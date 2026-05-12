@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { auth } from './lib/firebase';
 import { Shield } from 'lucide-react';
@@ -127,7 +127,15 @@ const AuthenticatedShell: React.FC = () => {
 };
 
 function AppContent() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-brand-bg">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <Routes>
@@ -151,12 +159,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <AuthProvider>
         <LogoutHandler />
         <AppContent />
       </AuthProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
