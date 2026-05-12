@@ -132,9 +132,9 @@ export default function App() {
         <LogoutHandler />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/justice" element={<JusticeUnitPage />} />
-          <Route path="/health" element={<HealthUnitPage />} />
-          <Route path="/youth" element={<YouthUnitPage />} />
+          <Route path="/info/justice" element={<JusticeUnitPage />} />
+          <Route path="/info/health" element={<HealthUnitPage />} />
+          <Route path="/info/youth" element={<YouthUnitPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<AuthenticatedShell />} />
         </Routes>
