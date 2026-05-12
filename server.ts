@@ -15,18 +15,24 @@ async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: 'spa',
+      appType: 'custom',
     });
     app.use(vite.middlewares);
 
-    // Fallback for dev mode
-    app.use('*', async (req, res, next) => {
+    // Explicit fallback for dev mode to handle SPA routing reloads
+    app.get('*', async (req, res, next) => {
       const url = req.originalUrl;
+      // Skip if it looks like a static file (has extension) but isn't HTML
+      if (url.includes('.') && !url.endsWith('.html')) {
+        return next();
+      }
+
       try {
         let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
         template = await vite.transformIndexHtml(url, template);
         res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
       } catch (e) {
+        vite.hot.send({ type: 'error', err: e as any });
         next(e);
       }
     });
