@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
-import { doc, onSnapshot, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
+import { useNavigate } from 'react-router-dom';
 
 export type UserRole = 
   | 'SuperAdmin' 
@@ -32,14 +33,24 @@ interface AuthContextType {
   user: FirebaseUser | null;
   profile: UserProfile | null;
   loading: boolean;
+  loggingOut: boolean;
+  logout: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null, profile: null, loading: true });
+const AuthContext = createContext<AuthContextType>({ 
+  user: null, 
+  profile: null, 
+  loading: true,
+  loggingOut: false,
+  logout: async () => {} 
+});
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -77,8 +88,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => unsubscribeProfile();
   }, [user]);
 
+  const logout = async () => {
+    setLoggingOut(true);
+    // Let the loader show for a bit to show termination process
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    await auth.signOut();
+    // Navigate first so the target page starts rendering
+    navigate('/login');
+    // Keep the logout screen visible for a tiny bit longer to cover the transition
+    setTimeout(() => {
+      setLoggingOut(false);
+    }, 100);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, profile, loading }}>
+    <AuthContext.Provider value={{ user, profile, loading, loggingOut, logout }}>
       {children}
     </AuthContext.Provider>
   );

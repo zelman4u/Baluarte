@@ -10,7 +10,13 @@ export const LandingPage: React.FC = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-brand-bg/80 backdrop-blur-md border-b border-brand-border px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-brand-primary rounded flex items-center justify-center font-black text-brand-bg">B</div>
+          <img 
+            src="https://lh3.googleusercontent.com/d/15qEeMZnaeEI052MdJrFujHjkxcKJMHku=s1000" 
+            alt="Logo" 
+            referrerPolicy="no-referrer"
+            className="w-10 h-10 object-contain rounded-full" 
+            onError={(e) => { (e.target as HTMLImageElement).src = "https://placehold.co/100/1e1e1e/58a6ff?text=B" }} 
+          />
           <span className="font-black uppercase tracking-widest text-sm">Baluarte</span>
         </div>
         <div className="flex items-center gap-8">
@@ -62,11 +68,7 @@ export const LandingPage: React.FC = () => {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link to="/login">
-              <button className="bg-brand-primary text-brand-bg px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest flex items-center gap-2 hover:shadow-[0_0_40px_rgba(88,166,255,0.3)] transition-all active:scale-95">
-                Staff Entry <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
+            {/* Staff Entry removed as requested */}
           </motion.div>
         </div>
       </section>
@@ -79,21 +81,22 @@ export const LandingPage: React.FC = () => {
              <h3 className="text-3xl font-black uppercase tracking-tighter">Unified Governance Architecture</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { id: 'ADMIN', title: 'Governance & Admin', desc: 'Centralized resident records, certificate issuing, and fiscal transparency.', icon: Building2 },
-              { id: 'JUSTICE', title: 'Justice & Safety', desc: 'Peace and order monitoring, blotter records, and mediation management.', icon: Scale },
-              { id: 'HEALTH', title: 'Social Welfare', desc: 'Vaccination tracking, maternal care, and elderly assistance programs.', icon: Heart },
-              { id: 'YOUTH', title: 'Community & SK', desc: 'Youth development, sports programs, and environmental monitoring.', icon: Compass },
+              { id: 'JUSTICE', title: 'Justice & Safety', desc: 'Peace and order monitoring, blotter records, and mediation management.', icon: Scale, path: '/justice' },
+              { id: 'HEALTH', title: 'Social Welfare', desc: 'Vaccination tracking, maternal care, and elderly assistance programs.', icon: Heart, path: '/health' },
+              { id: 'YOUTH', title: 'Community & SK', desc: 'Youth development, sports programs, and environmental monitoring.', icon: Compass, path: '/youth' },
             ].map(dept => (
-              <div key={dept.id} className="p-8 bg-brand-card border border-brand-border rounded-2xl hover:border-brand-primary/50 transition-all group">
-                <div className="w-12 h-12 bg-brand-bg border border-brand-border rounded-xl flex items-center justify-center text-brand-primary mb-6 group-hover:scale-110 transition-transform">
-                  <dept.icon className="w-6 h-6" />
+              <Link key={dept.id} to={dept.path} className="group">
+                <div className="p-8 h-full bg-brand-card border border-brand-border rounded-2xl hover:border-brand-primary/50 transition-all">
+                  <div className="w-12 h-12 bg-brand-bg border border-brand-border rounded-xl flex items-center justify-center text-brand-primary mb-6 group-hover:scale-110 transition-transform">
+                    <dept.icon className="w-6 h-6" />
+                  </div>
+                  <span className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-2 block">{dept.id}_UNIT</span>
+                  <h4 className="text-lg font-black uppercase tracking-tight mb-4">{dept.title}</h4>
+                  <p className="text-xs text-brand-muted leading-relaxed mb-6">{dept.desc}</p>
                 </div>
-                <span className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-2 block">{dept.id}_UNIT</span>
-                <h4 className="text-lg font-black uppercase tracking-tight mb-4">{dept.title}</h4>
-                <p className="text-xs text-brand-muted leading-relaxed">{dept.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -104,7 +107,13 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-32">
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-brand-primary rounded flex items-center justify-center font-black text-brand-bg text-sm">B</div>
+              <img 
+                src="https://lh3.googleusercontent.com/d/15qEeMZnaeEI052MdJrFujHjkxcKJMHku=s1000" 
+                alt="Logo" 
+                referrerPolicy="no-referrer"
+                className="w-12 h-12 object-contain rounded-full" 
+                onError={(e) => { (e.target as HTMLImageElement).src = "https://placehold.co/100/1e1e1e/58a6ff?text=B" }} 
+              />
               <span className="font-black uppercase tracking-widest text-xs">Baluarte</span>
             </div>
             <p className="text-xs text-brand-muted leading-relaxed font-medium">

@@ -54,17 +54,41 @@ const navItems: NavItem[] = [
 ];
 
 export const Sidebar: React.FC = () => {
-  const { profile } = useAuth();
+  const { profile, logout } = useAuth();
   const location = useLocation();
   
   const filteredNav = navItems.filter(item => 
     !item.department || (profile && item.department.includes(profile.department))
   );
 
+  const isSK = profile?.department === 'Youth' && profile?.role === 'SKOfficial';
+  const isAdmin = profile?.department === 'Administration' && (profile?.role === 'Captain' || profile?.role === 'Secretary');
+  const logoUrl = isSK 
+    ? "https://lh3.googleusercontent.com/d/1x8riK__Rn53iKzwbvEUapuNuQmNUwC33=s1000"
+    : "https://lh3.googleusercontent.com/d/15qEeMZnaeEI052MdJrFujHjkxcKJMHku=s1000";
+
   return (
     <aside id="sidebar" className="fixed left-0 top-0 h-screen w-64 bg-brand-surface text-brand-text flex flex-col z-50 border-r border-brand-border lg:translate-x-0 -translate-x-full lg:static transition-shadow duration-300">
       <div className="p-6 flex items-center gap-3 shrink-0">
-        <div className="w-10 h-10 bg-brand-primary rounded-lg flex items-center justify-center font-bold text-xl text-brand-bg shadow-lg shadow-brand-primary/20 shrink-0">B</div>
+        <div className="w-12 h-12 flex items-center justify-center shrink-0">
+          {(isSK || isAdmin) ? (
+            <img 
+              src={logoUrl} 
+              alt="Barangay Logo" 
+              referrerPolicy="no-referrer"
+              className="w-12 h-12 object-contain rounded-full drop-shadow-md" 
+              onError={(e) => { (e.target as HTMLImageElement).src = "https://placehold.co/100/1e1e1e/58a6ff?text=B" }} 
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-brand-bg flex items-center justify-center border border-brand-border">
+              {profile?.department === 'Justice' ? (
+                <Scale className="w-6 h-6 text-brand-primary" />
+              ) : (
+                <Building2 className="w-6 h-6 text-brand-primary" />
+              )}
+            </div>
+          )}
+        </div>
         <div className="overflow-hidden">
           <h1 className="font-bold text-sm leading-tight text-brand-primary truncate">Barangay Baluarte</h1>
           <p className="text-[10px] text-brand-muted uppercase tracking-widest font-semibold font-mono truncate">Governance System</p>
@@ -101,7 +125,7 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
         <button 
-          onClick={() => auth.signOut()}
+          onClick={logout}
           className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-brand-muted hover:bg-brand-danger/10 hover:text-brand-danger transition-all mt-2"
         >
           <LogOut className="w-4 h-4" />

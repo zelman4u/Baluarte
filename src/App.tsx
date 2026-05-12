@@ -6,6 +6,7 @@ import { Shield } from 'lucide-react';
 import { LoginPage } from './pages/LoginPage';
 import { LandingPage } from './pages/LandingPage';
 import { LoadingScreen } from './components/ui/LoadingScreen';
+import { LogoutScreen } from './components/ui/LogoutScreen';
 import { PortalLayout } from './components/layout/PortalLayout';
 import { Dashboard } from './pages/Dashboard';
 import { ResidentsPage } from './pages/ResidentsPage';
@@ -16,11 +17,14 @@ import { HealthPage } from './pages/HealthPage';
 import { RequestsPage } from './pages/RequestsPage';
 import { CaseHistoryPage } from './pages/CaseHistoryPage';
 import { PlaceholderPage } from './pages/PlaceholderPage';
+import { JusticeUnitPage } from './pages/JusticeUnitPage';
+import { HealthUnitPage } from './pages/HealthUnitPage';
+import { YouthUnitPage } from './pages/YouthUnitPage';
 
 // Placeholder Components
 const DRRMPlaceholder = () => <PlaceholderPage title="Disaster Risk Management" module="DRRM" description="Emergency response logistics and hazard mapping system integration." />;
 const CasesPlaceholder = () => <PlaceholderPage title="Katarungang Pambarangay" module="JUSTICE" description="Mediation schedule and settlement agreement registry." />;
-const YouthPlaceholder = () => <PlaceholderPage title="Youth & SK Programs" module="COMMUNITY" description="SK Project management, scholarship tracking, and youth profiling." />;
+const YouthPlaceholder = () => <PlaceholderPage title="Youth & SK Programs" module="COMMUNITY" description="SK Project management, scholarship tracking, and youth profiling." logoPath="/assets/sk_logo.png" />;
 const ProfilePlaceholder = () => <PlaceholderPage title="Authorized Identity" module="USER_CONFIG" description="Biometric credential management and portal accessibility settings." />;
 const SettingsPlaceholder = () => <PlaceholderPage title="Global Configuration" module="SYSTEM" description="Baluarte Governance Portal core infrastructure settings." />;
 const SecurityPlaceholder = () => <PlaceholderPage title="Public Safety Patrol" module="TANOD" description="Baluarte Security Force (Tanod) patrol logs and incident response." />;
@@ -123,14 +127,24 @@ const AuthenticatedShell: React.FC = () => {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <LogoutHandler />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/justice" element={<JusticeUnitPage />} />
+          <Route path="/health" element={<HealthUnitPage />} />
+          <Route path="/youth" element={<YouthUnitPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<AuthenticatedShell />} />
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
+
+const LogoutHandler: React.FC = () => {
+  const { loggingOut } = useAuth();
+  if (!loggingOut) return null;
+  return <LogoutScreen />;
+};
