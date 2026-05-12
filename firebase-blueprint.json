@@ -1,0 +1,181 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "System user with role-based access control and department assignment.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["SuperAdmin", "Captain", "Secretary", "Treasurer", "Kagawad", "Lupon", "Tanod", "BHW", "SKOfficial", "DRRMOfficer", "Resident"] },
+        "department": { "type": "string", "enum": ["Administration", "Justice", "Health", "Youth", "Resident"] },
+        "isApproved": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "department"]
+    },
+    "Resident": {
+      "title": "Resident Profile",
+      "description": "Detailed information about a barangay resident.",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "middleName": { "type": "string" },
+        "suffix": { "type": "string" },
+        "birthDate": { "type": "string", "format": "date" },
+        "gender": { "type": "string", "enum": ["Male", "Female", "Other"] },
+        "civilStatus": { "type": "string", "enum": ["Single", "Married", "Widowed", "Separated"] },
+        "occupation": { "type": "string" },
+        "voterStatus": { "type": "string", "enum": ["Registered", "Not Registered"] },
+        "householdId": { "type": "string" },
+        "address": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "isSeniorCitizen": { "type": "boolean" },
+        "isPWD": { "type": "boolean" },
+        "pwdType": { "type": "string" },
+        "status": { "type": "string", "enum": ["Alive", "Deceased", "Transferred"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["firstName", "lastName", "birthDate", "gender"]
+    },
+    "Household": {
+      "title": "Household Profiling",
+      "description": "Groups residents into households for demographic analysis.",
+      "type": "object",
+      "properties": {
+        "householdNumber": { "type": "string" },
+        "headId": { "type": "string" },
+        "address": { "type": "string" },
+        "totalMembers": { "type": "number" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["householdNumber", "headId", "address"]
+    },
+    "DocumentRequest": {
+      "title": "Document Request",
+      "description": "Requests for barangay clearances, residency, indigency, etc.",
+      "type": "object",
+      "properties": {
+        "residentId": { "type": "string" },
+        "type": { "type": "string", "enum": ["Clearance", "Residency", "Indigency", "Cedula", "First Time Jobseeker", "Business Permit"] },
+        "purpose": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Processing", "Ready For Pickup", "Completed", "Rejected"] },
+        "controlNumber": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "orNumber": { "type": "string" },
+        "requestedAt": { "type": "string", "format": "date-time" },
+        "processedAt": { "type": "string", "format": "date-time" },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["residentId", "type", "status", "requestedAt"]
+    },
+    "BlotterRecord": {
+      "title": "Blotter Record",
+      "description": "Official records of incidents and complaints.",
+      "type": "object",
+      "properties": {
+        "incidentType": { "type": "string" },
+        "complainantId": { "type": "string" },
+        "complainantName": { "type": "string" },
+        "respondentName": { "type": "string" },
+        "incidentDate": { "type": "string", "format": "date-time" },
+        "location": { "type": "string" },
+        "narrative": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Settled", "Referred", "Closed"] },
+        "caseNumber": { "type": "string" },
+        "reportedAt": { "type": "string", "format": "date-time" },
+        "reportedBy": { "type": "string" }
+      },
+      "required": ["incidentType", "narrative", "status", "reportedAt"]
+    },
+    "TreasuryLog": {
+      "title": "Treasury Log",
+      "description": "Financial transactions for revenue and expenses.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["Revenue", "Expense"] },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "referenceId": { "type": "string" },
+        "orNumber": { "type": "string" },
+        "recordedBy": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["type", "amount", "date", "recordedBy"]
+    },
+    "HealthRecord": {
+      "title": "Resident Health Record",
+      "description": "Medical history and monitoring for residents.",
+      "type": "object",
+      "properties": {
+        "residentId": { "type": "string" },
+        "height": { "type": "number" },
+        "weight": { "type": "number" },
+        "bloodPressure": { "type": "string" },
+        "findings": { "type": "string" },
+        "treatment": { "type": "string" },
+        "immunizations": { "type": "array", "items": { "type": "string" } },
+        "isPregnant": { "type": "boolean" },
+        "lastCheckup": { "type": "string", "format": "date-time" },
+        "recordedBy": { "type": "string" }
+      },
+      "required": ["residentId", "lastCheckup"]
+    },
+    "CaseHistory": {
+      "title": "Case History Log",
+      "description": "Historical progression of a judicial case or blotter entry.",
+      "type": "object",
+      "properties": {
+        "caseId": { "type": "string" },
+        "caseNumber": { "type": "string" },
+        "eventType": { "type": "string", "enum": ["Initial Report", "Hearing", "Mediation", "Conciliation", "Settlement", "Escalation", "Resolution"] },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "recordedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["caseId", "caseNumber", "eventType", "description", "date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and permissions."
+    },
+    "/residents/{residentId}": {
+      "schema": "Resident",
+      "description": "Detailed resident registry."
+    },
+    "/households/{householdId}": {
+      "schema": "Household",
+      "description": "Grouping of residents into households."
+    },
+    "/requests/{requestId}": {
+      "schema": "DocumentRequest",
+      "description": "Barangay document and certificate requests."
+    },
+    "/blotter/{recordId}": {
+      "schema": "BlotterRecord",
+      "description": "Public safety and incident records."
+    },
+    "/treasury/{logId}": {
+      "schema": "TreasuryLog",
+      "description": "Revenue and expense tracking."
+    },
+    "/health_records/{recordId}": {
+      "schema": "HealthRecord",
+      "description": "Health and nutrition monitoring."
+    },
+    "/case_history/{historyId}": {
+      "schema": "CaseHistory",
+      "description": "Historical progression of judicial cases."
+    }
+  }
+}

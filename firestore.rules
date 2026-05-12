@@ -1,0 +1,119 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function getRole() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role : null;
+    }
+
+    function getDept() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.department : null;
+    }
+
+    function hasRole(role) {
+      return isSignedIn() && getRole() == role;
+    }
+
+    function hasDept(dept) {
+      return isSignedIn() && getDept() == dept;
+    }
+
+    function isApproved() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isApproved == true;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'admin@baluarte.gov.ph' ||
+        hasRole('SuperAdmin') || 
+        hasRole('Captain')
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // 1. Users Collection
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // 2. Residents Collection
+    match /residents/{residentId} {
+      allow read: if isSignedIn() && (
+        isAdmin() || 
+        hasDept('Administration') || 
+        hasDept('Health') || 
+        hasDept('Justice') || 
+        hasDept('Youth') ||
+        hasRole('Resident')
+      );
+      allow create: if isSignedIn() && (hasDept('Administration') || isAdmin() || hasRole('Secretary'));
+      allow update: if isSignedIn() && (hasDept('Administration') || isAdmin() || hasRole('Secretary'));
+      allow delete: if isAdmin();
+    }
+
+    // 3. Households
+    match /households/{householdId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && (hasDept('Administration') || isAdmin());
+    }
+
+    // 4. Document Requests
+    match /requests/{requestId} {
+      allow read: if isSignedIn() && (isOwner(existing().residentId) || hasDept('Administration') || isAdmin());
+      allow create: if isSignedIn() && (isOwner(incoming().residentId) || hasDept('Administration') || isAdmin());
+      allow update: if isSignedIn() && (hasDept('Administration') || isAdmin());
+    }
+
+    // 5. Blotter Records
+    match /blotter/{recordId} {
+      allow read: if isSignedIn() && (hasDept('Justice') || isAdmin() || isOwner(existing().complainantId));
+      allow create: if isSignedIn() && (hasDept('Justice') || isAdmin() || isOwner(incoming().complainantId));
+      allow update: if isSignedIn() && (hasDept('Justice') || isAdmin());
+    }
+
+    // 6. Treasury Logs
+    match /treasury/{logId} {
+      allow read: if isSignedIn() && (hasDept('Administration') || isAdmin());
+      allow create: if isSignedIn() && (hasDept('Administration') || isAdmin());
+      allow update: if isAdmin();
+    }
+
+    // 7. Health Records
+    match /health_records/{recordId} {
+      allow read: if isSignedIn() && (hasDept('Health') || isAdmin() || isOwner(existing().residentId));
+      allow create: if isSignedIn() && (hasDept('Health') || isAdmin());
+      allow update: if isSignedIn() && (hasDept('Health') || isAdmin());
+    }
+
+    // 8. Case History
+    match /case_history/{historyId} {
+      allow read: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
+      allow create: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
+      allow update: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
+    }
+  }
+}

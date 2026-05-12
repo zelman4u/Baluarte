@@ -1,0 +1,10 @@
+{
+  "name": "Baluarte",
+  "description": "A comprehensive, multi-departmental Management Information System for Barangay Baluarte, streamlining administration, justice, health, and community development.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
