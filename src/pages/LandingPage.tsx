@@ -83,9 +83,9 @@ export const LandingPage: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { id: 'JUSTICE', title: 'Justice & Safety', desc: 'Peace and order monitoring, blotter records, and mediation management.', icon: Scale, path: '/info/justice' },
-              { id: 'HEALTH', title: 'Social Welfare', desc: 'Vaccination tracking, maternal care, and elderly assistance programs.', icon: Heart, path: '/info/health' },
-              { id: 'YOUTH', title: 'Community & SK', desc: 'Youth development, sports programs, and environmental monitoring.', icon: Compass, path: '/info/youth' },
+              { id: 'JUSTICE', title: 'Justice & Safety', desc: 'Peace and order monitoring, blotter records, and mediation management.', icon: Scale, path: '/blotter' },
+              { id: 'HEALTH', title: 'Medical Records', desc: 'Vaccination tracking, maternal care, and elderly assistance programs.', icon: Heart, path: '/health' },
+              { id: 'YOUTH', title: 'Youth Programs', desc: 'Youth development, sports programs, and environmental monitoring.', icon: Compass, path: '/youth' },
             ].map(dept => (
               <Link key={dept.id} to={dept.path} className="group">
                 <div className="p-8 h-full bg-brand-card border border-brand-border rounded-2xl hover:border-brand-primary/50 transition-all">
