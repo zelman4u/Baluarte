@@ -14,6 +14,7 @@ import { HouseholdsPage } from './pages/HouseholdsPage';
 import { TreasuryPage } from './pages/TreasuryPage';
 import { BlotterPage } from './pages/BlotterPage';
 import { HealthPage } from './pages/HealthPage';
+import { YouthPage } from './pages/YouthPage';
 import { RequestsPage } from './pages/RequestsPage';
 import { CaseHistoryPage } from './pages/CaseHistoryPage';
 import { PlaceholderPage } from './pages/PlaceholderPage';
@@ -118,7 +119,7 @@ const AuthenticatedShell: React.FC = () => {
     <Route path="/security" element={<SecurityPlaceholder />} />
     <Route path="/health" element={<HealthPage />} />
     <Route path="/welfare" element={<WelfarePlaceholder />} />
-    <Route path="/youth" element={<YouthPlaceholder />} />
+    <Route path="/youth" element={<YouthPage />} />
     <Route path="/requests" element={<RequestsPage />} />
     <Route path="/profile" element={<ProfilePlaceholder />} />
     <Route path="/settings" element={<SettingsPlaceholder />} />
