@@ -18,7 +18,8 @@ import {
   Map,
   MessageSquare,
   AlertTriangle,
-  Building2
+  Building2,
+  Layout
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { auth } from '../../lib/firebase';
@@ -29,10 +30,18 @@ interface NavItem {
   icon: React.ElementType;
   path: string;
   department?: string[];
+  roles?: string[];
 }
 
 const navItems: NavItem[] = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  // Content Management
+  { 
+    label: 'Page Content', 
+    icon: Layout, 
+    path: '/content-management', 
+    department: ['Administration', 'Justice', 'Health', 'Youth'] 
+  },
   // Administration
   { label: 'Residents', icon: Users, path: '/residents', department: ['Administration', 'Health', 'Justice', 'Youth'] },
   { label: 'Households', icon: Building2, path: '/households', department: ['Administration'] },

@@ -142,6 +142,68 @@
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["caseId", "caseNumber", "eventType", "description", "date"]
+    },
+    "LandingPageContent": {
+      "title": "Landing Page Content",
+      "description": "Dynamic content for the main and departmental landing pages.",
+      "type": "object",
+      "properties": {
+        "pageId": { "type": "string", "enum": ["main", "justice", "health", "youth"] },
+        "title": { "type": "string" },
+        "heroImages": { "type": "array", "items": { "type": "string" } },
+        "announcements": { 
+          "type": "array", 
+          "items": { 
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "content": { "type": "string" },
+              "date": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "body": { "type": "string" },
+        "organization": { 
+          "type": "array", 
+          "items": { 
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "image": { "type": "string" }
+            }
+          }
+        },
+        "communityHappenings": { 
+          "type": "array", 
+          "items": { 
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "image": { "type": "string" },
+              "date": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "quickFacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "value": { "type": "string" }
+            }
+          }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string" }
+      },
+      "required": ["pageId", "title"]
     }
   },
   "firestore": {
@@ -176,6 +238,10 @@
     "/case_history/{historyId}": {
       "schema": "CaseHistory",
       "description": "Historical progression of judicial cases."
+    },
+    "/landing_pages/{pageId}": {
+      "schema": "LandingPageContent",
+      "description": "Dynamic content for landing pages."
     }
   }
 }

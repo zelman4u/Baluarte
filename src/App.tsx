@@ -21,6 +21,7 @@ import { PlaceholderPage } from './pages/PlaceholderPage';
 import { JusticeUnitPage } from './pages/JusticeUnitPage';
 import { HealthUnitPage } from './pages/HealthUnitPage';
 import { YouthUnitPage } from './pages/YouthUnitPage';
+import { ContentManagementPage } from './pages/ContentManagementPage';
 
 // Placeholder Components
 const DRRMPlaceholder = () => <PlaceholderPage title="Disaster Risk Management" module="DRRM" description="Emergency response logistics and hazard mapping system integration." />;
@@ -121,6 +122,7 @@ const AuthenticatedShell: React.FC = () => {
     <Route path="/welfare" element={<WelfarePlaceholder />} />
     <Route path="/youth" element={<YouthPage />} />
     <Route path="/requests" element={<RequestsPage />} />
+    <Route path="/content-management" element={<ContentManagementPage />} />
     <Route path="/profile" element={<ProfilePlaceholder />} />
     <Route path="/settings" element={<SettingsPlaceholder />} />
   </Routes></PortalLayout>;

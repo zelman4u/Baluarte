@@ -115,5 +115,17 @@ service cloud.firestore {
       allow create: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
       allow update: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
     }
+
+    // 9. Landing Pages
+    match /landing_pages/{pageId} {
+      allow read: if true; // Publicly readable
+      allow write: if isSignedIn() && (
+        isAdmin() ||
+        (pageId == 'main' && hasDept('Administration')) ||
+        (pageId == 'justice' && hasDept('Justice')) ||
+        (pageId == 'health' && hasDept('Health')) ||
+        (pageId == 'youth' && hasDept('Youth'))
+      );
+    }
   }
 }
