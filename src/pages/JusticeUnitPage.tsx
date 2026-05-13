@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Scale, Shield, ArrowLeft, FileText, History, Gavel, Megaphone, Users, Camera, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { landingPageService, LandingPageContent } from '../services/landingPageService';
+import { OrgChart } from '../components/OrgChart';
 import { cn } from '../lib/utils';
 
 export const JusticeUnitPage: React.FC = () => {
@@ -154,28 +155,7 @@ export const JusticeUnitPage: React.FC = () => {
 
       {/* Organization */}
       {content?.organization && content.organization.length > 0 && (
-        <section className="relative z-10 py-24 px-8 border-y border-white/5">
-          <div className="max-w-7xl mx-auto">
-            <h3 className="text-3xl font-black uppercase tracking-tighter mb-12 text-center text-green-500">Legal Personnel</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-              {content.organization.map((member) => (
-                <div key={member.id} className="text-center group">
-                  <div className="aspect-square bg-white/5 border border-white/10 rounded-2xl mb-4 overflow-hidden grayscale group-hover:grayscale-0 transition-all">
-                    {member.image ? (
-                      <img src={member.image} className="w-full h-full object-cover" alt={member.name} />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-white/10">
-                        <Users className="w-12 h-12" />
-                      </div>
-                    )}
-                  </div>
-                  <h5 className="text-[10px] font-black uppercase tracking-tight text-white">{member.name}</h5>
-                  <p className="text-[9px] font-black text-green-500 uppercase tracking-[0.2em] mt-1">{member.role}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <OrgChart members={content.organization} accentColor="green-500" subtitle="Legal Personnel" title="Justice Unit Tree" />
       )}
 
       {/* Community Gallery */}

@@ -3,97 +3,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Shield, ArrowRight, Building2, Scale, Heart, Compass, ChevronLeft, ChevronRight, Megaphone, Users, Camera } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Base';
-import { landingPageService, LandingPageContent } from '../services/landingPageService';
+import { OrganizationMember, landingPageService, LandingPageContent } from '../services/landingPageService';
+import { OrgChart } from '../components/OrgChart';
 import { cn } from '../lib/utils';
-
-import { OrganizationMember } from '../services/landingPageService';
-
-const OrgMemberNode: React.FC<{ member: any; level: number; isFirst: boolean; isLast: boolean; hasSiblings: boolean; onMemberClick?: (member: any) => void }> = ({ member, level, isFirst, isLast, hasSiblings, onMemberClick }) => {
-  return (
-    <div className="flex flex-col items-center relative">
-      {/* Horizontal connector to siblings */}
-      {level > 0 && hasSiblings && (
-        <div className={cn(
-          "absolute top-0 h-px bg-brand-primary/30",
-          isFirst && "left-1/2 right-0",
-          isLast && "left-0 right-1/2",
-          !isFirst && !isLast && "left-0 right-0"
-        )}></div>
-      )}
-
-      <div className="relative flex flex-col items-center pt-12">
-        {/* Vertical line from parent/connector */}
-        {level > 0 && (
-          <div className="w-px h-12 bg-brand-primary/30 absolute top-0"></div>
-        )}
-        
-        {/* Member Card */}
-        <div 
-          className="relative p-[1px] bg-gradient-to-b from-brand-primary/40 to-transparent rounded-2xl shadow-2xl cursor-pointer group"
-          onClick={() => onMemberClick?.(member)}
-        >
-          <div className="p-3 md:p-4 bg-brand-card/90 backdrop-blur-md border border-brand-border/50 rounded-2xl min-w-[140px] md:min-w-[180px] flex flex-col items-center group-hover:border-brand-primary hover:shadow-brand-primary/10 transition-all duration-500">
-            <div className="relative w-16 h-16 md:w-20 md:h-20 mb-3">
-              <div className="absolute inset-0 bg-brand-primary/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative w-full h-full bg-brand-bg border-2 border-brand-border rounded-xl overflow-hidden group-hover:border-brand-primary transition-colors duration-500">
-                {member.image ? (
-                  <img src={member.image} className="w-full h-full object-cover transition-all duration-700" alt={member.name} />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-brand-muted/20">
-                    <Users className="w-8 h-8 md:w-10 md:h-10" />
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <div className="text-center w-full">
-              <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-tight text-white mb-1.5 group-hover:text-brand-primary transition-colors line-clamp-2 min-h-[1.5rem]">
-                {member.name || "Vacant Position"}
-              </h5>
-              <div className="inline-block px-3 py-1 bg-brand-surface border border-brand-border rounded-lg">
-                <p className="text-[7px] md:text-[8px] font-black text-brand-primary uppercase tracking-[0.2em] whitespace-nowrap">
-                  {member.role}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Vertical line to children */}
-        {member.children && member.children.length > 0 && (
-          <div className="w-px h-12 bg-brand-primary/30"></div>
-        )}
-      </div>
-      
-      {/* Children Grid */}
-      {member.children && member.children.length > 0 && (
-        <div className="flex justify-center gap-4 md:gap-8">
-          {member.children.map((child: any, idx: number) => (
-            <OrgMemberNode 
-              key={child.id} 
-              member={child} 
-              level={level + 1} 
-              isFirst={idx === 0}
-              isLast={idx === member.children.length - 1}
-              hasSiblings={member.children.length > 1}
-              onMemberClick={onMemberClick}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
 
 export const LandingPage: React.FC = () => {
   const [content, setContent] = useState<LandingPageContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [chartScale, setChartScale] = useState(1);
-  const [chartHeight, setChartHeight] = useState<string | number>('auto');
-  const [selectedMember, setSelectedMember] = useState<any | null>(null);
-  const chartContainerRef = React.useRef<HTMLDivElement>(null);
-  const chartContentRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -108,40 +25,6 @@ export const LandingPage: React.FC = () => {
     };
     fetchContent();
   }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (chartContainerRef.current && chartContentRef.current) {
-        const containerWidth = chartContainerRef.current.offsetWidth;
-        
-        // Measure with scale 1 to get real width
-        const originalTransform = chartContentRef.current.style.transform;
-        chartContentRef.current.style.transform = 'scale(1)';
-        const contentWidth = chartContentRef.current.scrollWidth;
-        const contentHeight = chartContentRef.current.scrollHeight;
-        chartContentRef.current.style.transform = originalTransform;
-        
-        if (contentWidth > containerWidth && containerWidth > 0) {
-          const newScale = Math.max(0.25, (containerWidth - 32) / contentWidth);
-          setChartScale(newScale);
-          setChartHeight(contentHeight * newScale);
-        } else {
-          setChartScale(1);
-          setChartHeight(contentHeight || 'auto');
-        }
-      }
-    };
-
-    handleResize();
-    const observer = new ResizeObserver(handleResize);
-    if (chartContainerRef.current) observer.observe(chartContainerRef.current);
-    
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      observer.disconnect();
-    };
-  }, [content]);
 
   useEffect(() => {
     if (content?.heroImages?.length && content.heroImages.length > 1) {
@@ -508,67 +391,7 @@ export const LandingPage: React.FC = () => {
 
       {/* Organization Chart */}
       {content?.organization && content.organization.length > 0 && (
-        <section className="py-24 px-4 md:px-8 bg-brand-surface/30 relative">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 md:mb-24">
-              <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-primary mb-2">Leadership</h2>
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter">Barangay Organization Tree</h3>
-            </div>
-            
-            <div ref={chartContainerRef} className="px-4 overflow-hidden flex justify-center" style={{ height: chartHeight }}>
-              <div 
-                ref={chartContentRef}
-                className="inline-block origin-top transition-transform duration-500 pb-12"
-                style={{ 
-                  transform: `scale(${chartScale})`,
-                }}
-              >
-                {(() => {
-                  const map: { [key: string]: any } = {};
-                  const tree: any[] = [];
-                  const members = content.organization;
-                  
-                  members.forEach(member => {
-                    map[member.id] = { ...member, children: [] };
-                  });
-                  
-                  members.forEach(member => {
-                    if (member.reportsTo && map[member.reportsTo]) {
-                      map[member.reportsTo].children.push(map[member.id]);
-                    } else {
-                      tree.push(map[member.id]);
-                    }
-                  });
-                  
-                  // Sort roots to ensure Captain/Punong Barangay is first
-                  tree.sort((a, b) => {
-                    const aRole = a.role.toLowerCase();
-                    const bRole = b.role.toLowerCase();
-                    if (aRole.includes('captain') || aRole.includes('punong')) return -1;
-                    if (bRole.includes('captain') || bRole.includes('punong')) return 1;
-                    return 0;
-                  });
-                  
-                  return (
-                    <div className="flex justify-center">
-                      {tree.map(root => (
-                        <OrgMemberNode 
-                          key={root.id} 
-                          member={root} 
-                          level={0} 
-                          isFirst={true} 
-                          isLast={true} 
-                          hasSiblings={false} 
-                          onMemberClick={(member) => setSelectedMember(member)}
-                        />
-                      ))}
-                    </div>
-                  );
-                })()}
-              </div>
-            </div>
-          </div>
-        </section>
+        <OrgChart members={content.organization} subtitle="Leadership" title="Barangay Organization Tree" />
       )}
 
       {/* Community Happenings */}
@@ -628,65 +451,6 @@ export const LandingPage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Member Detail Modal */}
-      <AnimatePresence>
-        {selectedMember && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedMember(null)}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-12"
-          >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              className="relative w-full max-w-2xl bg-brand-surface/90 border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row gap-8 p-6 md:p-10"
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="w-full md:w-1/2 aspect-square md:aspect-auto h-auto md:h-[400px] rounded-3xl overflow-hidden border-2 border-brand-border/50">
-                {selectedMember.image ? (
-                  <img 
-                    src={selectedMember.image} 
-                    alt={selectedMember.name} 
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-brand-bg text-brand-muted/20">
-                    <Users className="w-24 h-24" />
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex flex-col justify-center flex-1">
-                <div className="mb-8">
-                  <h2 className="text-[12px] font-black uppercase tracking-[0.4em] text-brand-primary mb-3">Community Leader</h2>
-                  <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
-                    {selectedMember.name || "Vacant Position"}
-                  </h3>
-                  <div className="inline-flex items-center px-6 py-2 bg-brand-primary text-black font-black uppercase text-[10px] md:text-[12px] tracking-[0.2em] rounded-full">
-                    {selectedMember.role}
-                  </div>
-                </div>
-
-                <div className="space-y-4 pt-8 border-t border-white/5">
-                  <p className="text-brand-muted font-medium italic">
-                    "Dedicated to serving the people of Barangay Baluarte."
-                  </p>
-                </div>
-              </div>
-
-              <button 
-                onClick={() => setSelectedMember(null)}
-                className="absolute top-6 right-6 w-12 h-12 bg-white/5 hover:bg-brand-primary hover:text-black transition-all duration-300 rounded-full flex items-center justify-center text-white border border-white/10"
-              >
-                <ChevronLeft className="w-8 h-8 rotate-180" />
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
