@@ -64,7 +64,7 @@ export const YouthPage: React.FC = () => {
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Community /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Youth Development</span>
           </div>
-          <h1 className="text-2xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em]">SK Program Management</h1>
+          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">SK Program Management</h1>
           <p className="text-brand-muted text-sm font-medium">Monitoring youth initiatives, scholarships, and engagement metrics.</p>
         </div>
         <div className="flex items-center gap-3">

@@ -256,7 +256,7 @@ export const ContentManagementPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-6 bg-brand-primary rounded-full"></span>
-            <h1 className="text-3xl font-black text-brand-text uppercase tracking-tighter">Content Terminal</h1>
+            <h1 className="text-4xl font-black text-brand-text uppercase tracking-tighter leading-none mb-1">Content Terminal</h1>
           </div>
           <p className="text-brand-muted text-xs uppercase tracking-[0.2em] font-bold">
             Managing <span className="text-brand-primary">{pageId.toUpperCase()}</span> Landing Page

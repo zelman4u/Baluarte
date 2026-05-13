@@ -17,7 +17,7 @@ export const PlaceholderPage: React.FC<PlaceholderPageProps> = ({ title, module,
         <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Module /</span>
         <span className="text-brand-text text-xs font-bold uppercase tracking-widest">{module}</span>
       </div>
-      <h1 className="text-3xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em]">{title}</h1>
+      <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">{title}</h1>
       
       <Card className="p-12 flex flex-col items-center justify-center text-center bg-brand-surface border-brand-border mt-12">
         <div className="w-24 h-24 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center mb-6 overflow-hidden p-3">

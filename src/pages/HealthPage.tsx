@@ -214,7 +214,7 @@ export const HealthPage: React.FC = () => {
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Welfare /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Health Registry</span>
           </div>
-          <h1 className="text-2xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em]">Medical Surveillance</h1>
+          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Medical Surveillance</h1>
           <p className="text-brand-muted text-sm font-medium">Baluarte Health Center Resident Monitoring & Records Audit</p>
         </div>
         <div className="flex items-center gap-3">

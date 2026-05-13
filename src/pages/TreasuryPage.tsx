@@ -188,7 +188,7 @@ export const TreasuryPage: React.FC = () => {
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Finance /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Treasury Oversight</span>
           </div>
-          <h1 className="text-2xl font-bold text-brand-text tracking-tight">Barangay Budget Ledger</h1>
+          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Barangay Budget Ledger</h1>
           <p className="text-brand-muted text-sm font-medium">Baluarte Fiscal Transparency & Revenue Tracking</p>
         </div>
         <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg font-black uppercase tracking-widest text-[10px]">

@@ -120,8 +120,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               )}
             </div>
             <div className="overflow-hidden">
-              <h1 className="font-bold text-xs leading-tight text-brand-primary truncate">Barangay Baluarte</h1>
-              <p className="text-[9px] text-brand-muted uppercase tracking-widest font-semibold font-mono truncate">Governance</p>
+              <h1 className="font-bold text-base leading-tight text-brand-primary truncate">Barangay Baluarte</h1>
+              <p className="text-[11px] text-brand-muted uppercase tracking-widest font-semibold font-mono truncate">Governance</p>
             </div>
           </div>
           <button 
@@ -133,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
 
       <nav className="flex-1 px-4 py-2 space-y-1 overflow-y-auto scrollbar-hide">
-        <div className="px-4 py-3 text-[10px] uppercase tracking-widest text-brand-muted/70 font-black">Core Modules</div>
+        <div className="px-4 py-3 text-[13px] uppercase tracking-widest text-brand-muted/70 font-black">Core Modules</div>
         {filteredNav.map((item) => (
           <Link
             key={item.path}
@@ -146,8 +146,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 : "text-brand-muted hover:bg-brand-card hover:text-brand-text border-transparent"
             )}
           >
-            <item.icon className={cn("w-4 h-4 transition-transform group-hover:scale-110", location.pathname === item.path ? "text-brand-primary" : "text-brand-muted group-hover:text-brand-text")} />
-            <span className="text-xs truncate">{item.label}</span>
+            <item.icon className={cn("w-5 h-5 transition-transform group-hover:scale-110", location.pathname === item.path ? "text-brand-primary" : "text-brand-muted group-hover:text-brand-text")} />
+            <span className="text-sm font-medium truncate">{item.label}</span>
           </Link>
         ))}
       </nav>
@@ -166,8 +166,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           onClick={logout}
           className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-brand-muted hover:bg-brand-danger/10 hover:text-brand-danger transition-all mt-2"
         >
-          <LogOut className="w-4 h-4" />
-          <span className="text-xs font-bold">Sign Out</span>
+          <LogOut className="w-5 h-5" />
+          <span className="text-sm font-bold">Sign Out</span>
         </button>
       </div>
     </aside>

@@ -120,7 +120,7 @@ export const Dashboard: React.FC = () => {
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Portal /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">{profile?.department} Registry</span>
           </div>
-          <h1 className="text-3xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em]">{manifest.title}</h1>
+          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">{manifest.title}</h1>
           <p className="text-brand-muted mt-1 font-medium">{manifest.subtitle}</p>
         </div>
         <div className="flex items-center gap-2 text-brand-success bg-brand-success/5 border border-brand-success/20 px-3 py-1.5 rounded-full">
@@ -158,8 +158,8 @@ export const Dashboard: React.FC = () => {
         <Card className="p-8 lg:col-span-2">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h3 className="text-sm font-bold text-brand-text uppercase tracking-widest">{manifest.chartTitle}</h3>
-              <p className="text-xs text-brand-muted mt-0.5">Real-time synchronized data telemetry</p>
+              <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest leading-none mb-1">{manifest.chartTitle}</h3>
+              <p className="text-xs text-brand-muted">Real-time synchronized data telemetry</p>
             </div>
             <div className="flex border border-brand-border rounded-lg overflow-hidden">
                <button className="px-3 py-1.5 text-[10px] font-bold bg-brand-bg text-brand-primary border-r border-brand-border">30D_CYCLE</button>
@@ -190,7 +190,7 @@ export const Dashboard: React.FC = () => {
         </Card>
 
         <Card className="p-8">
-          <h3 className="text-sm font-bold text-brand-text uppercase tracking-widest mb-6">Recent Public Activity</h3>
+          <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest mb-6">Recent Public Activity</h3>
           <div className="space-y-4">
             {[
               { label: 'Resident ID #2941', status: '3m ago', icon: FileText, color: 'text-brand-primary' },
@@ -221,7 +221,7 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card className="p-8">
            <div className="flex items-center justify-between mb-8">
-            <h3 className="text-sm font-bold text-brand-text uppercase tracking-widest">Demographic Overview</h3>
+            <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest">Demographic Overview</h3>
             <span className="text-[10px] font-bold text-brand-muted">GLOBAL REACH</span>
           </div>
           <div className="flex gap-12 items-center">
@@ -256,7 +256,7 @@ export const Dashboard: React.FC = () => {
         </Card>
 
         <Card className="p-8">
-          <h3 className="text-sm font-bold text-brand-text uppercase tracking-widest mb-6 px-1">Subdomain Portals</h3>
+          <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest mb-6 px-1">Subdomain Portals</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {[
               { id: 'ADMIN', url: 'admin.baluarte.gov.ph' },

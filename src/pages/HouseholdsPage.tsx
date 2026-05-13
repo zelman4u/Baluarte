@@ -166,7 +166,7 @@ export const HouseholdsPage: React.FC = () => {
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Portal /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Household Registry</span>
           </div>
-          <h1 className="text-2xl font-bold text-brand-text tracking-tight">Residential Clusters</h1>
+          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Residential Clusters</h1>
           <p className="text-brand-muted text-sm font-medium">Baluarte Household Profiling & Location Analytics</p>
         </div>
         <div className="flex items-center gap-3">
