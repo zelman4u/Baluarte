@@ -61,8 +61,8 @@ export const LandingPage: React.FC = () => {
           <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="text-[10px] font-black uppercase text-brand-muted hover:text-brand-primary transition-colors tracking-widest cursor-pointer">About</button>
           <button onClick={() => document.getElementById('announcements')?.scrollIntoView({ behavior: 'smooth' })} className="text-[10px] font-black uppercase text-brand-muted hover:text-brand-primary transition-colors tracking-widest cursor-pointer">News</button>
           <Link to="/login">
-            <Button variant="outline" size="sm" className="text-[10px] font-black uppercase border-brand-primary/30 text-brand-primary">
-              Personnel Portal
+            <Button variant="outline" size="sm" className="text-[10px] font-black uppercase border-brand-primary/30 text-brand-primary px-6">
+              Login
             </Button>
           </Link>
         </div>

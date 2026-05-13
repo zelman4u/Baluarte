@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
   signInWithPopup, 
   GoogleAuthProvider, 
@@ -10,7 +10,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 import { UserRole, Department, useAuth } from '../context/AuthContext';
 import { Button, Input, Card } from '../components/ui/Base';
-import { LogIn, Globe, Shield, Scale } from 'lucide-react';
+import { LogIn, Globe, Shield, Scale, ArrowLeft } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const LoginPage: React.FC = () => {
@@ -155,7 +155,7 @@ export const LoginPage: React.FC = () => {
         }
       } catch (fsErr: any) {
         console.error("[AUTH] Sync cluster failure:", fsErr.code, fsErr.message);
-        setError(`DATABASE_LINK_ERR: ${fsErr.code || 'PROTOCOL_SYNC'}`);
+        setError("Database connection error. Please try again.");
         setLoading(false);
         return;
       }
@@ -183,10 +183,16 @@ export const LoginPage: React.FC = () => {
 
     } catch (err: any) {
       console.error("[AUTH] Fatal catch:", err.code, err.message);
-      if (err.code?.startsWith('auth/')) {
-        setError(`AUTH_ERR [${err.code}]: ${err.message}`);
+      const code = err.code || "";
+      
+      if (code === 'auth/invalid-credential' || code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-login-credentials') {
+        setError('Invalid email or password. Please try again.');
+      } else if (code === 'auth/too-many-requests') {
+        setError('Too many failed attempts. Please try again later.');
+      } else if (code === 'auth/network-request-failed') {
+        setError('Network error. Please check your internet connection.');
       } else {
-        setError(`SYSTEM_ERR: ${err.message || 'Unknown protocol failure'}`);
+        setError('Problem signing in. Please check your credentials or connection.');
       }
     } finally {
       if (!showAdminLoader) {
@@ -264,7 +270,7 @@ export const LoginPage: React.FC = () => {
           className="mt-16 text-center z-10"
         >
           <h2 className={`text-2xl font-black text-brand-text tracking-[0.3em] uppercase mb-4`}>
-            {isSK ? 'SK_PORTAL_SYNC' : isJustice ? 'JUSTICE_KERNEL_SYNC' : 'Authorizing Cluster'}
+            {isSK ? 'SK PORTAL LOGIN' : isJustice ? 'JUSTICE PORTAL LOGIN' : 'Accessing Portal'}
           </h2>
           <div className="flex flex-col items-center gap-2">
             <div className={`w-64 h-1 ${isSK ? 'bg-blue-900' : isJustice ? 'bg-green-900' : 'bg-brand-border'} rounded-full overflow-hidden relative`}>
@@ -276,14 +282,14 @@ export const LoginPage: React.FC = () => {
               />
             </div>
             <p className="text-[10px] font-mono text-brand-primary uppercase tracking-widest mt-4">
-              Access_Level: <span className="font-bold text-white uppercase">{isSK ? 'SK_OFFICIAL_ENCRYPTED' : isJustice ? 'JUSTICE_COMMISSION_SECURE' : 'CAPTAIN_AUTHORIZATION_REQUIRED'}</span>
+              Access Level: <span className="font-bold text-white uppercase">{isSK ? 'SK OFFICIAL' : isJustice ? 'JUSTICE COMMISSION' : 'CAPTAIN ACCESS'}</span>
             </p>
             <div className="mt-8 bg-black/40 backdrop-blur-md rounded-lg p-4 border border-brand-border/50 max-w-xs overflow-hidden">
                <p className={`text-[8px] font-mono ${isSK ? 'text-blue-400' : isJustice ? 'text-green-500' : 'text-green-500/80'} leading-tight whitespace-pre animate-pulse text-left uppercase`}>
-                 {">"} SCANNING IDENTITY... OK<br/>
-                 {">"} SYNCING {isSK ? 'SK' : isJustice ? 'JUSTICE' : 'SECURE'} KERNEL... OK<br/>
-                 {">"} ALLOCATING RESOURCE NODES... OK<br/>
-                 {">"} REDIRECTING TO GOVERNANCE PORTAL...
+                 {">"} Checking Account... OK<br/>
+                 {">"} Syncing {isSK ? 'SK' : isJustice ? 'Justice' : 'Secure'} Data... OK<br/>
+                 {">"} Preparing Dashboard... OK<br/>
+                 {">"} Opening Dashboard...
                </p>
             </div>
           </div>
@@ -359,10 +365,10 @@ export const LoginPage: React.FC = () => {
 
           <form onSubmit={handleAuth} className="space-y-6">
             <div>
-              <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] mb-2 block">Terminal Account Access</label>
+              <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] mb-2 block">Email Address</label>
               <Input 
                 type="email" 
-                placeholder="ID_UID@BALUARTE.GOV.PH" 
+                placeholder="email@example.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-brand-bg/50 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs py-3" 
@@ -371,7 +377,7 @@ export const LoginPage: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] block">Encrypted Entry Code</label>
+                <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] block">Password</label>
               </div>
               <Input 
                 type="password" 
@@ -388,9 +394,19 @@ export const LoginPage: React.FC = () => {
             disabled={loading}
             className="w-full bg-brand-primary text-brand-bg font-black uppercase tracking-[0.2em] text-xs py-4 shadow-[0_8px_24_px_-8px_#58A6FF]"
           >
-            {loading ? 'Processing...' : 'Authenticate User'}
+            {loading ? 'Processing...' : 'Login'}
           </Button>
           </form>
+
+          <div className="mt-8 pt-8 border-t border-brand-border/30 text-center">
+            <Link 
+              to="/" 
+              className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-muted hover:text-brand-primary transition-colors group"
+            >
+              <ArrowLeft className="w-3 h-3 transition-transform group-hover:-translate-x-1" />
+              Back to main page
+            </Link>
+          </div>
         </Card>
       </motion.div>
     </div>
