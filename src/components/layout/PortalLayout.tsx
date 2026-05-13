@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { useAuth } from '../../context/AuthContext';
-import { Bell, Search } from 'lucide-react';
+import { Bell, Search, Menu } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 
 export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, profile, loading } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   if (loading) return (
     <div className="h-screen w-full flex items-center justify-center bg-slate-50">
@@ -17,12 +18,20 @@ export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children
 
   return (
     <div className="flex min-h-screen bg-brand-bg font-sans">
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header className="h-16 bg-brand-surface border-b border-brand-border px-8 flex items-center justify-between z-40 shrink-0">
-          <div className="flex items-center gap-4 bg-brand-bg px-4 py-2 rounded-lg border border-brand-border w-96 max-w-full">
-            <Search className="w-4 h-4 text-brand-muted" />
-            <input type="text" placeholder="Search operations, files, sessions..." className="bg-transparent border-none focus:ring-0 text-sm w-full text-brand-text placeholder:text-brand-muted/50" />
+        <header className="h-16 bg-brand-surface border-b border-brand-border px-4 md:px-8 flex items-center justify-between z-40 shrink-0">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 -ml-2 text-brand-muted hover:text-brand-text lg:hidden transition-colors"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+            <div className="flex items-center gap-4 bg-brand-bg px-4 py-2 rounded-lg border border-brand-border w-48 md:w-96 max-w-full hidden sm:flex">
+              <Search className="w-4 h-4 text-brand-muted" />
+              <input type="text" placeholder="Search operations..." className="bg-transparent border-none focus:ring-0 text-sm w-full text-brand-text placeholder:text-brand-muted/50" />
+            </div>
           </div>
           
           <div className="flex items-center gap-6">
@@ -43,8 +52,8 @@ export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children
           </div>
         </header>
         
-        <main className="flex-1 overflow-y-auto p-8 relative scrollbar-hide">
-          <div className="max-w-7xl mx-auto space-y-8">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 relative scrollbar-hide">
+          <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
             {children}
           </div>
         </main>
