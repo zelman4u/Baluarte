@@ -10,7 +10,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 import { UserRole, Department, useAuth } from '../context/AuthContext';
 import { Button, Input, Card } from '../components/ui/Base';
-import { LogIn, Globe, Shield, Scale, ArrowLeft } from 'lucide-react';
+import { LogIn, Globe, Shield, Scale, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const LoginPage: React.FC = () => {
@@ -18,6 +18,7 @@ export const LoginPage: React.FC = () => {
   const { user: currentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showAdminLoader, setShowAdminLoader] = useState(false);
@@ -382,14 +383,29 @@ export const LoginPage: React.FC = () => {
                   Password
                 </label>
               </div>
-              <Input 
-                type="password" 
-                placeholder="••••••••••••" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-brand-bg/60 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs h-11 min-h-[44px]" 
-                disabled={loading}
-              />
+              <div className="relative flex items-center">
+                <Input 
+                  type={showPassword ? "text" : "password"} 
+                  placeholder="••••••••••••" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="bg-brand-bg/60 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs h-11 min-h-[44px] pr-11" 
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(prev => !prev)}
+                  className="absolute right-0 top-0 bottom-0 px-3.5 flex items-center justify-center text-brand-muted hover:text-brand-primary transition-colors interactive-click focus:outline-none min-h-[44px] min-w-[44px]"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  title={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4 text-brand-primary" />
+                  ) : (
+                    <Eye className="w-4 h-4 text-brand-muted hover:text-brand-text" />
+                  )}
+                </button>
+              </div>
             </div>
             
             <Button 
