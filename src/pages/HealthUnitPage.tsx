@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { landingPageService, LandingPageContent } from '../services/landingPageService';
 import { OrgChart } from '../components/OrgChart';
 import { cn } from '../lib/utils';
+import { GeminiChatFloatingButton } from '../components/ai/GeminiCivicAssistantModal';
 
 export const HealthUnitPage: React.FC = () => {
   const [content, setContent] = useState<LandingPageContent | null>(null);
@@ -43,18 +44,18 @@ export const HealthUnitPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#051111] text-brand-text font-sans overflow-x-hidden selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-[#051111] text-brand-text font-sans overflow-x-hidden selection:bg-cyan-500 selection:text-white relative">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
       
-      <nav className="relative z-50 px-8 py-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Link to="/" className="flex items-center gap-2 group">
+      <nav className="relative z-50 px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between max-w-7xl mx-auto">
+        <Link to="/" className="min-h-[44px] flex items-center gap-2 group interactive-click">
           <ArrowLeft className="w-4 h-4 text-brand-muted group-hover:text-cyan-400 transition-colors" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-brand-muted group-hover:text-brand-text transition-colors">Main Portal</span>
+          <span className="text-[11px] font-black uppercase tracking-widest text-brand-muted group-hover:text-brand-text transition-colors">Main Portal</span>
         </Link>
         <div className="flex items-center gap-2">
            <Heart className="w-5 h-5 text-cyan-500" />
-           <span className="font-black uppercase tracking-[0.2em] text-sm">Health_Unit</span>
+           <span className="font-black uppercase tracking-[0.2em] text-xs sm:text-sm text-cyan-400">Health Unit</span>
         </div>
       </nav>
 
@@ -184,6 +185,9 @@ export const HealthUnitPage: React.FC = () => {
           </div>
         </section>
       )}
+
+      {/* Floating Gemini Civic Assistant */}
+      <GeminiChatFloatingButton />
     </div>
   );
 };

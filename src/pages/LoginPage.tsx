@@ -299,113 +299,119 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 relative overflow-hidden font-sans">
+    <div className="h-screen max-h-screen w-full bg-brand-bg flex items-center justify-center p-3 sm:p-6 relative overflow-hidden font-sans">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute -top-48 -left-48 w-[40rem] h-[40rem] bg-brand-primary/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute -bottom-48 -right-48 w-[40rem] h-[40rem] bg-purple-600/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+        <div className="absolute -top-48 -left-48 w-[35rem] h-[35rem] bg-brand-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute -bottom-48 -right-48 w-[35rem] h-[35rem] bg-purple-600/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
       </div>
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md z-10"
+        className="w-full max-w-sm sm:max-w-md z-10 my-auto"
       >
-        <Card className="p-10 backdrop-blur-3xl bg-brand-surface/40 border border-brand-border/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
-          <div className="text-center mb-10">
+        <Card className="p-5 sm:p-8 backdrop-blur-3xl bg-brand-surface/60 border border-brand-border/60 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.6)] rounded-2xl">
+          <div className="text-center mb-5 sm:mb-6">
             <motion.div 
-              style={{ perspective: 1200 }}
+              style={{ perspective: 1000 }}
               animate={{ 
-                y: [0, -15, 0],
-                rotateX: [5, -5, 5],
-                rotateY: [-10, 10, -10],
-                rotateZ: [0, 2, 0]
+                y: [0, -6, 0],
+                rotateX: [3, -3, 3],
+                rotateY: [-5, 5, -5]
               }}
               transition={{ 
-                duration: 8, 
+                duration: 6, 
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
               whileHover={{ 
-                scale: 1.2,
+                scale: 1.1,
                 rotateX: 0,
                 rotateY: 0,
-                rotateZ: 0,
-                transition: { duration: 0.5, type: "spring", stiffness: 300 }
+                transition: { duration: 0.3 }
               }}
-              className="w-32 h-32 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl rounded-full mx-auto flex items-center justify-center p-3 shadow-[0_30px_70px_rgba(88,166,255,0.4),inset_0_0_20px_rgba(255,255,255,0.1)] mb-10 border border-white/20 overflow-hidden relative cursor-default group"
+              className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl rounded-full mx-auto flex items-center justify-center p-2 shadow-[0_15px_35px_rgba(88,166,255,0.3)] mb-3 border border-white/20 overflow-hidden relative cursor-default"
             >
-              {/* Internal depth effects */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(88,166,255,0.3)_0%,transparent_70%)]" />
-              <div className="absolute -inset-1 bg-gradient-to-br from-brand-primary/20 via-transparent to-brand-primary/20 opacity-30 animate-pulse" />
-              
               <img 
                 src="https://lh3.googleusercontent.com/d/15qEeMZnaeEI052MdJrFujHjkxcKJMHku=s1000" 
                 alt="Barangay Logo" 
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover rounded-full drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] z-10"
+                className="w-full h-full object-cover rounded-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.7)] z-10"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = "https://placehold.co/400x400/1e1e1e/58a6ff?text=Barangay+Logo";
                 }}
               />
             </motion.div>
-            <h1 className="text-3xl font-black text-brand-text tracking-tighter uppercase mb-2">Barangay Baluarte</h1>
+            <h1 className="text-xl sm:text-2xl font-black text-brand-text tracking-tighter uppercase interactive-text">
+              Barangay Baluarte
+            </h1>
+            <p className="text-[10px] font-mono text-brand-muted uppercase tracking-widest mt-0.5">
+              Secure Governance Portal
+            </p>
           </div>
 
           {error && (
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="mb-8 p-4 bg-brand-danger/10 border border-brand-danger/20 rounded-lg text-brand-danger text-[10px] font-black uppercase tracking-widest leading-relaxed text-center"
+              className="mb-4 p-2.5 bg-brand-danger/10 border border-brand-danger/20 rounded-lg text-brand-danger text-[10px] font-black uppercase tracking-wider leading-relaxed text-center"
             >
               {error}
             </motion.div>
           )}
 
-          <form onSubmit={handleAuth} className="space-y-6">
+          <form onSubmit={handleAuth} className="space-y-3.5 sm:space-y-4">
             <div>
-              <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] mb-2 block">Email Address</label>
+              <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] mb-1.5 block">
+                Official Email Address
+              </label>
               <Input 
                 type="email" 
-                placeholder="email@example.com" 
+                placeholder="admin@baluarte.gov.ph" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-brand-bg/50 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs py-3" 
+                className="bg-brand-bg/60 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs h-11 min-h-[44px]" 
                 disabled={loading}
               />
             </div>
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] block">Password</label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-[10px] font-black text-brand-muted uppercase tracking-[0.15em] block">
+                  Password
+                </label>
               </div>
               <Input 
                 type="password" 
                 placeholder="••••••••••••" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-brand-bg/50 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs py-3" 
+                className="bg-brand-bg/60 border-brand-border text-brand-text placeholder:text-brand-muted/30 font-mono text-xs h-11 min-h-[44px]" 
                 disabled={loading}
               />
             </div>
             
-          <Button 
-            type="submit" 
-            disabled={loading}
-            className="w-full bg-brand-primary text-brand-bg font-black uppercase tracking-[0.2em] text-xs py-4 shadow-[0_8px_24_px_-8px_#58A6FF]"
-          >
-            {loading ? 'Processing...' : 'Login'}
-          </Button>
+            <Button 
+              type="submit" 
+              disabled={loading}
+              className="w-full bg-brand-primary text-brand-bg font-black uppercase tracking-[0.2em] text-xs h-11 min-h-[44px] shadow-[0_8px_24px_-8px_#58A6FF] interactive-click mt-2"
+            >
+              {loading ? 'Authenticating...' : 'Sign In To Portal'}
+            </Button>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-brand-border/30 text-center">
+          <div className="mt-4 pt-3.5 border-t border-brand-border/40 text-center flex items-center justify-between">
             <Link 
               to="/" 
-              className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-muted hover:text-brand-primary transition-colors group"
+              className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-muted hover:text-brand-primary transition-colors group min-h-[36px]"
             >
               <ArrowLeft className="w-3 h-3 transition-transform group-hover:-translate-x-1" />
-              Back to main page
+              <span>Back to home</span>
             </Link>
+            <span className="text-[9px] font-mono text-brand-muted/60">
+              v2.4 LTS Secure
+            </span>
           </div>
         </Card>
       </motion.div>

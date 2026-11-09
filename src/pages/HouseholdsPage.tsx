@@ -160,28 +160,30 @@ export const HouseholdsPage: React.FC = () => {
           </motion.div>
         </div>
       )}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Portal /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Household Registry</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Residential Clusters</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Household Profiling & Location Analytics</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Residential Clusters
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Household Profiling & Location Analytics</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden lg:flex">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button variant="outline" className="hidden lg:flex min-h-[44px] interactive-click">
             Map View
           </Button>
-          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest">
+          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             Cluster Record
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6 bg-brand-surface border-brand-border">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <Card className="p-6 bg-brand-surface border-brand-border kinetic-card">
           <div className="flex items-center justify-between mb-4">
             <div className="p-2 bg-brand-primary/10 rounded-lg text-brand-primary border border-brand-primary/20">
               <Home className="w-5 h-5" />
@@ -192,7 +194,7 @@ export const HouseholdsPage: React.FC = () => {
             </div>
           </div>
           <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">Total Households</p>
-          <h3 className="text-2xl font-bold text-brand-text mt-1">{households.length}</h3>
+          <h3 className="text-2xl font-bold text-brand-text mt-1 interactive-text">{households.length}</h3>
         </Card>
         
         <Card className="p-6 bg-brand-surface border-brand-border">

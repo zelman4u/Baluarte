@@ -29,6 +29,7 @@ import {
   Area
 } from 'recharts';
 import { motion } from 'motion/react';
+import { AdminDataVisualizationSummary } from '../components/dashboard/AdminDataVisualizationSummary';
 
 const data = [
   { name: 'Jan', requests: 400, cases: 24, revenue: 2400 },
@@ -153,6 +154,9 @@ export const Dashboard: React.FC = () => {
           </motion.div>
         ))}
       </div>
+      
+      {/* Departmental Recharts Decision Support Summary Component */}
+      <AdminDataVisualizationSummary />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <Card className="p-8 lg:col-span-2">

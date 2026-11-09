@@ -208,48 +208,50 @@ export const HealthPage: React.FC = () => {
           </motion.div>
         </div>
       )}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Welfare /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Health Registry</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Medical Surveillance</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Health Center Resident Monitoring & Records Audit</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Medical Surveillance
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Health Center Resident Monitoring & Records Audit</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden lg:flex">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button variant="outline" className="hidden lg:flex min-h-[44px] interactive-click">
             Health Census
           </Button>
-          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest">
+          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             Clinical Entry
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6 bg-brand-surface border-brand-border">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <Card className="p-6 bg-brand-surface border-brand-border kinetic-card">
           <div className="flex items-center justify-between mb-4">
             <div className="p-2 bg-brand-danger/10 rounded-lg text-brand-danger border border-brand-danger/20">
               <Activity className="w-5 h-5" />
             </div>
           </div>
           <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">Active Consultations</p>
-          <h3 className="text-2xl font-bold text-brand-text mt-1">{records.length}</h3>
+          <h3 className="text-2xl font-bold text-brand-text mt-1 interactive-text">{records.length}</h3>
         </Card>
         
-        <Card className="p-6 bg-brand-surface border-brand-border">
+        <Card className="p-6 bg-brand-surface border-brand-border kinetic-card">
           <div className="flex items-center justify-between mb-4">
             <div className="p-2 bg-brand-success/10 rounded-lg text-brand-success border border-brand-success/20">
               <Syringe className="w-5 h-5" />
             </div>
           </div>
           <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">Vaccination Coverage</p>
-          <h3 className="text-2xl font-bold text-brand-text mt-1">94.8%</h3>
+          <h3 className="text-2xl font-bold text-brand-text mt-1 interactive-text">94.8%</h3>
         </Card>
 
-        <Card className="p-6 bg-brand-surface border-brand-border">
+        <Card className="p-6 bg-brand-surface border-brand-border kinetic-card">
           <div className="flex items-center justify-between mb-4">
             <div className="p-2 bg-purple-400/10 rounded-lg text-purple-400 border border-purple-400/20">
               <Heart className="w-5 h-5" />

@@ -182,23 +182,25 @@ export const TreasuryPage: React.FC = () => {
           </motion.div>
         </div>
       )}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Finance /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Treasury Oversight</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Barangay Budget Ledger</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Fiscal Transparency & Revenue Tracking</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Barangay Budget Ledger
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Fiscal Transparency & Revenue Tracking</p>
         </div>
-        <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg font-black uppercase tracking-widest text-[10px]">
+        <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg font-black uppercase tracking-wider text-xs min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
           <Plus className="w-4 h-4 mr-2" />
           Log Transaction
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6 border-b-2 border-b-brand-success shadow-lg shadow-brand-success/5 bg-brand-surface">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <Card className="p-6 border-b-2 border-b-brand-success shadow-lg shadow-brand-success/5 bg-brand-surface kinetic-card">
           <div className="flex items-center justify-between mb-4">
             <div className="p-2 bg-brand-success/10 rounded-lg border border-brand-success/20">
               <TrendingUp className="w-5 h-5 text-brand-success" />

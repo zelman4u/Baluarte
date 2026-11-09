@@ -17,20 +17,17 @@ import { HealthPage } from './pages/HealthPage';
 import { YouthPage } from './pages/YouthPage';
 import { RequestsPage } from './pages/RequestsPage';
 import { CaseHistoryPage } from './pages/CaseHistoryPage';
-import { PlaceholderPage } from './pages/PlaceholderPage';
 import { JusticeUnitPage } from './pages/JusticeUnitPage';
 import { HealthUnitPage } from './pages/HealthUnitPage';
 import { YouthUnitPage } from './pages/YouthUnitPage';
 import { ContentManagementPage } from './pages/ContentManagementPage';
-
-// Placeholder Components
-const DRRMPlaceholder = () => <PlaceholderPage title="Disaster Risk Management" module="DRRM" description="Emergency response logistics and hazard mapping system integration." />;
-const CasesPlaceholder = () => <PlaceholderPage title="Katarungang Pambarangay" module="JUSTICE" description="Mediation schedule and settlement agreement registry." />;
-const YouthPlaceholder = () => <PlaceholderPage title="Youth & SK Programs" module="COMMUNITY" description="SK Project management, scholarship tracking, and youth profiling." logoPath="/assets/sk_logo.png" />;
-const ProfilePlaceholder = () => <PlaceholderPage title="Authorized Identity" module="USER_CONFIG" description="Biometric credential management and portal accessibility settings." />;
-const SettingsPlaceholder = () => <PlaceholderPage title="Global Configuration" module="SYSTEM" description="Baluarte Governance Portal core infrastructure settings." />;
-const SecurityPlaceholder = () => <PlaceholderPage title="Public Safety Patrol" module="TANOD" description="Baluarte Security Force (Tanod) patrol logs and incident response." />;
-const WelfarePlaceholder = () => <PlaceholderPage title="Social Welfare" module="SOCIAL" description="PWD, Senior Citizen, and Indigency social program tracking." />;
+import { DRRMPage } from './pages/DRRMPage';
+import { CasesPage } from './pages/CasesPage';
+import { SecurityPage } from './pages/SecurityPage';
+import { WelfarePage } from './pages/WelfarePage';
+import { SettingsPage } from './pages/SettingsPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { AuditTrailPage } from './pages/AuditTrailPage';
 
 // App shell component for authenticated routes
 const AuthenticatedShell: React.FC = () => {
@@ -113,18 +110,19 @@ const AuthenticatedShell: React.FC = () => {
     <Route path="/residents" element={<ResidentsPage />} />
     <Route path="/households" element={<HouseholdsPage />} />
     <Route path="/treasury" element={<TreasuryPage />} />
-    <Route path="/drrm" element={<DRRMPlaceholder />} />
+    <Route path="/drrm" element={<DRRMPage />} />
     <Route path="/blotter" element={<BlotterPage />} />
-    <Route path="/cases" element={<CasesPlaceholder />} />
+    <Route path="/cases" element={<CasesPage />} />
     <Route path="/case-history" element={<CaseHistoryPage />} />
-    <Route path="/security" element={<SecurityPlaceholder />} />
+    <Route path="/security" element={<SecurityPage />} />
     <Route path="/health" element={<HealthPage />} />
-    <Route path="/welfare" element={<WelfarePlaceholder />} />
+    <Route path="/welfare" element={<WelfarePage />} />
     <Route path="/youth" element={<YouthPage />} />
     <Route path="/requests" element={<RequestsPage />} />
     <Route path="/content-management" element={<ContentManagementPage />} />
-    <Route path="/profile" element={<ProfilePlaceholder />} />
-    <Route path="/settings" element={<SettingsPlaceholder />} />
+    <Route path="/audit-trail" element={<AuditTrailPage />} />
+    <Route path="/profile" element={<ProfilePage />} />
+    <Route path="/settings" element={<SettingsPage />} />
   </Routes></PortalLayout>;
 };
 

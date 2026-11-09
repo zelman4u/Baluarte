@@ -58,39 +58,41 @@ export const YouthPage: React.FC = () => {
 
   return (
     <div className="space-y-6 pb-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Community /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Youth Development</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">SK Program Management</h1>
-          <p className="text-brand-muted text-sm font-medium">Monitoring youth initiatives, scholarships, and engagement metrics.</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            SK Program Management
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Monitoring youth initiatives, scholarships, and engagement metrics.</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden lg:flex">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button variant="outline" className="hidden lg:flex min-h-[44px] interactive-click">
             Youth Census
           </Button>
-          <Button className="bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest">
+          <Button className="bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             New Initiative
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
         {[
           { label: 'Active Programs', val: programs.filter(p => p.status === 'Active').length, icon: Compass, color: 'text-blue-400' },
           { label: 'Beneficiaries', val: programs.reduce((acc, p) => acc + p.beneficiariesCount, 0), icon: Users, color: 'text-green-400' },
           { label: 'Scholarships', val: '142', icon: GraduationCap, color: 'text-purple-400' },
           { label: 'Environmental', val: '4', icon: Trees, color: 'text-emerald-400' }
         ].map((stat, i) => (
-          <Card key={i} className="p-6 bg-brand-surface border-brand-border">
+          <Card key={i} className="p-5 bg-brand-surface border-brand-border kinetic-card interactive-click">
             <div className={stat.color}>
-              <stat.icon className="w-5 h-5 mb-4" />
+              <stat.icon className="w-5 h-5 mb-3" />
             </div>
             <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
-            <h3 className="text-2xl font-bold text-brand-text mt-1">{stat.val}</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-brand-text mt-1 interactive-text">{stat.val}</h3>
           </Card>
         ))}
       </div>

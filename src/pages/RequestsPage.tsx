@@ -172,41 +172,43 @@ export const RequestsPage: React.FC = () => {
           </motion.div>
         </div>
       )}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Documentation /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Public Service</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Document Queue</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Official Certificate & Clearance Processing Service</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Document Queue
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Official Certificate & Clearance Processing Service</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden lg:flex">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button variant="outline" className="hidden lg:flex min-h-[44px] interactive-click">
             Fee Schedule
           </Button>
-          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest">
+          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             New Request
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
         {[
           { label: 'Unprocessed', value: requests.filter(r => r.status === 'Pending').length.toString(), icon: Clock, color: 'text-brand-warning' },
           { label: 'Processed', value: requests.filter(r => r.status === 'Completed').length.toString(), icon: CheckCircle2, color: 'text-brand-success' },
           { label: 'Avg Pulse', value: '4.2H', icon: ArrowUpRight, color: 'text-brand-primary' },
           { label: 'Daily Revenue', value: '₱2,850', icon: CreditCard, color: 'text-purple-400' },
         ].map((stat, i) => (
-          <Card key={i} className="p-4 bg-brand-surface border-brand-border">
-            <div className="flex items-center gap-4">
+          <Card key={i} className="p-4 bg-brand-surface border-brand-border kinetic-card interactive-click">
+            <div className="flex items-center gap-3">
               <div className="p-2 bg-brand-bg border border-brand-border rounded-lg">
                 <stat.icon className={cn("w-4 h-4", stat.color)} />
               </div>
               <div>
                 <p className="text-[10px] font-bold text-brand-muted uppercase tracking-widest leading-none">{stat.label}</p>
-                <h4 className="text-lg font-black text-brand-text mt-1">{stat.value}</h4>
+                <h4 className="text-base sm:text-lg font-black text-brand-text mt-1 interactive-text">{stat.value}</h4>
               </div>
             </div>
           </Card>

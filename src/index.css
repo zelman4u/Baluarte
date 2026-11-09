@@ -35,3 +35,92 @@
     @apply bg-brand-border rounded-full hover:bg-brand-muted/30;
   }
 }
+
+@keyframes textClickPulse {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(0.96); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes textGlint {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Micro-interaction & click text animation classes */
+.interactive-click {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.interactive-click:active {
+  transform: scale(0.96);
+  filter: brightness(1.15);
+}
+
+.interactive-text {
+  cursor: pointer;
+  display: inline-block;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.interactive-text:hover {
+  color: var(--color-brand-primary);
+}
+
+.interactive-text:active {
+  animation: textClickPulse 0.25s ease-out;
+}
+
+.kinetic-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.kinetic-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand-primary);
+}
+
+.kinetic-card:active {
+  transform: scale(0.985);
+}
+
+.kinetic-badge {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.kinetic-badge:active {
+  transform: scale(0.92);
+}
+
+@keyframes moduleFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.module-enter {
+  animation: moduleFadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Responsive table scroll wrapper */
+.responsive-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+
+/* Ensure mobile tap targets */
+@media (max-width: 640px) {
+  button, a[role="button"], input[type="submit"], select {
+    min-height: 44px;
+  }
+}
+

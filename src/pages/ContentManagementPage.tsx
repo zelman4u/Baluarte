@@ -251,12 +251,12 @@ export const ContentManagementPage: React.FC = () => {
   if (loading) return null;
 
   return (
-    <div className="p-6 lg:p-8 max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto module-enter">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="w-2 h-6 bg-brand-primary rounded-full"></span>
-            <h1 className="text-4xl font-black text-brand-text uppercase tracking-tighter leading-none mb-1">Content Terminal</h1>
+            <span className="w-2 h-6 bg-brand-primary rounded-full animate-pulse"></span>
+            <h1 className="text-2xl sm:text-4xl font-black text-brand-text uppercase tracking-tighter leading-none mb-1 interactive-text">Content Terminal</h1>
           </div>
           <p className="text-brand-muted text-xs uppercase tracking-[0.2em] font-bold">
             Managing <span className="text-brand-primary">{pageId.toUpperCase()}</span> Landing Page
@@ -267,7 +267,7 @@ export const ContentManagementPage: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-bg rounded-xl font-black uppercase text-xs tracking-widest hover:brightness-110 active:scale-95 transition-all disabled:opacity-50"
+            className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary text-brand-bg rounded-xl font-black uppercase text-xs tracking-widest hover:brightness-110 active:scale-95 transition-all disabled:opacity-50 interactive-click shadow-lg shadow-brand-primary/20"
           >
             {saving ? <div className="w-4 h-4 border-2 border-brand-bg/30 border-t-brand-bg animate-spin rounded-full" /> : <Save className="w-4 h-4" />}
             Save Changes
@@ -281,10 +281,10 @@ export const ContentManagementPage: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3 text-red-500 text-xs font-bold uppercase tracking-widest"
+            className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3 text-red-500 text-xs font-bold uppercase tracking-widest kinetic-card"
           >
-            <AlertCircle className="w-5 h-5" />
-            {error}
+            <AlertCircle className="w-5 h-5 shrink-0" />
+            <span>{error}</span>
           </motion.div>
         )}
         {success && (
@@ -292,17 +292,17 @@ export const ContentManagementPage: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="mb-8 p-4 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center gap-3 text-green-500 text-xs font-bold uppercase tracking-widest"
+            className="mb-8 p-4 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center gap-3 text-green-500 text-xs font-bold uppercase tracking-widest kinetic-card"
           >
-            <CheckCircle2 className="w-5 h-5" />
-            {success}
+            <CheckCircle2 className="w-5 h-5 shrink-0" />
+            <span>{success}</span>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Sidebar Tabs */}
-        <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* Responsive Tabs: scrollable on mobile, column on lg */}
+        <div className="flex flex-row overflow-x-auto pb-2 lg:pb-0 lg:flex-col gap-2 shrink-0 no-scrollbar">
           {[
             { id: 'hero', icon: ImageIcon, label: 'Hero Display' },
             { id: 'announcements', icon: Megaphone, label: 'News & Announcements' },
@@ -315,14 +315,14 @@ export const ContentManagementPage: React.FC = () => {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
+                "flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap min-h-[44px] shrink-0 interactive-click",
                 activeTab === tab.id 
-                  ? "bg-brand-primary text-brand-bg" 
+                  ? "bg-brand-primary text-brand-bg shadow-md shadow-brand-primary/20" 
                   : "bg-brand-surface text-brand-muted hover:text-brand-text hover:bg-brand-border/30"
               )}
             >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
+              <tab.icon className="w-4 h-4 shrink-0" />
+              <span>{tab.label}</span>
             </button>
           ))}
         </div>
@@ -334,22 +334,22 @@ export const ContentManagementPage: React.FC = () => {
               {activeTab === 'hero' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Hero Display Gallery</h2>
-                    <label className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-brand-primary/10 text-brand-primary rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/20 transition-all">
-                      <Plus className="w-3 h-3" />
-                      Add Images
+                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Hero Display Gallery</h2>
+                    <label className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-brand-primary/10 text-brand-primary rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/20 transition-all min-h-[44px] interactive-click">
+                      <Plus className="w-4 h-4 shrink-0" />
+                      <span>Add Images</span>
                       <input type="file" multiple className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, 'hero')} />
                     </label>
                   </div>
                   
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {content.heroImages.map((img, idx) => (
-                      <div key={idx} className="group relative aspect-video bg-brand-bg rounded-xl overflow-hidden border border-brand-border">
+                      <div key={idx} className="group relative aspect-video bg-brand-bg rounded-xl overflow-hidden border border-brand-border kinetic-card">
                         <img src={img} alt={`Hero ${idx}`} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-brand-bg/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <button 
                             onClick={() => removeHeroImage(idx)}
-                            className="p-2 bg-red-500 text-white rounded-lg hover:scale-110 active:scale-95 transition-all"
+                            className="p-3 bg-red-500 text-white rounded-lg hover:scale-110 active:scale-95 transition-all interactive-click min-h-[44px] min-w-[44px] flex items-center justify-center"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -369,16 +369,16 @@ export const ContentManagementPage: React.FC = () => {
               {activeTab === 'announcements' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Latest Announcements</h2>
-                    <button onClick={addAnnouncement} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest">
-                      <Plus className="w-3 h-3" />
+                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Latest Announcements</h2>
+                    <button onClick={addAnnouncement} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest interactive-click min-h-[44px]">
+                      <Plus className="w-4 h-4" />
                       Add New
                     </button>
                   </div>
 
                   <div className="space-y-4">
                     {content.announcements.map((ann) => (
-                      <div key={ann.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl space-y-4">
+                      <div key={ann.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl space-y-4 kinetic-card">
                         <div className="flex justify-between items-start gap-4">
                           <input
                             type="text"
@@ -387,7 +387,7 @@ export const ContentManagementPage: React.FC = () => {
                             placeholder="Announcement Title"
                             className="bg-transparent text-sm font-black uppercase tracking-tight text-brand-text w-full focus:outline-none"
                           />
-                          <button onClick={() => removeAnnouncement(ann.id)} className="text-brand-muted hover:text-red-500 transition-colors">
+                          <button onClick={() => removeAnnouncement(ann.id)} className="text-brand-muted hover:text-red-500 transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center interactive-click">
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
@@ -411,9 +411,9 @@ export const ContentManagementPage: React.FC = () => {
 
               {activeTab === 'facts' && (
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                      <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Barangay Quick Facts</h2>
+                      <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Barangay Quick Facts</h2>
                       <p className="text-[10px] font-bold text-brand-muted uppercase tracking-widest mt-1">Key demographics and administrative data</p>
                     </div>
                     <button 
@@ -421,16 +421,16 @@ export const ContentManagementPage: React.FC = () => {
                         ...prev,
                         quickFacts: [...(prev.quickFacts || []), { id: crypto.randomUUID(), label: 'New Fact', value: '' }]
                       } : null)}
-                      className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest"
+                      className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest min-h-[44px] interactive-click justify-center"
                     >
-                      <Plus className="w-3 h-3" />
+                      <Plus className="w-4 h-4" />
                       Add Data Point
                     </button>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(content.quickFacts || []).map((fact) => (
-                      <div key={fact.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex items-center gap-4">
+                      <div key={fact.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex items-center gap-4 kinetic-card">
                         <div className="flex-1 space-y-2">
                           <input
                             type="text"
@@ -458,7 +458,7 @@ export const ContentManagementPage: React.FC = () => {
                             ...prev,
                             quickFacts: prev.quickFacts?.filter(f => f.id !== fact.id)
                           } : null)}
-                          className="text-brand-muted hover:text-red-500 transition-colors p-2"
+                          className="text-brand-muted hover:text-red-500 transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center interactive-click"
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -476,7 +476,7 @@ export const ContentManagementPage: React.FC = () => {
 
               {activeTab === 'body' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Landing Page Body Content</h2>
+                  <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Landing Page Body Content</h2>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest">Description / About Section</label>
                     <textarea
@@ -493,22 +493,22 @@ export const ContentManagementPage: React.FC = () => {
                 <div className="space-y-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                      <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Organization Chart</h2>
+                      <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Organization Chart</h2>
                       <p className="text-[10px] font-bold text-brand-muted uppercase tracking-widest mt-1">Build your barangay's leadership hierarchy</p>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
                       <button 
                         onClick={() => {
                           if (confirm('This will replace current organization with a standard barangay structure. Continue?')) {
                             setContent(prev => prev ? { ...prev, organization: getStandardOrg() } : null);
                           }
                         }}
-                        className="px-4 py-2 border border-brand-border text-brand-muted rounded-lg text-[10px] font-black uppercase tracking-widest hover:text-brand-text transition-all"
+                        className="px-4 py-2 border border-brand-border text-brand-muted rounded-lg text-[10px] font-black uppercase tracking-widest hover:text-brand-text transition-all min-h-[44px] interactive-click"
                       >
                         Reset to Standard
                       </button>
-                      <button onClick={addOrgMember} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest">
-                        <Plus className="w-3 h-3" />
+                      <button onClick={addOrgMember} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest min-h-[44px] interactive-click">
+                        <Plus className="w-4 h-4" />
                         Add Personnel
                       </button>
                     </div>
@@ -516,7 +516,7 @@ export const ContentManagementPage: React.FC = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {content.organization.map((member) => (
-                      <div key={member.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex gap-4">
+                      <div key={member.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex gap-4 kinetic-card">
                         <div className="relative group w-16 h-16 rounded-lg bg-brand-surface border border-brand-border overflow-hidden shrink-0">
                           {member.image ? (
                             <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
@@ -531,55 +531,55 @@ export const ContentManagementPage: React.FC = () => {
                           </label>
                         </div>
                         
-                          <div className="flex flex-col gap-2 flex-1">
-                            <div className="flex justify-between items-start">
-                              <input
-                                type="text"
-                                value={member.name}
-                                onChange={(e) => setContent(prev => prev ? {
-                                  ...prev,
-                                  organization: prev.organization.map(m => m.id === member.id ? { ...m, name: e.target.value } : m)
-                                } : null)}
-                                placeholder="Name"
-                                className="bg-transparent text-xs font-black uppercase tracking-tight text-brand-text w-full focus:outline-none"
-                              />
-                              <button 
-                                onClick={() => setContent(prev => prev ? {
-                                  ...prev,
-                                  organization: prev.organization.filter(m => m.id !== member.id)
-                                } : null)}
-                                className="text-brand-muted hover:text-red-500 transition-colors"
-                              >
-                                <X className="w-3 h-3" />
-                              </button>
-                            </div>
+                        <div className="flex flex-col gap-2 flex-1 min-w-0">
+                          <div className="flex justify-between items-start">
                             <input
                               type="text"
-                              value={member.role}
+                              value={member.name}
                               onChange={(e) => setContent(prev => prev ? {
                                 ...prev,
-                                organization: prev.organization.map(m => m.id === member.id ? { ...m, role: e.target.value } : m)
+                                organization: prev.organization.map(m => m.id === member.id ? { ...m, name: e.target.value } : m)
                               } : null)}
-                              placeholder="Role / Position"
-                              className="bg-transparent text-[10px] uppercase tracking-widest text-brand-muted w-full focus:outline-none"
+                              placeholder="Name"
+                              className="bg-transparent text-xs font-black uppercase tracking-tight text-brand-text w-full focus:outline-none"
                             />
-                            <div className="flex flex-col gap-1">
-                              <label className="text-[8px] font-black text-brand-muted uppercase tracking-widest">Reports To</label>
-                              <select
-                                value={member.reportsTo || ''}
-                                onChange={(e) => setContent(prev => prev ? {
-                                  ...prev,
-                                  organization: prev.organization.map(m => m.id === member.id ? { ...m, reportsTo: e.target.value || undefined } : m)
-                                } : null)}
-                                className="bg-brand-surface border border-brand-border rounded px-2 py-1 text-[9px] font-bold uppercase text-brand-text focus:outline-none focus:border-brand-primary"
-                              >
-                                <option value="">None (Top Level)</option>
-                                {content.organization.filter(m => m.id !== member.id).map(other => (
-                                  <option key={other.id} value={other.id}>{other.name} ({other.role})</option>
-                                ))}
-                              </select>
-                            </div>
+                            <button 
+                              onClick={() => setContent(prev => prev ? {
+                                ...prev,
+                                organization: prev.organization.filter(m => m.id !== member.id)
+                              } : null)}
+                              className="text-brand-muted hover:text-red-500 transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center interactive-click"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
                           </div>
+                          <input
+                            type="text"
+                            value={member.role}
+                            onChange={(e) => setContent(prev => prev ? {
+                              ...prev,
+                              organization: prev.organization.map(m => m.id === member.id ? { ...m, role: e.target.value } : m)
+                            } : null)}
+                            placeholder="Role / Position"
+                            className="bg-transparent text-[10px] uppercase tracking-widest text-brand-muted w-full focus:outline-none"
+                          />
+                          <div className="flex flex-col gap-1">
+                            <label className="text-[8px] font-black text-brand-muted uppercase tracking-widest">Reports To</label>
+                            <select
+                              value={member.reportsTo || ''}
+                              onChange={(e) => setContent(prev => prev ? {
+                                ...prev,
+                                organization: prev.organization.map(m => m.id === member.id ? { ...m, reportsTo: e.target.value || undefined } : m)
+                              } : null)}
+                              className="bg-brand-surface border border-brand-border rounded px-2 py-1 text-[9px] font-bold uppercase text-brand-text focus:outline-none focus:border-brand-primary min-h-[36px]"
+                            >
+                              <option value="">None (Top Level)</option>
+                              {content.organization.filter(m => m.id !== member.id).map(other => (
+                                <option key={other.id} value={other.id}>{other.name} ({other.role})</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -589,16 +589,16 @@ export const ContentManagementPage: React.FC = () => {
               {activeTab === 'happenings' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter">Community Happenings</h2>
-                    <button onClick={addHappening} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest">
-                      <Plus className="w-3 h-3" />
+                    <h2 className="text-xl font-black text-brand-text uppercase tracking-tighter interactive-text">Community Happenings</h2>
+                    <button onClick={addHappening} className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg rounded-lg text-[10px] font-black uppercase tracking-widest min-h-[44px] interactive-click">
+                      <Plus className="w-4 h-4" />
                       Add Event
                     </button>
                   </div>
 
                   <div className="space-y-6">
                     {content.communityHappenings.map((event) => (
-                      <div key={event.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex flex-col md:flex-row gap-6">
+                      <div key={event.id} className="p-4 bg-brand-bg border border-brand-border rounded-xl flex flex-col md:flex-row gap-6 kinetic-card">
                         <div className="relative group w-full md:w-32 aspect-video md:aspect-square rounded-lg bg-brand-surface border border-brand-border overflow-hidden shrink-0">
                           {event.image ? (
                             <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
@@ -613,7 +613,7 @@ export const ContentManagementPage: React.FC = () => {
                           </label>
                         </div>
 
-                        <div className="flex-1 space-y-3">
+                        <div className="flex-1 space-y-3 min-w-0">
                           <div className="flex justify-between items-start gap-4">
                             <input
                               type="text"
@@ -630,7 +630,7 @@ export const ContentManagementPage: React.FC = () => {
                                 ...prev,
                                 communityHappenings: prev.communityHappenings.filter(h => h.id !== event.id)
                               } : null)}
-                              className="text-brand-muted hover:text-red-500 transition-colors"
+                              className="text-brand-muted hover:text-red-500 transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center interactive-click"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>

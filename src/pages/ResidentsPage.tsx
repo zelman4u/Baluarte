@@ -51,28 +51,30 @@ export const ResidentsPage: React.FC = () => {
 
   return (
     <div className="space-y-6 pb-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
            <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Portal /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Resident Registry</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Citizen Database</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Unified Inhabitant Monitoring System</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Citizen Database
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Unified Inhabitant Monitoring System</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden lg:flex" onClick={handleExport}>
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button variant="outline" className="hidden lg:flex min-h-[44px] interactive-click" onClick={handleExport}>
             <Download className="w-4 h-4 mr-2" />
             Export Audit
           </Button>
-          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg">
+          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             Register Citizen
           </Button>
         </div>
       </div>
 
-      <Card className="overflow-hidden bg-brand-surface border-brand-border">
+      <Card className="overflow-hidden bg-brand-surface border-brand-border kinetic-card">
         <div className="p-6 border-b border-brand-border flex flex-col md:flex-row md:items-center justify-between gap-4 bg-brand-card/50">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted font-bold" />

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { landingPageService, LandingPageContent } from '../services/landingPageService';
 import { OrgChart } from '../components/OrgChart';
 import { cn } from '../lib/utils';
+import { GeminiChatFloatingButton } from '../components/ai/GeminiCivicAssistantModal';
 
 export const YouthUnitPage: React.FC = () => {
   const [content, setContent] = useState<LandingPageContent | null>(null);
@@ -43,19 +44,19 @@ export const YouthUnitPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#000d1a] text-brand-text font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-[#000d1a] text-brand-text font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white relative">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,120,255,0.08)_0%,transparent_70%)] pointer-events-none" />
       
-      <nav className="relative z-50 px-8 py-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Link to="/" className="flex items-center gap-2 group">
+      <nav className="relative z-50 px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between max-w-7xl mx-auto">
+        <Link to="/" className="min-h-[44px] flex items-center gap-2 group interactive-click">
           <ArrowLeft className="w-4 h-4 text-brand-muted group-hover:text-blue-400 transition-colors" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-brand-muted group-hover:text-brand-text transition-colors">Main Portal</span>
+          <span className="text-[11px] font-black uppercase tracking-widest text-brand-muted group-hover:text-brand-text transition-colors">Main Portal</span>
         </Link>
         <div className="flex items-center gap-4">
            <div className="flex items-center gap-2">
               <Compass className="w-5 h-5 text-blue-500" />
-              <span className="font-black uppercase tracking-[0.2em] text-sm text-white">Youth_Unit</span>
+              <span className="font-black uppercase tracking-[0.2em] text-xs sm:text-sm text-blue-400">Youth Unit</span>
            </div>
            <div>
               <img 
@@ -193,6 +194,10 @@ export const YouthUnitPage: React.FC = () => {
           </div>
         </section>
       )}
+
+      {/* Floating Civic Assistant */}
+      <GeminiChatFloatingButton />
     </div>
   );
 };
+

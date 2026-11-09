@@ -59,7 +59,10 @@ const navItems: NavItem[] = [
   { label: 'Youth Programs', icon: Compass, path: '/youth', department: ['Youth', 'Administration'] },
   // Resident
   { label: 'My Requests', icon: MessageSquare, path: '/requests', department: ['Resident', 'Administration'] },
-  { label: 'Profile', icon: Settings, path: '/profile' },
+  // Administrative Audit & Governance
+  { label: 'Audit Trail', icon: FileText, path: '/audit-trail', department: ['Administration', 'Justice'] },
+  { label: 'Settings', icon: Settings, path: '/settings', department: ['Administration'] },
+  { label: 'Profile', icon: Users, path: '/profile' },
 ];
 
 interface SidebarProps {

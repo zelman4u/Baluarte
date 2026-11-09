@@ -251,26 +251,28 @@ export const CaseHistoryPage: React.FC = () => {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-brand-muted text-xs font-bold uppercase tracking-widest">Justice /</span>
             <span className="text-brand-text text-xs font-bold uppercase tracking-widest">Case Progression</span>
           </div>
-          <h1 className="text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1">Historical Tracking</h1>
-          <p className="text-brand-muted text-sm font-medium">Baluarte Official Judicial Progression & Resolution Logs</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-brand-text tracking-tight uppercase tracking-[-0.05em] leading-none mb-1 interactive-text cursor-default">
+            Historical Tracking
+          </h1>
+          <p className="text-brand-muted text-xs sm:text-sm font-medium">Baluarte Official Judicial Progression & Resolution Logs</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="relative w-64">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="relative w-full sm:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
             <Input 
               placeholder="Case # or Keywords..."
-              className="pl-10 text-xs"
+              className="pl-10 text-xs min-h-[44px]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest shrink-0">
+          <Button onClick={() => setShowAddModal(true)} className="bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider shrink-0 min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">
             <Plus className="w-4 h-4 mr-2" />
             Log Evolution
           </Button>

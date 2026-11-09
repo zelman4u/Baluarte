@@ -4,6 +4,9 @@ import { useAuth } from '../../context/AuthContext';
 import { Bell, Search, Menu } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 
+import { NotificationFlyout } from '../notifications/NotificationFlyout';
+import { GeminiChatFloatingButton } from '../ai/GeminiCivicAssistantModal';
+
 export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, profile, loading } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -24,7 +27,8 @@ export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="p-2 -ml-2 text-brand-muted hover:text-brand-text lg:hidden transition-colors"
+              className="p-2 -ml-2 text-brand-muted hover:text-brand-text lg:hidden transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label="Toggle Navigation Menu"
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -34,11 +38,9 @@ export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children
             </div>
           </div>
           
-          <div className="flex items-center gap-6">
-            <button className="relative p-2 text-brand-muted hover:text-brand-text transition-colors">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-brand-danger rounded-full border-2 border-brand-surface"></span>
-            </button>
+          <div className="flex items-center gap-4 sm:gap-6">
+            {/* Live Administrative Notifications Flyout */}
+            <NotificationFlyout />
             <div className="h-8 w-[1px] bg-brand-border"></div>
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
@@ -53,11 +55,14 @@ export const PortalLayout: React.FC<{ children: React.ReactNode }> = ({ children
         </header>
         
         <main className="flex-1 overflow-y-auto p-4 md:p-8 relative scrollbar-hide">
-          <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
+          <div className="max-w-7xl mx-auto space-y-6 md:space-y-8 module-enter">
             {children}
           </div>
         </main>
       </div>
+
+      {/* Floating Gemini Civic Assistant */}
+      <GeminiChatFloatingButton />
     </div>
   );
 };
