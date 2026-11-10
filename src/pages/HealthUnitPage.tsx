@@ -111,14 +111,21 @@ export const HealthUnitPage: React.FC = () => {
 
       {/* Quick Facts / Stats */}
       {content?.quickFacts && content.quickFacts.length > 0 && (
-        <section className="relative z-10 py-16 px-8 border-b border-white/5 bg-white/5">
+        <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {content.quickFacts.map(fact => (
-                <div key={fact.id} className="p-6 bg-black/40 border border-white/10 rounded-2xl text-center">
-                  <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-1">{fact.label}</p>
-                  <p className="text-sm font-black text-cyan-500 truncate">{fact.value}</p>
-                </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+              {content.quickFacts.map((fact, i) => (
+                <motion.div 
+                  key={fact.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: i * 0.05 }}
+                  className="p-4 sm:p-6 bg-black/40 border border-white/10 rounded-2xl text-center kinetic-card interactive-click"
+                >
+                  <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-1 truncate">{fact.label}</p>
+                  <p className="text-sm sm:text-base font-black text-cyan-400 truncate interactive-text">{fact.value}</p>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -126,28 +133,50 @@ export const HealthUnitPage: React.FC = () => {
       )}
 
       {/* Main Body */}
-      <section className="relative z-10 py-24 px-8 border-b border-white/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 mb-6">Our Commitment</h2>
-          <div className="text-xl md:text-3xl font-black uppercase tracking-tight text-brand-text leading-tight whitespace-pre-wrap">
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400 mb-6 kinetic-badge">
+            Our Commitment
+          </span>
+          <div className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-text leading-relaxed whitespace-pre-wrap interactive-text">
             {content?.body || "Streamlining medical record keeping, vaccination tracking, and maternal care coordination to ensure the well-being of every resident in our community."}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Announcements */}
       {content?.announcements && content.announcements.length > 0 && (
-        <section className="relative z-10 py-24 px-8 bg-black/20">
+        <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-b border-white/5">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-3xl font-black uppercase tracking-tighter mb-12 text-center text-cyan-500">Health Advisories</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {content.announcements.map((ann) => (
-                <div key={ann.id} className="p-8 bg-white/5 border border-white/10 rounded-2xl">
-                  <Megaphone className="w-6 h-6 text-cyan-500 mb-6" />
+            <motion.h3 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-8 sm:mb-12 text-center text-cyan-400 interactive-text"
+            >
+              Health Advisories
+            </motion.h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {content.announcements.map((ann, i) => (
+                <motion.div 
+                  key={ann.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl kinetic-card interactive-click"
+                >
+                  <Megaphone className="w-6 h-6 text-cyan-400 mb-4" />
                   <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-2">{new Date(ann.date).toLocaleDateString()}</p>
-                  <h4 className="text-lg font-black uppercase tracking-tight mb-4 text-white">{ann.title}</h4>
+                  <h4 className="text-base sm:text-lg font-black uppercase tracking-tight mb-3 text-white interactive-text">{ann.title}</h4>
                   <p className="text-xs text-brand-muted leading-relaxed line-clamp-4">{ann.content}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -156,17 +185,31 @@ export const HealthUnitPage: React.FC = () => {
 
       {/* Organization */}
       {content?.organization && content.organization.length > 0 && (
-        <OrgChart members={content.organization} accentColor="brand-primary" subtitle="Professional Staff" title="Health Personnel Tree" />
+        <OrgChart members={content.organization} accentColor="cyan-500" subtitle="Professional Staff" title="Health Personnel Tree" />
       )}
 
       {/* Community Gallery */}
       {content?.communityHappenings && content.communityHappenings.length > 0 && (
-        <section className="relative z-10 py-24 px-8">
+        <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-3xl font-black uppercase tracking-tighter mb-12 text-center text-cyan-500">Health Initiatives</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {content.communityHappenings.map((event) => (
-                <div key={event.id} className="group relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+            <motion.h3 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-8 sm:mb-12 text-center text-cyan-400 interactive-text"
+            >
+              Health Initiatives
+            </motion.h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {content.communityHappenings.map((event, i) => (
+                <motion.div 
+                  key={event.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="group relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5 kinetic-card interactive-click"
+                >
                   {event.image ? (
                     <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   ) : (
@@ -174,12 +217,12 @@ export const HealthUnitPage: React.FC = () => {
                       <Camera className="w-12 h-12 opacity-10" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-8">
-                    <span className="text-[9px] font-black text-cyan-500 uppercase tracking-widest mb-1">{new Date(event.date).toLocaleDateString()}</span>
-                    <h4 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">{event.title}</h4>
-                    <p className="text-xs text-white/60 font-medium max-w-md line-clamp-2">{event.description}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                    <span className="text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-1">{new Date(event.date).toLocaleDateString()}</span>
+                    <h4 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter mb-2 interactive-text">{event.title}</h4>
+                    <p className="text-xs text-white/70 font-medium max-w-md line-clamp-2">{event.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

@@ -72,6 +72,9 @@ export const CaseHistoryPage: React.FC = () => {
       })) as CaseHistoryEntry[];
       setHistory(data);
       setLoading(false);
+    }, (error) => {
+      console.warn("Case history sync warning:", error.message);
+      setLoading(false);
     });
 
     // Fetch cases for the dropdown

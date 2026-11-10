@@ -46,6 +46,9 @@ export const TreasuryPage: React.FC = () => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setLogs(data);
       setLoading(false);
+    }, (error) => {
+      console.warn("Treasury sync warning:", error.message);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [profile]);

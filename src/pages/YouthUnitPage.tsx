@@ -120,14 +120,21 @@ export const YouthUnitPage: React.FC = () => {
 
       {/* Quick Facts / Stats */}
       {content?.quickFacts && content.quickFacts.length > 0 && (
-        <section className="relative z-10 py-16 px-8 border-b border-white/5 bg-white/5">
+        <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {content.quickFacts.map(fact => (
-                <div key={fact.id} className="p-6 bg-black/40 border border-white/10 rounded-2xl text-center">
-                  <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-1">{fact.label}</p>
-                  <p className="text-sm font-black text-blue-500 truncate">{fact.value}</p>
-                </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+              {content.quickFacts.map((fact, i) => (
+                <motion.div 
+                  key={fact.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: i * 0.05 }}
+                  className="p-4 sm:p-6 bg-black/40 border border-white/10 rounded-2xl text-center kinetic-card interactive-click"
+                >
+                  <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-1 truncate">{fact.label}</p>
+                  <p className="text-sm sm:text-base font-black text-blue-400 truncate interactive-text">{fact.value}</p>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -135,28 +142,50 @@ export const YouthUnitPage: React.FC = () => {
       )}
 
       {/* Main Body */}
-      <section className="relative z-10 py-24 px-8 border-b border-white/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-6">Our Vision</h2>
-          <div className="text-xl md:text-3xl font-black uppercase tracking-tight text-brand-text leading-tight whitespace-pre-wrap italic">
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-6 kinetic-badge">
+            Our Vision
+          </span>
+          <div className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-text leading-relaxed whitespace-pre-wrap interactive-text">
             {content?.body || "Providing the platform for the next generation of leaders. We focus on building a future-ready Baluarte through youth empowerment and community engagement."}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Announcements */}
       {content?.announcements && content.announcements.length > 0 && (
-        <section className="relative z-10 py-24 px-8 bg-black/20">
+        <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-b border-white/5">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-3xl font-black uppercase tracking-tighter mb-12 text-center text-blue-500">SK Bulletins</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {content.announcements.map((ann) => (
-                <div key={ann.id} className="p-8 bg-white/5 border border-white/10 rounded-2xl group hover:border-blue-500/30 transition-all">
-                  <Megaphone className="w-6 h-6 text-blue-500 mb-6" />
+            <motion.h3 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-8 sm:mb-12 text-center text-blue-400 interactive-text"
+            >
+              SK Bulletins
+            </motion.h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {content.announcements.map((ann, i) => (
+                <motion.div 
+                  key={ann.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl kinetic-card interactive-click"
+                >
+                  <Megaphone className="w-6 h-6 text-blue-400 mb-4" />
                   <p className="text-[9px] font-black text-brand-muted uppercase tracking-widest mb-2">{new Date(ann.date).toLocaleDateString()}</p>
-                  <h4 className="text-lg font-black uppercase tracking-tight mb-4 text-white group-hover:text-blue-400 transition-colors">{ann.title}</h4>
+                  <h4 className="text-base sm:text-lg font-black uppercase tracking-tight mb-3 text-white interactive-text">{ann.title}</h4>
                   <p className="text-xs text-brand-muted leading-relaxed line-clamp-4">{ann.content}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -170,12 +199,26 @@ export const YouthUnitPage: React.FC = () => {
 
       {/* Community Gallery */}
       {content?.communityHappenings && content.communityHappenings.length > 0 && (
-        <section className="relative z-10 py-24 px-8">
+        <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-3xl font-black uppercase tracking-tighter mb-12 text-center text-blue-500">Youth Events</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {content.communityHappenings.map((event) => (
-                <div key={event.id} className="group relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+            <motion.h3 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-8 sm:mb-12 text-center text-blue-400 interactive-text"
+            >
+              Youth Events
+            </motion.h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {content.communityHappenings.map((event, i) => (
+                <motion.div 
+                  key={event.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="group relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5 kinetic-card interactive-click"
+                >
                   {event.image ? (
                     <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   ) : (
@@ -183,12 +226,12 @@ export const YouthUnitPage: React.FC = () => {
                       <Camera className="w-12 h-12 opacity-10" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#000d1a]/90 via-transparent to-transparent flex flex-col justify-end p-8">
-                    <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest mb-1">{new Date(event.date).toLocaleDateString()}</span>
-                    <h4 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">{event.title}</h4>
-                    <p className="text-xs text-white/60 font-medium max-w-md line-clamp-2">{event.description}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#000d1a]/95 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8">
+                    <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1">{new Date(event.date).toLocaleDateString()}</span>
+                    <h4 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter mb-2 interactive-text">{event.title}</h4>
+                    <p className="text-xs text-white/70 font-medium max-w-md line-clamp-2">{event.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

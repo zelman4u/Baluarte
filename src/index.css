@@ -74,30 +74,36 @@
 }
 
 .kinetic-card {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .kinetic-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-brand-primary);
+  transform: translateY(-3px);
+  border-color: rgba(88, 166, 255, 0.5);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 16px -2px rgba(88, 166, 255, 0.12);
 }
 
 .kinetic-card:active {
-  transform: scale(0.985);
+  transform: scale(0.985) translateY(0);
 }
 
 .kinetic-badge {
-  transition: transform 0.12s ease, opacity 0.12s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.kinetic-badge:hover {
+  filter: brightness(1.15);
 }
 
 .kinetic-badge:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 @keyframes moduleFadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -106,8 +112,14 @@
 }
 
 .module-enter {
-  animation: moduleFadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: moduleFadeInUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Stagger item entrance */
+.stagger-item-1 { animation: moduleFadeInUp 0.35s 0.05s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.stagger-item-2 { animation: moduleFadeInUp 0.35s 0.10s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.stagger-item-3 { animation: moduleFadeInUp 0.35s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.stagger-item-4 { animation: moduleFadeInUp 0.35s 0.20s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 /* Responsive table scroll wrapper */
 .responsive-table-container {
@@ -117,10 +129,20 @@
   border-radius: 0.75rem;
 }
 
+/* Scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Ensure mobile tap targets */
 @media (max-width: 640px) {
   button, a[role="button"], input[type="submit"], select {
     min-height: 44px;
   }
 }
+
 

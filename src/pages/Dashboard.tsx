@@ -130,26 +130,26 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
           >
-            <Card className="p-6">
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
               <div className="flex items-center justify-between mb-4">
                 <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
                   <stat.icon className={cn("w-5 h-5", stat.color)} />
                 </div>
-                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20">
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
                   <ArrowUpRight className="w-2.5 h-2.5" />
                   Live
                 </div>
               </div>
               <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
-              <h3 className="text-2xl font-bold text-brand-text mt-1">{stat.value}</h3>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
             </Card>
           </motion.div>
         ))}
@@ -158,16 +158,16 @@ export const Dashboard: React.FC = () => {
       {/* Departmental Recharts Decision Support Summary Component */}
       <AdminDataVisualizationSummary />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="p-8 lg:col-span-2">
-          <div className="flex items-center justify-between mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <Card className="p-6 sm:p-8 lg:col-span-2 kinetic-card">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
             <div>
-              <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest leading-none mb-1">{manifest.chartTitle}</h3>
+              <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-widest leading-none mb-1 interactive-text">{manifest.chartTitle}</h3>
               <p className="text-xs text-brand-muted">Real-time synchronized data telemetry</p>
             </div>
-            <div className="flex border border-brand-border rounded-lg overflow-hidden">
-               <button className="px-3 py-1.5 text-[10px] font-bold bg-brand-bg text-brand-primary border-r border-brand-border">30D_CYCLE</button>
-               <button className="px-3 py-1.5 text-[10px] font-bold text-brand-muted hover:bg-brand-bg">ANNUAL</button>
+            <div className="flex border border-brand-border rounded-lg overflow-hidden shrink-0">
+               <button className="px-3 py-1.5 text-[10px] font-bold bg-brand-bg text-brand-primary border-r border-brand-border interactive-click">30D_CYCLE</button>
+               <button className="px-3 py-1.5 text-[10px] font-bold text-brand-muted hover:bg-brand-bg interactive-click">ANNUAL</button>
             </div>
           </div>
           <div className="h-72 w-full">
@@ -193,8 +193,8 @@ export const Dashboard: React.FC = () => {
           </div>
         </Card>
 
-        <Card className="p-8">
-          <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest mb-6">Recent Public Activity</h3>
+        <Card className="p-6 sm:p-8 kinetic-card">
+          <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-widest mb-6 interactive-text">Recent Public Activity</h3>
           <div className="space-y-4">
             {[
               { label: 'Resident ID #2941', status: '3m ago', icon: FileText, color: 'text-brand-primary' },
@@ -204,39 +204,39 @@ export const Dashboard: React.FC = () => {
               { label: 'Blotter #022-A', status: 'Escalated', icon: FileText, color: 'text-brand-danger' },
               { label: 'Disaster Alert Test', status: '2h ago', icon: AlertCircle, color: 'text-brand-muted' },
             ].map((activity, i) => (
-              <div key={i} className="flex items-center justify-between pb-3 border-b border-brand-border last:border-0 last:pb-0">
+              <div key={i} className="flex items-center justify-between pb-3 border-b border-brand-border/60 last:border-0 last:pb-0 hover:bg-brand-bg/40 p-1.5 rounded-lg transition-colors interactive-click">
                 <div className="flex items-center gap-3">
                   <activity.icon className={cn("w-4 h-4", activity.color)} />
                   <span className="text-xs font-bold text-brand-text">{activity.label}</span>
                 </div>
                 <span className={cn(
                   "text-[10px] font-bold uppercase tracking-tight",
-                  activity.status === 'LIVE' ? "text-brand-success" : "text-brand-muted"
+                  activity.status === 'LIVE' ? "text-brand-success animate-pulse" : "text-brand-muted"
                 )}>{activity.status}</span>
               </div>
             ))}
           </div>
-          <button className="w-full mt-6 py-2.5 bg-brand-surface border border-brand-border rounded-lg text-[10px] font-bold text-brand-muted hover:text-brand-text transition-colors uppercase tracking-widest">
+          <button className="w-full mt-6 py-2.5 bg-brand-surface border border-brand-border rounded-lg text-[10px] font-bold text-brand-muted hover:text-brand-text transition-colors uppercase tracking-widest min-h-[44px] interactive-click">
             View All Terminal Logs
           </button>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="p-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <Card className="p-6 sm:p-8 kinetic-card">
            <div className="flex items-center justify-between mb-8">
-            <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest">Demographic Overview</h3>
-            <span className="text-[10px] font-bold text-brand-muted">GLOBAL REACH</span>
+            <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-widest interactive-text">Demographic Overview</h3>
+            <span className="text-[10px] font-bold text-brand-muted uppercase tracking-widest">GLOBAL REACH</span>
           </div>
-          <div className="flex gap-12 items-center">
-            <div className="relative w-24 h-24">
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 items-center">
+            <div className="relative w-24 h-24 shrink-0">
                <div className="absolute inset-0 rounded-full border-[6px] border-brand-surface"></div>
                <div className="absolute inset-0 rounded-full border-[6px] border-brand-primary border-r-transparent border-b-transparent -rotate-45 shadow-[0_0_15px_rgba(88,166,255,0.2)]"></div>
                <div className="absolute inset-0 flex items-center justify-center">
                  <span className="text-sm font-bold text-brand-text">72%</span>
                </div>
             </div>
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 w-full space-y-4">
                <div>
                   <div className="flex justify-between text-[10px] font-bold text-brand-muted mb-1.5 uppercase">
                     <span>Youth (SK)</span>
@@ -259,9 +259,9 @@ export const Dashboard: React.FC = () => {
           </div>
         </Card>
 
-        <Card className="p-8">
-          <h3 className="text-lg font-bold text-brand-text uppercase tracking-widest mb-6 px-1">Subdomain Portals</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <Card className="p-6 sm:p-8 kinetic-card">
+          <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-widest mb-6 px-1 interactive-text">Subdomain Portals</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               { id: 'ADMIN', url: 'admin.baluarte.gov.ph' },
               { id: 'JUSTICE', url: 'justice.baluarte.gov.ph' },
@@ -270,8 +270,8 @@ export const Dashboard: React.FC = () => {
               { id: 'TANOD', url: 'tanod.baluarte.gov.ph' },
               { id: 'DRRM', url: 'drrm.baluarte.gov.ph' },
             ].map(portal => (
-              <div key={portal.id} className="bg-brand-surface border border-brand-border p-3 rounded-lg hover:border-brand-primary/50 transition-colors cursor-pointer group">
-                  <span className="block text-[8px] font-black text-brand-muted group-hover:text-brand-primary transition-colors tracking-tighter">{portal.id}</span>
+              <div key={portal.id} className="bg-brand-surface border border-brand-border p-3.5 rounded-xl hover:border-brand-primary/50 transition-all cursor-pointer group kinetic-card interactive-click min-h-[44px]">
+                  <span className="block text-[9px] font-black text-brand-muted group-hover:text-brand-primary transition-colors tracking-wider uppercase">{portal.id}</span>
                   <span className="block text-[10px] text-brand-text font-medium truncate mt-0.5">{portal.url}</span>
               </div>
             ))}

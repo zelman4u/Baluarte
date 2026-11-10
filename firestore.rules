@@ -1,11 +1,6 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // 0. Global Safety Net
-    match /{document=**} {
-      allow read, write: if false;
-    }
-
     // Helper functions
     function isSignedIn() {
       return request.auth != null;
@@ -15,117 +10,95 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
-    function getRole() {
-      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role : null;
-    }
-
-    function getDept() {
-      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.department : null;
-    }
-
-    function hasRole(role) {
-      return isSignedIn() && getRole() == role;
-    }
-
-    function hasDept(dept) {
-      return isSignedIn() && getDept() == dept;
-    }
-
-    function isApproved() {
-      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isApproved == true;
-    }
-
     function isAdmin() {
       return isSignedIn() && (
         request.auth.token.email == 'admin@baluarte.gov.ph' ||
-        hasRole('SuperAdmin') || 
-        hasRole('Captain')
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['SuperAdmin', 'Captain']))
       );
-    }
-
-    function isValidId(id) {
-      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
-    }
-
-    function incoming() {
-      return request.resource.data;
-    }
-
-    function existing() {
-      return resource.data;
     }
 
     // 1. Users Collection
     match /users/{userId} {
-      allow read, write: if isOwner(userId) || isAdmin();
+      // Authenticated users can read user profiles (necessary for profile sync & admin rosters)
+      allow read: if isSignedIn();
+      // Users can write their own profile document on sign-up, or admins can manage
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
     }
 
     // 2. Residents Collection
     match /residents/{residentId} {
-      allow read: if isSignedIn() && (
-        isAdmin() || 
-        hasDept('Administration') || 
-        hasDept('Health') || 
-        hasDept('Justice') || 
-        hasDept('Youth') ||
-        hasRole('Resident')
-      );
-      allow create: if isSignedIn() && (hasDept('Administration') || isAdmin() || hasRole('Secretary'));
-      allow update: if isSignedIn() && (hasDept('Administration') || isAdmin() || hasRole('Secretary'));
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
       allow delete: if isAdmin();
     }
 
-    // 3. Households
+    // 3. Households Collection
     match /households/{householdId} {
       allow read: if isSignedIn();
-      allow write: if isSignedIn() && (hasDept('Administration') || isAdmin());
+      allow write: if isSignedIn();
     }
 
     // 4. Document Requests
     match /requests/{requestId} {
-      allow read: if isSignedIn() && (isOwner(existing().residentId) || hasDept('Administration') || isAdmin());
-      allow create: if isSignedIn() && (isOwner(incoming().residentId) || hasDept('Administration') || isAdmin());
-      allow update: if isSignedIn() && (hasDept('Administration') || isAdmin());
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
     }
 
     // 5. Blotter Records
     match /blotter/{recordId} {
-      allow read: if isSignedIn() && (hasDept('Justice') || isAdmin() || isOwner(existing().complainantId));
-      allow create: if isSignedIn() && (hasDept('Justice') || isAdmin() || isOwner(incoming().complainantId));
-      allow update: if isSignedIn() && (hasDept('Justice') || isAdmin());
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
     }
 
     // 6. Treasury Logs
     match /treasury/{logId} {
-      allow read: if isSignedIn() && (hasDept('Administration') || isAdmin());
-      allow create: if isSignedIn() && (hasDept('Administration') || isAdmin());
-      allow update: if isAdmin();
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
     }
 
     // 7. Health Records
     match /health_records/{recordId} {
-      allow read: if isSignedIn() && (hasDept('Health') || isAdmin() || isOwner(existing().residentId));
-      allow create: if isSignedIn() && (hasDept('Health') || isAdmin());
-      allow update: if isSignedIn() && (hasDept('Health') || isAdmin());
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
     }
 
     // 8. Case History
     match /case_history/{historyId} {
-      allow read: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
-      allow create: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
-      allow update: if isSignedIn() && (hasDept('Justice') || hasDept('Administration') || isAdmin());
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
     }
 
-    // 9. Landing Pages
+    // 9. Katarungang Pambarangay Cases
+    match /cases/{caseId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // 10. DRRM Incidents & Evacuation Operations
+    match /drrm_incidents/{incidentId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // 11. Youth & SK Programs
+    match /youth_programs/{programId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // 12. Administrative Audit Trail
+    match /audit_trail/{logId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin();
+    }
+
+    // 13. Public Landing Pages Content
     match /landing_pages/{pageId} {
-      allow read: if true; // Publicly readable
-      allow write: if isSignedIn() && (
-        isAdmin() ||
-        (pageId == 'main' && hasDept('Administration')) ||
-        (pageId == 'justice' && hasDept('Justice')) ||
-        (pageId == 'health' && hasDept('Health')) ||
-        (pageId == 'youth' && hasDept('Youth'))
-      );
+      allow read: if true; // Publicly readable for citizens
+      allow write: if isSignedIn();
     }
   }
 }

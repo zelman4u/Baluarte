@@ -135,42 +135,42 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-      <nav className="flex-1 px-4 py-2 space-y-1 overflow-y-auto scrollbar-hide">
-        <div className="px-4 py-3 text-[13px] uppercase tracking-widest text-brand-muted/70 font-black">Core Modules</div>
+      <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto no-scrollbar">
+        <div className="px-3 py-2 text-[11px] uppercase tracking-widest text-brand-muted/70 font-black">Core Modules</div>
         {filteredNav.map((item) => (
           <Link
             key={item.path}
             to={item.path}
             onClick={onClose}
             className={cn(
-              "flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all group border",
+              "flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all group border min-h-[44px] interactive-click",
               location.pathname === item.path 
-                ? "bg-brand-bg text-brand-primary border-brand-border font-bold shadow-sm" 
+                ? "bg-brand-bg text-brand-primary border-brand-border font-bold shadow-md shadow-brand-primary/10" 
                 : "text-brand-muted hover:bg-brand-card hover:text-brand-text border-transparent"
             )}
           >
-            <item.icon className={cn("w-5 h-5 transition-transform group-hover:scale-110", location.pathname === item.path ? "text-brand-primary" : "text-brand-muted group-hover:text-brand-text")} />
-            <span className="text-sm font-medium truncate">{item.label}</span>
+            <item.icon className={cn("w-5 h-5 shrink-0 transition-transform group-hover:scale-110", location.pathname === item.path ? "text-brand-primary" : "text-brand-muted group-hover:text-brand-text")} />
+            <span className="text-xs font-bold uppercase tracking-wider truncate">{item.label}</span>
           </Link>
         ))}
       </nav>
 
       <div className="p-4 mt-auto border-t border-brand-border bg-brand-bg/30">
-        <div className="flex items-center gap-3 px-4 py-3">
-          <div className="w-8 h-8 rounded-full bg-brand-border flex items-center justify-center text-xs font-bold border border-brand-primary/30">
+        <div className="flex items-center gap-3 px-3 py-2">
+          <div className="w-8 h-8 rounded-full bg-brand-border flex items-center justify-center text-xs font-bold border border-brand-primary/30 shrink-0">
             {profile?.displayName?.charAt(0) || 'U'}
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="text-xs font-bold truncate text-brand-text">{profile?.displayName || 'User'}</p>
-            <p className="text-[10px] text-brand-muted truncate uppercase tracking-tighter uppercase">{profile?.role || 'Guest'}</p>
+            <p className="text-[10px] text-brand-muted truncate uppercase tracking-tighter">{profile?.role || 'Guest'}</p>
           </div>
         </div>
         <button 
           onClick={logout}
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-brand-muted hover:bg-brand-danger/10 hover:text-brand-danger transition-all mt-2"
+          className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl text-brand-muted hover:bg-brand-danger/10 hover:text-brand-danger transition-all mt-2 min-h-[44px] interactive-click font-bold text-xs uppercase tracking-wider border border-transparent hover:border-brand-danger/30"
         >
-          <LogOut className="w-5 h-5" />
-          <span className="text-sm font-bold">Sign Out</span>
+          <LogOut className="w-4 h-4 shrink-0" />
+          <span>Sign Out</span>
         </button>
       </div>
     </aside>

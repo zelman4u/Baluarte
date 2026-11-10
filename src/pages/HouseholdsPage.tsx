@@ -48,6 +48,9 @@ export const HouseholdsPage: React.FC = () => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setHouseholds(data as Household[]);
       setLoading(false);
+    }, (error) => {
+      console.warn("Households sync warning:", error.message);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [profile]);
