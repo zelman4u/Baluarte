@@ -159,7 +159,7 @@ export const Dashboard: React.FC = () => {
       <AdminDataVisualizationSummary />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-        <Card className="p-6 sm:p-8 lg:col-span-2 kinetic-card">
+        <Card className="p-6 sm:p-8 lg:col-span-2 kinetic-card min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
             <div>
               <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-widest leading-none mb-1 interactive-text">{manifest.chartTitle}</h3>
@@ -170,8 +170,8 @@ export const Dashboard: React.FC = () => {
                <button className="px-3 py-1.5 text-[10px] font-bold text-brand-muted hover:bg-brand-bg interactive-click">ANNUAL</button>
             </div>
           </div>
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-72 w-full min-w-0">
+            <ResponsiveContainer width="100%" height={280} minWidth={0}>
               <AreaChart data={data}>
                 <defs>
                   <linearGradient id="colorRequests" x1="0" y1="0" x2="0" y2="1">

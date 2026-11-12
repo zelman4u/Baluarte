@@ -603,114 +603,133 @@ export const DRRMPage: React.FC = () => {
       )}
 
       {/* Modal: Log Incident */}
-      {showIncidentModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
-            <div className="p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <div>
-                <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Log Emergency Incident</h3>
-                <p className="text-[10px] text-brand-muted uppercase tracking-wider">BDRRMC Immediate Escalation Protocol</p>
-              </div>
-              <button onClick={() => setShowIncidentModal(false)} className="text-brand-muted hover:text-brand-text p-1">✕</button>
-            </div>
-            <form onSubmit={handleCreateIncident} className="p-6 space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-4">
+      <AnimatePresence>
+        {showIncidentModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hazard Type</label>
-                  <select 
-                    value={incidentForm.type} 
-                    onChange={e => setIncidentForm({...incidentForm, type: e.target.value as any})}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-2 text-brand-text"
-                  >
-                    <option>Flood</option>
-                    <option>Fire</option>
-                    <option>Typhoon</option>
-                    <option>Landslide</option>
-                    <option>Medical Emergency</option>
-                    <option>Vehicular</option>
-                  </select>
+                  <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Log Emergency Incident</h3>
+                  <p className="text-[10px] text-brand-muted uppercase tracking-wider font-mono">BDRRMC Immediate Escalation Protocol</p>
+                </div>
+                <button onClick={() => setShowIncidentModal(false)} className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-muted hover:text-brand-text hover:bg-brand-bg transition-colors min-h-[36px] min-w-[36px] interactive-click">✕</button>
+              </div>
+              <form onSubmit={handleCreateIncident} className="p-4 sm:p-6 space-y-4 text-xs overflow-y-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hazard Type</label>
+                    <select 
+                      value={incidentForm.type} 
+                      onChange={e => setIncidentForm({...incidentForm, type: e.target.value as any})}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-brand-text min-h-[44px]"
+                    >
+                      <option>Flood</option>
+                      <option>Fire</option>
+                      <option>Typhoon</option>
+                      <option>Landslide</option>
+                      <option>Medical Emergency</option>
+                      <option>Vehicular</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Severity Level</label>
+                    <select 
+                      value={incidentForm.severity} 
+                      onChange={e => setIncidentForm({...incidentForm, severity: e.target.value as any})}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-brand-text min-h-[44px]"
+                    >
+                      <option>Low</option>
+                      <option>Moderate</option>
+                      <option>High</option>
+                      <option>Critical</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Specific Location</label>
+                    <Input required placeholder="e.g. Near Seawall, Riverside Alley" value={incidentForm.location} onChange={e => setIncidentForm({...incidentForm, location: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Purok</label>
+                    <select value={incidentForm.purok} onChange={e => setIncidentForm({...incidentForm, purok: e.target.value})} className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-brand-text min-h-[44px]">
+                      <option>Purok 1</option>
+                      <option>Purok 2</option>
+                      <option>Purok 3</option>
+                      <option>Purok 4</option>
+                      <option>Purok 5</option>
+                      <option>Purok 6</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Severity Level</label>
-                  <select 
-                    value={incidentForm.severity} 
-                    onChange={e => setIncidentForm({...incidentForm, severity: e.target.value as any})}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-2 text-brand-text"
-                  >
-                    <option>Low</option>
-                    <option>Moderate</option>
-                    <option>High</option>
-                    <option>Critical</option>
-                  </select>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Responding Unit</label>
+                  <Input value={incidentForm.respondingUnit} onChange={e => setIncidentForm({...incidentForm, respondingUnit: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Specific Location</label>
-                  <Input required placeholder="e.g. Near Seawall, Riverside Alley" value={incidentForm.location} onChange={e => setIncidentForm({...incidentForm, location: e.target.value})} className="bg-brand-bg text-brand-text" />
+                <div className="flex gap-2 pt-2">
+                  <Button type="button" variant="outline" onClick={() => setShowIncidentModal(false)} className="flex-1 min-h-[44px] text-xs font-bold uppercase interactive-click">Cancel</Button>
+                  <Button type="submit" variant="danger" className="flex-1 min-h-[44px] text-xs font-black uppercase interactive-click shadow-lg shadow-brand-danger/20">Confirm Dispatch</Button>
                 </div>
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Purok</label>
-                  <select value={incidentForm.purok} onChange={e => setIncidentForm({...incidentForm, purok: e.target.value})} className="w-full bg-brand-bg border border-brand-border rounded-lg p-2 text-brand-text">
-                    <option>Purok 1</option>
-                    <option>Purok 2</option>
-                    <option>Purok 3</option>
-                    <option>Purok 4</option>
-                    <option>Purok 5</option>
-                    <option>Purok 6</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Responding Unit</label>
-                <Input value={incidentForm.respondingUnit} onChange={e => setIncidentForm({...incidentForm, respondingUnit: e.target.value})} className="bg-brand-bg text-brand-text" />
-              </div>
-              <div className="flex gap-2 pt-2">
-                <Button type="button" variant="outline" onClick={() => setShowIncidentModal(false)} className="flex-1 text-[10px] font-bold uppercase">Cancel</Button>
-                <Button type="submit" variant="danger" className="flex-1 text-[10px] font-black uppercase">Confirm Dispatch</Button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Modal: Stock Relief */}
-      {showReliefModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
-            <div className="p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Stock Relief Inventory</h3>
-              <button onClick={() => setShowReliefModal(false)} className="text-brand-muted hover:text-brand-text p-1">✕</button>
-            </div>
-            <form onSubmit={handleCreateRelief} className="p-6 space-y-4 text-xs">
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Item Name & Description</label>
-                <Input required placeholder="e.g. 50kg Rice Sacks, Ready-To-Eat Meals" value={reliefForm.name} onChange={e => setReliefForm({...reliefForm, name: e.target.value})} className="bg-brand-bg text-brand-text" />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
+      <AnimatePresence>
+        {showReliefModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-md overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Category</label>
-                  <select value={reliefForm.category} onChange={e => setReliefForm({...reliefForm, category: e.target.value as any})} className="w-full bg-brand-bg border border-brand-border rounded-lg p-2 text-brand-text">
-                    <option>Food Packs</option>
-                    <option>Hygiene Kits</option>
-                    <option>Medical Supplies</option>
-                    <option>Water Containers</option>
-                    <option>Blankets & Mats</option>
-                  </select>
+                  <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Stock Relief Inventory</h3>
+                  <p className="text-[10px] text-brand-muted uppercase tracking-wider font-mono">BDRRMC Warehouse Log</p>
                 </div>
+                <button onClick={() => setShowReliefModal(false)} className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-muted hover:text-brand-text hover:bg-brand-bg transition-colors min-h-[36px] min-w-[36px] interactive-click">✕</button>
+              </div>
+              <form onSubmit={handleCreateRelief} className="p-4 sm:p-6 space-y-4 text-xs overflow-y-auto">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Quantity</label>
-                  <Input type="number" required value={reliefForm.quantity} onChange={e => setReliefForm({...reliefForm, quantity: Number(e.target.value)})} className="bg-brand-bg text-brand-text font-black" />
+                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Item Name & Description</label>
+                  <Input required placeholder="e.g. 50kg Rice Sacks, Ready-To-Eat Meals" value={reliefForm.name} onChange={e => setReliefForm({...reliefForm, name: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
                 </div>
-              </div>
-              <div className="flex gap-2 pt-2">
-                <Button type="button" variant="outline" onClick={() => setShowReliefModal(false)} className="flex-1 text-[10px] font-bold uppercase">Cancel</Button>
-                <Button type="submit" className="flex-1 bg-brand-primary text-brand-bg text-[10px] font-black uppercase">Save Stock</Button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Category</label>
+                    <select value={reliefForm.category} onChange={e => setReliefForm({...reliefForm, category: e.target.value as any})} className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-brand-text min-h-[44px]">
+                      <option>Food Packs</option>
+                      <option>Hygiene Kits</option>
+                      <option>Medical Supplies</option>
+                      <option>Water Containers</option>
+                      <option>Blankets & Mats</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Quantity</label>
+                    <Input type="number" required min="1" value={reliefForm.quantity} onChange={e => setReliefForm({...reliefForm, quantity: Number(e.target.value)})} className="bg-brand-bg text-brand-text font-black min-h-[44px]" />
+                  </div>
+                </div>
+                <div className="flex gap-2 pt-2">
+                  <Button type="button" variant="outline" onClick={() => setShowReliefModal(false)} className="flex-1 min-h-[44px] text-xs font-bold uppercase interactive-click">Cancel</Button>
+                  <Button type="submit" className="flex-1 min-h-[44px] bg-brand-primary text-brand-bg text-xs font-black uppercase interactive-click shadow-lg shadow-brand-primary/20">Save Stock</Button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

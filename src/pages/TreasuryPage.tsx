@@ -10,7 +10,9 @@ import {
   DollarSign, 
   ArrowRight,
   Filter,
-  Download
+  Download,
+  ShieldCheck,
+  ArrowUpRight
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -24,7 +26,8 @@ import {
 } from 'recharts';
 import { format } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { auditService } from '../services/auditService';
 
 export const TreasuryPage: React.FC = () => {
   const [logs, setLogs] = useState<any[]>([]);
@@ -58,12 +61,27 @@ export const TreasuryPage: React.FC = () => {
     if (!profile) return;
     
     try {
-      await addDoc(collection(db, 'treasury'), {
+      const docRef = await addDoc(collection(db, 'treasury'), {
         ...formData,
         amount: Number(formData.amount),
         recordedBy: profile.displayName || profile.email,
         createdAt: serverTimestamp()
       });
+
+      auditService.logAction({
+        userId: profile.uid,
+        userName: profile.displayName || 'Barangay Treasurer',
+        userEmail: profile.email,
+        userRole: profile.role,
+        department: 'Administration',
+        action: 'CREATE',
+        targetEntity: 'Treasury',
+        targetId: docRef.id,
+        targetName: `${formData.type}: ₱${Number(formData.amount).toLocaleString()}`,
+        details: `Recorded ${formData.type} under ${formData.category}: ${formData.description}`,
+        severity: Number(formData.amount) >= 50000 ? 'Critical' : 'Info'
+      });
+
       setShowAddModal(false);
       setFormData({
         type: 'Revenue',
@@ -87,104 +105,118 @@ export const TreasuryPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Add Transaction Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-brand-surface border border-brand-border rounded-xl w-full max-w-md overflow-hidden shadow-2xl"
-          >
-            <div className="p-6 border-b border-brand-border bg-brand-card/50">
-              <h3 className="text-lg font-black text-brand-text uppercase tracking-tight">Fiscal Transaction Entry</h3>
-              <p className="text-xs text-brand-muted font-bold mt-1 uppercase tracking-widest leading-none">Transparency Ledger V2</p>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Flow Direction</label>
-                  <div className="flex gap-2">
-                    {['Revenue', 'Expense'].map(type => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => setFormData({...formData, type})}
-                        className={cn(
-                          "flex-1 py-3 border rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                          formData.type === type 
-                            ? (type === 'Revenue' ? "bg-brand-success/20 border-brand-success text-brand-success" : "bg-brand-danger/20 border-brand-danger text-brand-danger")
-                            : "bg-brand-bg border-brand-border text-brand-muted"
-                        )}
-                      >
-                        {type}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className="col-span-2">
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Category / Source</label>
-                  <Input 
-                    required
-                    placeholder="e.g. Permit Fees, Utility, Payroll..."
-                    value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
-                    className="bg-brand-bg"
-                  />
-                </div>
+    <div className="space-y-8 pb-12 min-w-0">
+      {/* Add Transaction Modal with fluid motion */}
+      <AnimatePresence>
+        {showAddModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-md overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Value (₱)</label>
-                  <Input 
-                    type="number"
-                    required
-                    placeholder="0.00"
-                    value={formData.amount}
-                    onChange={(e) => setFormData({...formData, amount: e.target.value})}
-                    className="bg-brand-bg font-black"
-                  />
+                  <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-tight">Fiscal Ledger Entry</h3>
+                  <p className="text-[10px] text-brand-muted font-bold mt-0.5 uppercase tracking-widest font-mono">Transparency Ledger V2</p>
                 </div>
-                <div>
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Log Date</label>
-                  <Input 
-                    type="date"
-                    required
-                    value={formData.date}
-                    onChange={(e) => setFormData({...formData, date: e.target.value})}
-                    className="bg-brand-bg"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Log Description</label>
-                  <Input 
-                    placeholder="Detailed transaction notes..."
-                    value={formData.description}
-                    onChange={(e) => setFormData({...formData, description: e.target.value})}
-                    className="bg-brand-bg"
-                  />
-                </div>
+                <button 
+                  onClick={() => setShowAddModal(false)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-muted hover:text-brand-text hover:bg-brand-bg transition-colors min-h-[36px] min-w-[36px] interactive-click"
+                >
+                  ✕
+                </button>
               </div>
               
-              <div className="flex gap-3 pt-4">
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={() => setShowAddModal(false)}
-                  className="flex-1 uppercase font-bold text-[10px]"
-                >
-                  Discard
-                </Button>
-                <Button 
-                  type="submit" 
-                  className="flex-1 bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest"
-                >
-                  Confirm Audit
-                </Button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+              <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Flow Direction</label>
+                    <div className="flex gap-2">
+                      {['Revenue', 'Expense'].map(type => (
+                        <button
+                          key={type}
+                          type="button"
+                          onClick={() => setFormData({...formData, type})}
+                          className={cn(
+                            "flex-1 py-2.5 border rounded-lg text-xs font-black uppercase tracking-wider transition-all min-h-[44px] interactive-click",
+                            formData.type === type 
+                              ? (type === 'Revenue' ? "bg-brand-success/20 border-brand-success text-brand-success shadow-sm" : "bg-brand-danger/20 border-brand-danger text-brand-danger shadow-sm")
+                              : "bg-brand-bg border-brand-border text-brand-muted hover:text-brand-text"
+                          )}
+                        >
+                          {type}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Category / Source</label>
+                    <Input 
+                      required
+                      placeholder="e.g. Permit Fees, Infrastructure, Payroll..."
+                      value={formData.category}
+                      onChange={(e) => setFormData({...formData, category: e.target.value})}
+                      className="bg-brand-bg min-h-[44px]"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Value (₱)</label>
+                      <Input 
+                        type="number"
+                        required
+                        placeholder="0.00"
+                        value={formData.amount}
+                        onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                        className="bg-brand-bg font-black min-h-[44px]"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Log Date</label>
+                      <Input 
+                        type="date"
+                        required
+                        value={formData.date}
+                        onChange={(e) => setFormData({...formData, date: e.target.value})}
+                        className="bg-brand-bg min-h-[44px]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Log Description</label>
+                    <Input 
+                      placeholder="Detailed transaction notes..."
+                      value={formData.description}
+                      onChange={(e) => setFormData({...formData, description: e.target.value})}
+                      className="bg-brand-bg min-h-[44px]"
+                    />
+                  </div>
+                </div>
+                
+                <div className="flex gap-3 pt-2">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setShowAddModal(false)}
+                    className="flex-1 uppercase font-bold text-xs min-h-[44px] interactive-click"
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    className="flex-1 bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20"
+                  >
+                    Commit Entry
+                  </Button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
@@ -202,43 +234,39 @@ export const TreasuryPage: React.FC = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        <Card className="p-6 border-b-2 border-b-brand-success shadow-lg shadow-brand-success/5 bg-brand-surface kinetic-card">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-2 bg-brand-success/10 rounded-lg border border-brand-success/20">
-              <TrendingUp className="w-5 h-5 text-brand-success" />
-            </div>
-            <span className="text-[10px] font-black text-brand-success uppercase tracking-widest bg-brand-success/5 px-2 py-1 rounded">Budget In</span>
-          </div>
-          <p className="text-brand-muted text-[10px] font-black uppercase tracking-wider">Total Revenue</p>
-          <h3 className="text-3xl font-black text-brand-text mt-1 tracking-tighter">₱{totalRevenue.toLocaleString()}</h3>
-        </Card>
-        
-        <Card className="p-6 border-b-2 border-b-brand-danger shadow-lg shadow-brand-danger/5 bg-brand-surface">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-2 bg-brand-danger/10 rounded-lg border border-brand-danger/20">
-              <TrendingDown className="w-5 h-5 text-brand-danger" />
-            </div>
-            <span className="text-[10px] font-black text-brand-danger uppercase tracking-widest bg-brand-danger/5 px-2 py-1 rounded">Budget Out</span>
-          </div>
-          <p className="text-brand-muted text-[10px] font-black uppercase tracking-wider">Total Expenses</p>
-          <h3 className="text-3xl font-black text-brand-text mt-1 tracking-tighter">₱{totalExpense.toLocaleString()}</h3>
-        </Card>
-
-        <Card className="p-6 border-b-2 border-b-brand-primary shadow-lg shadow-brand-primary/5 bg-brand-primary text-brand-bg">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-2 bg-brand-bg/20 rounded-lg">
-              <DollarSign className="w-5 h-5 text-brand-bg" />
-            </div>
-            <span className="text-[10px] font-black text-brand-bg uppercase tracking-widest bg-brand-bg/10 px-2 py-1 rounded">Net Standing</span>
-          </div>
-          <p className="text-brand-bg/60 text-[10px] font-black uppercase tracking-wider">Net Balance</p>
-          <h3 className="text-3xl font-black mt-1 tracking-tighter">₱{balance.toLocaleString()}</h3>
-        </Card>
+      {/* Dashboard-Style Staggered Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[
+          { label: 'Total Revenue', value: `₱${totalRevenue.toLocaleString()}`, icon: TrendingUp, color: 'text-brand-success', bg: 'bg-brand-success/10', change: '+12.4%', tag: 'Budget In' },
+          { label: 'Total Expenses', value: `₱${totalExpense.toLocaleString()}`, icon: TrendingDown, color: 'text-brand-danger', bg: 'bg-brand-danger/10', change: 'Audited', tag: 'Budget Out' },
+          { label: 'Net Balance', value: `₱${balance.toLocaleString()}`, icon: DollarSign, color: 'text-brand-primary', bg: 'bg-brand-primary/10', change: 'Standing', tag: 'Surplus' },
+          { label: 'Calamity Reserve', value: `₱${Math.round(totalRevenue * 0.05).toLocaleString()}`, icon: ShieldCheck, color: 'text-amber-400', bg: 'bg-amber-400/10', change: '5% LDRRMF', tag: 'Statutory' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
+          >
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
+              <div className="flex items-center justify-between mb-4">
+                <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
+                  <stat.icon className={cn("w-5 h-5", stat.color)} />
+                </div>
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
+                  <ArrowUpRight className="w-2.5 h-2.5" />
+                  {stat.change}
+                </div>
+              </div>
+              <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
+            </Card>
+          </motion.div>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="p-8 lg:col-span-2 bg-brand-surface border-brand-border">
+        <Card className="p-8 lg:col-span-2 bg-brand-surface border-brand-border min-w-0">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xs font-black text-brand-text uppercase tracking-widest">Financial Velocity</h3>
             <div className="flex items-center gap-2">
@@ -248,8 +276,8 @@ export const TreasuryPage: React.FC = () => {
                <span className="text-[10px] font-bold text-brand-muted uppercase">Expenditure</span>
             </div>
           </div>
-          <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-64 w-full min-w-0">
+            <ResponsiveContainer width="100%" height={256} minWidth={0}>
               <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#30363D" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10, fill: '#8B949E', fontWeight: 'bold'}} />

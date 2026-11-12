@@ -18,7 +18,8 @@ import {
   FileCheck,
   Building,
   ShieldCheck,
-  ChevronRight
+  ChevronRight,
+  ArrowUpRight
 } from 'lucide-react';
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, serverTimestamp, orderBy } from 'firebase/firestore';
 import { db } from '../lib/firebase';
@@ -233,6 +234,37 @@ export const CasesPage: React.FC = () => {
         </Button>
       </div>
 
+      {/* Dashboard-Style Staggered Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[
+          { label: 'Active Docket Cases', value: cases.length, icon: Scale, color: 'text-brand-primary', bg: 'bg-brand-primary/10', change: 'Docketed' },
+          { label: 'PB Mediation Phase', value: cases.filter(c => c.stage === 'PB Mediation').length, icon: Clock, color: 'text-amber-400', bg: 'bg-amber-400/10', change: 'Hearing' },
+          { label: 'Pangkat Conciliation', value: cases.filter(c => c.stage === 'Pangkat Conciliation').length, icon: Users, color: 'text-purple-400', bg: 'bg-purple-400/10', change: 'Elevated' },
+          { label: 'Amicably Settled', value: cases.filter(c => c.stage === 'Settled').length, icon: CheckCircle2, color: 'text-brand-success', bg: 'bg-brand-success/10', change: '84% Rate' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
+          >
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
+              <div className="flex items-center justify-between mb-4">
+                <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
+                  <stat.icon className={cn("w-5 h-5", stat.color)} />
+                </div>
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
+                  <ArrowUpRight className="w-2.5 h-2.5" />
+                  {stat.change}
+                </div>
+              </div>
+              <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
       {/* Filter and Search Bar */}
       <Card className="p-4 bg-brand-surface border-brand-border flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="relative flex-1 max-w-md">
@@ -328,148 +360,198 @@ export const CasesPage: React.FC = () => {
       </Card>
 
       {/* Case Detail Modal */}
-      {selectedCase && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl">
-            <div className="p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <div>
-                <span className="text-[9px] font-mono uppercase text-brand-muted font-bold">KP Case Docket Detail</span>
-                <h3 className="text-lg font-black text-brand-text uppercase tracking-tight">{selectedCase.caseNumber}</h3>
-              </div>
-              <button onClick={() => setSelectedCase(null)} className="text-brand-muted hover:text-brand-text p-1">✕</button>
-            </div>
-            <div className="p-6 space-y-4 text-xs">
-              <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
-                <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Dispute Matter</span>
-                <p className="font-bold text-brand-text text-sm">{selectedCase.disputeNature}</p>
-                <p className="text-brand-muted mt-1 leading-relaxed">{selectedCase.narrative}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Complainant</span>
-                  <p className="font-bold text-brand-text">{selectedCase.complainantName}</p>
-                  <p className="text-[10px] text-brand-muted">{selectedCase.complainantAddress}</p>
-                </div>
-                <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Respondent</span>
-                  <p className="font-bold text-brand-text">{selectedCase.respondentName}</p>
-                  <p className="text-[10px] text-brand-muted">{selectedCase.respondentAddress}</p>
-                </div>
-              </div>
-
-              <div className="p-3 bg-brand-bg rounded-lg border border-brand-border flex items-center justify-between">
+      <AnimatePresence>
+        {selectedCase && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Current Stage</span>
-                  <p className="font-bold text-brand-primary">{selectedCase.stage}</p>
+                  <span className="text-[9px] font-mono uppercase text-brand-muted font-bold">Katarungang Pambarangay Docket</span>
+                  <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-tight">{selectedCase.caseNumber}</h3>
                 </div>
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    onClick={() => handleAdvanceStage(selectedCase.id, 'Pangkat Conciliation')}
-                    className="text-[10px] font-bold uppercase"
-                  >
-                    Elevate to Pangkat
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    onClick={() => handleAdvanceStage(selectedCase.id, 'Settled')}
-                    className="bg-brand-success text-brand-bg text-[10px] font-black uppercase"
-                  >
-                    Mark Settled
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="danger"
-                    onClick={() => handleAdvanceStage(selectedCase.id, 'CFA Issued')}
-                    className="text-[10px] font-black uppercase"
-                  >
-                    Issue CFA
-                  </Button>
-                </div>
+                <button 
+                  onClick={() => setSelectedCase(null)} 
+                  className="p-2 text-brand-muted hover:text-brand-text rounded-lg hover:bg-brand-bg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
+              <div className="p-4 sm:p-6 space-y-4 text-xs">
+                <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Dispute Matter</span>
+                  <p className="font-bold text-brand-text text-sm">{selectedCase.disputeNature}</p>
+                  <p className="text-brand-muted mt-1 leading-relaxed">{selectedCase.narrative}</p>
+                </div>
 
-              <div className="flex gap-2 pt-2">
-                <Button variant="outline" onClick={() => alert(`Printing official KP Form 7 (Notice of Hearing) for ${selectedCase.caseNumber}`)} className="flex-1 text-[10px] font-bold uppercase">
-                  Print KP Form 7
-                </Button>
-                <Button onClick={() => setSelectedCase(null)} className="flex-1 bg-brand-primary text-brand-bg text-[10px] font-black uppercase">
-                  Close
-                </Button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Complainant</span>
+                    <p className="font-bold text-brand-text">{selectedCase.complainantName}</p>
+                    <p className="text-[10px] text-brand-muted">{selectedCase.complainantAddress}</p>
+                  </div>
+                  <div className="p-3 bg-brand-bg rounded-lg border border-brand-border">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Respondent</span>
+                    <p className="font-bold text-brand-text">{selectedCase.respondentName}</p>
+                    <p className="text-[10px] text-brand-muted">{selectedCase.respondentAddress}</p>
+                  </div>
+                </div>
+
+                <div className="p-3 bg-brand-bg rounded-lg border border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Current Stage</span>
+                    <p className="font-bold text-brand-primary">{selectedCase.stage}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => handleAdvanceStage(selectedCase.id, 'Pangkat Conciliation')}
+                      className="text-[10px] font-bold uppercase min-h-[36px] interactive-click"
+                    >
+                      Elevate to Pangkat
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      onClick={() => handleAdvanceStage(selectedCase.id, 'Settled')}
+                      className="bg-brand-success text-brand-bg text-[10px] font-black uppercase min-h-[36px] interactive-click"
+                    >
+                      Mark Settled
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="danger"
+                      onClick={() => handleAdvanceStage(selectedCase.id, 'CFA Issued')}
+                      className="text-[10px] font-black uppercase min-h-[36px] interactive-click"
+                    >
+                      Issue CFA
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 pt-2 border-t border-brand-border">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      auditService.logAction({
+                        userId: profile?.uid || 'lupon-sec',
+                        userName: profile?.displayName || 'Lupon Secretary',
+                        userEmail: profile?.email || 'lupon@baluarte.gov.ph',
+                        userRole: profile?.role || 'Lupon',
+                        department: 'Justice',
+                        action: 'UPDATE',
+                        targetEntity: 'Case',
+                        targetId: selectedCase.id,
+                        targetName: selectedCase.caseNumber,
+                        details: `Printed official KP Form 7 summons for ${selectedCase.caseNumber}`,
+                        severity: 'Info'
+                      });
+                    }} 
+                    className="flex-1 text-[10px] font-bold uppercase min-h-[44px] interactive-click"
+                  >
+                    Print KP Form 7
+                  </Button>
+                  <Button 
+                    onClick={() => setSelectedCase(null)} 
+                    className="flex-1 bg-brand-primary text-brand-bg text-[10px] font-black uppercase min-h-[44px] interactive-click"
+                  >
+                    Close
+                  </Button>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Modal: New Case */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
-            <div className="p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Docket New KP Complaint</h3>
-              <button onClick={() => setShowAddModal(false)} className="text-brand-muted hover:text-brand-text p-1">✕</button>
-            </div>
-            <form onSubmit={handleCreateCase} className="p-6 space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-4">
+      <AnimatePresence>
+        {showAddModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Case Docket Number</label>
-                  <Input required value={formData.caseNumber} onChange={e => setFormData({...formData, caseNumber: e.target.value})} className="bg-brand-bg text-brand-text font-mono font-bold" />
+                  <h3 className="text-base font-black text-brand-text uppercase tracking-tight">Docket New KP Complaint</h3>
+                  <p className="text-[10px] text-brand-muted uppercase font-bold tracking-widest leading-none mt-1">Katarungang Pambarangay Office</p>
                 </div>
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Filing Date</label>
-                  <Input type="date" required value={formData.filingDate} onChange={e => setFormData({...formData, filingDate: e.target.value})} className="bg-brand-bg text-brand-text" />
-                </div>
+                <button 
+                  onClick={() => setShowAddModal(false)} 
+                  className="p-2 text-brand-muted hover:text-brand-text rounded-lg hover:bg-brand-bg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
+              <form onSubmit={handleCreateCase} className="p-4 sm:p-6 space-y-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Case Docket Number</label>
+                    <Input required value={formData.caseNumber} onChange={e => setFormData({...formData, caseNumber: e.target.value})} className="bg-brand-bg text-brand-text font-mono font-bold min-h-[44px]" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Filing Date</label>
+                    <Input type="date" required value={formData.filingDate} onChange={e => setFormData({...formData, filingDate: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
+                </div>
 
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Nature of Dispute</label>
-                <Input required placeholder="e.g. Boundary Line & Encroachment, Small Claims Debt" value={formData.disputeNature} onChange={e => setFormData({...formData, disputeNature: e.target.value})} className="bg-brand-bg text-brand-text" />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Complainant Full Name</label>
-                  <Input required placeholder="Juan Dela Cruz" value={formData.complainantName} onChange={e => setFormData({...formData, complainantName: e.target.value})} className="bg-brand-bg text-brand-text" />
+                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Nature of Dispute</label>
+                  <Input required placeholder="e.g. Boundary Line & Encroachment, Small Claims Debt" value={formData.disputeNature} onChange={e => setFormData({...formData, disputeNature: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
                 </div>
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Respondent Full Name</label>
-                  <Input required placeholder="Mario Santos" value={formData.respondentName} onChange={e => setFormData({...formData, respondentName: e.target.value})} className="bg-brand-bg text-brand-text" />
-                </div>
-              </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hearing Date</label>
-                  <Input type="date" value={formData.hearingDate} onChange={e => setFormData({...formData, hearingDate: e.target.value})} className="bg-brand-bg text-brand-text" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Complainant Full Name</label>
+                    <Input required placeholder="Juan Dela Cruz" value={formData.complainantName} onChange={e => setFormData({...formData, complainantName: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Respondent Full Name</label>
+                    <Input required placeholder="Mario Santos" value={formData.respondentName} onChange={e => setFormData({...formData, respondentName: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
                 </div>
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hearing Time</label>
-                  <Input value={formData.hearingTime} onChange={e => setFormData({...formData, hearingTime: e.target.value})} className="bg-brand-bg text-brand-text" />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hearing Date</label>
+                    <Input type="date" value={formData.hearingDate} onChange={e => setFormData({...formData, hearingDate: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Hearing Time</label>
+                    <Input value={formData.hearingTime} onChange={e => setFormData({...formData, hearingTime: e.target.value})} className="bg-brand-bg text-brand-text min-h-[44px]" />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Complaint Narrative</label>
-                <textarea 
-                  rows={3} 
-                  required 
-                  placeholder="Summary of facts, incident dates, and remedies requested..."
-                  value={formData.narrative} 
-                  onChange={e => setFormData({...formData, narrative: e.target.value})}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-brand-muted mb-1 block">Complaint Narrative</label>
+                  <textarea 
+                    rows={3} 
+                    required 
+                    placeholder="Summary of facts, incident dates, and remedies requested..."
+                    value={formData.narrative} 
+                    onChange={e => setFormData({...formData, narrative: e.target.value})}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-brand-text focus:outline-none focus:border-brand-primary"
+                  />
+                </div>
 
-              <div className="flex gap-2 pt-2">
-                <Button type="button" variant="outline" onClick={() => setShowAddModal(false)} className="flex-1 text-[10px] font-bold uppercase">Cancel</Button>
-                <Button type="submit" className="flex-1 bg-brand-primary text-brand-bg text-[10px] font-black uppercase">Confirm Docket</Button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+                <div className="flex gap-3 pt-3 border-t border-brand-border">
+                  <Button type="button" variant="outline" onClick={() => setShowAddModal(false)} className="flex-1 text-xs font-bold uppercase min-h-[44px] interactive-click">Cancel</Button>
+                  <Button type="submit" className="flex-1 bg-brand-primary text-brand-bg text-xs font-black uppercase min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20">Confirm Docket</Button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

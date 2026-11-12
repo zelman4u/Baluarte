@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { 
   HeartHandshake, 
   Users, 
@@ -11,7 +12,9 @@ import {
   ShieldAlert, 
   Filter,
   Download,
-  AlertCircle
+  AlertCircle,
+  X,
+  ArrowUpRight
 } from 'lucide-react';
 import { Card } from '../components/ui/Base';
 import { auditService } from '../services/auditService';
@@ -229,6 +232,10 @@ export const WelfarePage: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-brand-success bg-brand-success/5 border border-brand-success/20 px-3 py-1.5 rounded-full">
+            <div className="w-2 h-2 bg-brand-success rounded-full animate-pulse shadow-[0_0_8px_rgba(63,185,80,0.5)]"></div>
+            <span className="text-[10px] font-bold uppercase tracking-widest leading-none">DSWD Link Active</span>
+          </div>
           <button
             onClick={() => setShowIntakeModal(true)}
             className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-brand-primary/20 hover:bg-brand-primary/90 interactive-click"
@@ -239,51 +246,35 @@ export const WelfarePage: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Total Disbursed (MTD)</span>
-            <Coins className="w-4 h-4 text-emerald-400" />
-          </div>
-          <div className="text-2xl font-black text-brand-text interactive-text">
-            ₱{totalDisbursed.toLocaleString()}
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">{cases.filter(c => c.status === 'Approved & Disbursed').length} released vouchers</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Pending Signoff</span>
-            <Clock className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="text-2xl font-black text-brand-text interactive-text">
-            ₱{pendingAmount.toLocaleString()}
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">{cases.filter(c => c.status !== 'Approved & Disbursed').length} awaiting Punong Barangay</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Enrolled Beneficiaries</span>
-            <Users className="w-4 h-4 text-brand-primary" />
-          </div>
-          <div className="text-2xl font-black text-brand-text interactive-text">
-            1,482 Residents
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Cross-matched with RBI Census</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Welfare Desk</span>
-            <HeartHandshake className="w-4 h-4 text-pink-400" />
-          </div>
-          <div className="text-2xl font-black text-brand-text interactive-text">
-            Baluarte MSWDO
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Direct Tagoloan Link Active</p>
-        </Card>
+      {/* Dashboard-Style Staggered Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[
+          { label: 'Total Disbursed (MTD)', value: `₱${totalDisbursed.toLocaleString()}`, icon: Coins, color: 'text-emerald-400', bg: 'bg-emerald-500/10', change: `${cases.filter(c => c.status === 'Approved & Disbursed').length} released` },
+          { label: 'Pending Signoff', value: `₱${pendingAmount.toLocaleString()}`, icon: Clock, color: 'text-amber-400', bg: 'bg-amber-500/10', change: 'PB Action' },
+          { label: 'Enrolled Beneficiaries', value: '1,482 Residents', icon: Users, color: 'text-brand-primary', bg: 'bg-brand-primary/10', change: 'RBI Census' },
+          { label: 'Welfare Desk Status', value: 'Baluarte MSWDO', icon: HeartHandshake, color: 'text-pink-400', bg: 'bg-pink-500/10', change: 'Online' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
+          >
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
+              <div className="flex items-center justify-between mb-4">
+                <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
+                  <stat.icon className={cn("w-5 h-5", stat.color)} />
+                </div>
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
+                  <ArrowUpRight className="w-2.5 h-2.5" />
+                  {stat.change}
+                </div>
+              </div>
+              <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
+            </Card>
+          </motion.div>
+        ))}
       </div>
 
       {/* Filter and Search */}
@@ -394,156 +385,169 @@ export const WelfarePage: React.FC = () => {
       </div>
 
       {/* New Assistance Intake Modal */}
-      {showIntakeModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <HeartHandshake className="w-5 h-5 text-pink-400" />
-                <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
-                  New Welfare Assistance Intake
-                </h3>
-              </div>
-              <button 
-                onClick={() => setShowIntakeModal(false)}
-                className="text-brand-muted hover:text-brand-text p-1"
-              >
-                ✕
-              </button>
-            </div>
-
-            <form onSubmit={handleCreateCase} className="p-5 space-y-4">
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Full Legal Name of Beneficiary
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Maria Teresa Santos"
-                  value={newCase.beneficiaryName}
-                  onChange={(e) => setNewCase({ ...newCase, beneficiaryName: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
+      <AnimatePresence>
+        {showIntakeModal && (
+          <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              <div className="p-4 sm:p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400">
+                    <HeartHandshake className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
+                      New Welfare Assistance Intake
+                    </h3>
+                    <p className="text-[10px] text-brand-muted uppercase font-bold tracking-widest leading-none mt-0.5">Baluarte MSWDO Social Safety Net</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowIntakeModal(false)}
+                  className="text-brand-muted hover:text-brand-text p-2 rounded-lg hover:bg-brand-bg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <form onSubmit={handleCreateCase} className="p-4 sm:p-5 space-y-4">
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Beneficiary Sector
-                  </label>
-                  <select
-                    value={newCase.category}
-                    onChange={(e) => setNewCase({ ...newCase, category: e.target.value as WelfareCase['category'] })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                  >
-                    <option value="Senior Citizen">Senior Citizen (60+)</option>
-                    <option value="PWD">PWD (Differently Abled)</option>
-                    <option value="Solo Parent">Solo Parent</option>
-                    <option value="AICS Indigent">AICS Indigent Household</option>
-                    <option value="Emergency Aid">Emergency Aid</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Assistance Program
-                  </label>
-                  <select
-                    value={newCase.voucherType}
-                    onChange={(e) => setNewCase({ ...newCase, voucherType: e.target.value as WelfareCase['voucherType'] })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                  >
-                    <option value="Medical Subsidy">Medical Subsidy</option>
-                    <option value="Burial Assistance">Burial Assistance</option>
-                    <option value="Educational Aid">Educational Aid</option>
-                    <option value="Food Rations">Food Rations</option>
-                    <option value="Livelihood Seed">Livelihood Seed Grant</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Requested Grant Amount (₱)
-                  </label>
-                  <input
-                    type="number"
-                    min="500"
-                    step="500"
-                    required
-                    value={newCase.amount}
-                    onChange={(e) => setNewCase({ ...newCase, amount: Number(e.target.value) })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Contact Mobile Number
+                    Full Legal Name of Beneficiary
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="0917-000-0000"
-                    value={newCase.contactNumber}
-                    onChange={(e) => setNewCase({ ...newCase, contactNumber: e.target.value })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
+                    placeholder="e.g. Maria Teresa Santos"
+                    value={newCase.beneficiaryName}
+                    onChange={(e) => setNewCase({ ...newCase, beneficiaryName: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Residential Purok / Zone
-                </label>
-                <select
-                  value={newCase.purok}
-                  onChange={(e) => setNewCase({ ...newCase, purok: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                >
-                  <option value="Zone 1 Riverside">Zone 1 Riverside</option>
-                  <option value="Zone 2 Lower Baluarte">Zone 2 Lower Baluarte</option>
-                  <option value="Zone 3 Spillway">Zone 3 Spillway</option>
-                  <option value="Zone 4 Highway Sector">Zone 4 Highway Sector</option>
-                  <option value="Zone 5 Upper Baluarte Foothills">Zone 5 Upper Baluarte Foothills</option>
-                </select>
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Beneficiary Sector
+                    </label>
+                    <select
+                      value={newCase.category}
+                      onChange={(e) => setNewCase({ ...newCase, category: e.target.value as WelfareCase['category'] })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    >
+                      <option value="Senior Citizen">Senior Citizen (60+)</option>
+                      <option value="PWD">PWD (Differently Abled)</option>
+                      <option value="Solo Parent">Solo Parent</option>
+                      <option value="AICS Indigent">AICS Indigent Household</option>
+                      <option value="Emergency Aid">Emergency Aid</option>
+                    </select>
+                  </div>
 
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Caseworker Assessment & Justification
-                </label>
-                <textarea
-                  required
-                  rows={3}
-                  placeholder="Clinical assessment, doctor certificate verification, or indigency grounds..."
-                  value={newCase.remarks}
-                  onChange={(e) => setNewCase({ ...newCase, remarks: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Assistance Program
+                    </label>
+                    <select
+                      value={newCase.voucherType}
+                      onChange={(e) => setNewCase({ ...newCase, voucherType: e.target.value as WelfareCase['voucherType'] })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    >
+                      <option value="Medical Subsidy">Medical Subsidy</option>
+                      <option value="Burial Assistance">Burial Assistance</option>
+                      <option value="Educational Aid">Educational Aid</option>
+                      <option value="Food Rations">Food Rations</option>
+                      <option value="Livelihood Seed">Livelihood Seed Grant</option>
+                    </select>
+                  </div>
+                </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-brand-border">
-                <button
-                  type="button"
-                  onClick={() => setShowIntakeModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-brand-muted hover:text-brand-text"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
-                >
-                  Submit for Approval
-                </button>
-              </div>
-            </form>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Requested Grant Amount (₱)
+                    </label>
+                    <input
+                      type="number"
+                      min="500"
+                      step="500"
+                      required
+                      value={newCase.amount}
+                      onChange={(e) => setNewCase({ ...newCase, amount: Number(e.target.value) })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Contact Mobile Number
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="0917-000-0000"
+                      value={newCase.contactNumber}
+                      onChange={(e) => setNewCase({ ...newCase, contactNumber: e.target.value })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Residential Purok / Zone
+                  </label>
+                  <select
+                    value={newCase.purok}
+                    onChange={(e) => setNewCase({ ...newCase, purok: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                  >
+                    <option value="Zone 1 Riverside">Zone 1 Riverside</option>
+                    <option value="Zone 2 Lower Baluarte">Zone 2 Lower Baluarte</option>
+                    <option value="Zone 3 Spillway">Zone 3 Spillway</option>
+                    <option value="Zone 4 Highway Sector">Zone 4 Highway Sector</option>
+                    <option value="Zone 5 Upper Baluarte Foothills">Zone 5 Upper Baluarte Foothills</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Caseworker Assessment & Justification
+                  </label>
+                  <textarea
+                    required
+                    rows={3}
+                    placeholder="Clinical assessment, doctor certificate verification, or indigency grounds..."
+                    value={newCase.remarks}
+                    onChange={(e) => setNewCase({ ...newCase, remarks: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
+                  />
+                </div>
+
+                <div className="flex items-center justify-end gap-3 pt-3 border-t border-brand-border">
+                  <button
+                    type="button"
+                    onClick={() => setShowIntakeModal(false)}
+                    className="min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-brand-muted hover:text-brand-text interactive-click"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
+                  >
+                    Submit for Approval
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };

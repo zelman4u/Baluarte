@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { 
   FileText, 
   Search, 
@@ -12,7 +12,8 @@ import {
   CreditCard,
   User,
   ArrowUpRight,
-  ExternalLink
+  ExternalLink,
+  X
 } from 'lucide-react';
 import { collection, query, onSnapshot, getDocs, addDoc, serverTimestamp, orderBy, where } from 'firebase/firestore';
 import { db } from '../lib/firebase';
@@ -20,6 +21,8 @@ import { useAuth } from '../context/AuthContext';
 import { Card, Button, Input } from '../components/ui/Base';
 import { cn } from '../lib/utils';
 import { format } from 'date-fns';
+import { auditService } from '../services/auditService';
+import { notificationService } from '../services/notificationService';
 
 interface DocumentRequest {
   id: string;
@@ -78,13 +81,37 @@ export const RequestsPage: React.FC = () => {
     if (!profile || !user) return;
     
     try {
-      await addDoc(collection(db, 'requests'), {
+      const docRef = await addDoc(collection(db, 'requests'), {
         ...formData,
         residentId: user.uid,
         residentName: profile.displayName || profile.email,
         status: 'Pending',
         requestedAt: serverTimestamp(),
       });
+
+      await auditService.logAction({
+        userId: user.uid,
+        userName: profile.displayName || profile.email || 'Resident',
+        userEmail: profile.email || 'resident@baluarte.gov.ph',
+        userRole: profile.role || 'Resident',
+        department: 'Administration',
+        action: 'CREATE',
+        targetEntity: 'System',
+        targetId: docRef.id,
+        targetName: formData.type,
+        details: `Filed certificate request: ${formData.type} for ${formData.purpose}`,
+        severity: 'Info'
+      });
+
+      notificationService.addNotification({
+        title: 'New Barangay Certificate Request',
+        message: `${profile.displayName || 'Resident'} requested a ${formData.type}.`,
+        category: 'system',
+        severity: 'info',
+        department: 'Administration',
+        actionUrl: '/requests'
+      });
+
       setShowAddModal(false);
       setFormData({
         type: 'Barangay Clearance',
@@ -112,66 +139,78 @@ export const RequestsPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-12">
       {/* New Request Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-brand-surface border border-brand-border rounded-xl w-full max-w-md overflow-hidden shadow-2xl"
-          >
-            <div className="p-6 border-b border-brand-border bg-brand-card/50">
-              <h3 className="text-lg font-black text-brand-text uppercase tracking-tight">Request Official Document</h3>
-              <p className="text-xs text-brand-muted font-bold mt-1 uppercase tracking-widest leading-none">Administrative Portal V4</p>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="space-y-4">
+      <AnimatePresence>
+        {showAddModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              <div className="p-4 sm:p-6 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
                 <div>
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Document Classification</label>
-                  <select 
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-primary font-bold uppercase"
-                    value={formData.type}
-                    onChange={(e) => setFormData({...formData, type: e.target.value})}
-                  >
-                    <option>Barangay Clearance</option>
-                    <option>Certificate of Indigency</option>
-                    <option>Residency Certificate</option>
-                    <option>Business Permit</option>
-                    <option>Others</option>
-                  </select>
+                  <h3 className="text-base sm:text-lg font-black text-brand-text uppercase tracking-tight">Request Official Document</h3>
+                  <p className="text-[10px] text-brand-muted font-bold mt-1 uppercase tracking-widest leading-none">Baluarte Civil Registry Desk</p>
                 </div>
-                <div>
-                  <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Purpose / Utilization</label>
-                  <textarea 
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text h-24 focus:outline-none focus:border-brand-primary"
-                    required
-                    placeholder="Describe the usage for this document..."
-                    value={formData.purpose}
-                    onChange={(e) => setFormData({...formData, purpose: e.target.value})}
-                  />
-                </div>
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="p-2 text-brand-muted hover:text-brand-text rounded-lg hover:bg-brand-bg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
               
-              <div className="flex gap-3 pt-4">
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={() => setShowAddModal(false)}
-                  className="flex-1 uppercase font-bold text-[10px]"
-                >
-                  Discard
-                </Button>
-                <Button 
-                  type="submit" 
-                  className="flex-1 bg-brand-primary text-brand-bg uppercase font-black text-[10px] tracking-widest"
-                >
-                  Confirm Request
-                </Button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+              <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Document Classification</label>
+                    <select 
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text focus:outline-none focus:border-brand-primary font-bold uppercase min-h-[44px]"
+                      value={formData.type}
+                      onChange={(e) => setFormData({...formData, type: e.target.value})}
+                    >
+                      <option>Barangay Clearance</option>
+                      <option>Certificate of Indigency</option>
+                      <option>Residency Certificate</option>
+                      <option>Business Permit</option>
+                      <option>Others</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Purpose / Utilization</label>
+                    <textarea 
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text h-24 focus:outline-none focus:border-brand-primary"
+                      required
+                      placeholder="e.g. Employment requirement, Bank loan, Scholarship application..."
+                      value={formData.purpose}
+                      onChange={(e) => setFormData({...formData, purpose: e.target.value})}
+                    />
+                  </div>
+                </div>
+                
+                <div className="flex gap-3 pt-3 border-t border-brand-border">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setShowAddModal(false)}
+                    className="flex-1 uppercase font-bold text-xs min-h-[44px] interactive-click"
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    className="flex-1 bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider min-h-[44px] interactive-click shadow-lg shadow-brand-primary/20"
+                  >
+                    Submit Request
+                  </Button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-brand-border">
         <div>
           <div className="flex items-center gap-2 mb-1">

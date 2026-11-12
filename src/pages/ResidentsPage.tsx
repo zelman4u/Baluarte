@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { Card, Button, Input } from '../components/ui/Base';
-import { Plus, Search, Filter, Download, MoreHorizontal, User } from 'lucide-react';
+import { Plus, Search, Filter, Download, MoreHorizontal, User, Users, CheckCircle2, Heart, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useAuth } from '../context/AuthContext';
@@ -72,6 +72,37 @@ export const ResidentsPage: React.FC = () => {
             Register Citizen
           </Button>
         </div>
+      </div>
+
+      {/* Dashboard-Style Staggered Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[
+          { label: 'Registered Citizens', value: residents.length || '12,482', icon: Users, color: 'text-brand-primary', bg: 'bg-brand-primary/10', change: '+2.4%' },
+          { label: 'Verified Voters', value: '8,920', icon: CheckCircle2, color: 'text-brand-success', bg: 'bg-brand-success/10', change: 'Live' },
+          { label: 'Vulnerable Sectors', value: '1,482', icon: Heart, color: 'text-pink-400', bg: 'bg-pink-400/10', change: 'Monitored' },
+          { label: 'Cluster Puroks', value: '7 Zones', icon: MapPin, color: 'text-purple-400', bg: 'bg-purple-400/10', change: 'Active' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
+          >
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
+              <div className="flex items-center justify-between mb-4">
+                <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
+                  <stat.icon className={cn("w-5 h-5", stat.color)} />
+                </div>
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
+                  <ArrowUpRight className="w-2.5 h-2.5" />
+                  {stat.change}
+                </div>
+              </div>
+              <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
+            </Card>
+          </motion.div>
+        ))}
       </div>
 
       <Card className="overflow-hidden bg-brand-surface border-brand-border kinetic-card">
@@ -212,7 +243,7 @@ const ResidentForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
     lastName: '',
     birthDate: '',
     gender: 'Male',
-    voterStatus: 'Not Registered',
+    voterStatus: 'Registered',
     isSeniorCitizen: false,
     isPWD: false
   });
@@ -235,26 +266,44 @@ const ResidentForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 block">First Name</label>
-          <Input required value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} />
+          <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">First Name</label>
+          <Input 
+            required 
+            placeholder="e.g. Juan"
+            value={formData.firstName} 
+            onChange={e => setFormData({...formData, firstName: e.target.value})} 
+            className="bg-brand-bg border-brand-border text-brand-text min-h-[44px]"
+          />
         </div>
         <div>
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 block">Last Name</label>
-          <Input required value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} />
+          <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Last Name</label>
+          <Input 
+            required 
+            placeholder="e.g. Dela Cruz"
+            value={formData.lastName} 
+            onChange={e => setFormData({...formData, lastName: e.target.value})} 
+            className="bg-brand-bg border-brand-border text-brand-text min-h-[44px]"
+          />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 block">Birth Date</label>
-          <Input type="date" required value={formData.birthDate} onChange={e => setFormData({...formData, birthDate: e.target.value})} />
+          <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Birth Date</label>
+          <Input 
+            type="date" 
+            required 
+            value={formData.birthDate} 
+            onChange={e => setFormData({...formData, birthDate: e.target.value})} 
+            className="bg-brand-bg border-brand-border text-brand-text min-h-[44px]"
+          />
         </div>
         <div>
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 block">Gender</label>
+          <label className="text-[10px] font-black text-brand-muted uppercase tracking-widest mb-1.5 block">Gender</label>
           <select 
-            className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full bg-brand-bg border border-brand-border text-brand-text rounded-lg px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-primary min-h-[44px]"
             value={formData.gender}
             onChange={e => setFormData({...formData, gender: e.target.value})}
           >
@@ -264,19 +313,43 @@ const ResidentForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
           </select>
         </div>
       </div>
-      <div className="flex gap-6 items-center py-4 border-y border-slate-100">
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" className="rounded text-blue-600" checked={formData.isSeniorCitizen} onChange={e => setFormData({...formData, isSeniorCitizen: e.target.checked})} />
-          <span className="text-sm font-medium text-slate-700">Senior Citizen</span>
+      <div className="flex flex-wrap gap-4 items-center py-3 border-y border-brand-border bg-brand-bg/40 px-3 rounded-lg">
+        <label className="flex items-center gap-2 cursor-pointer interactive-click">
+          <input 
+            type="checkbox" 
+            className="w-4 h-4 accent-brand-primary rounded" 
+            checked={formData.isSeniorCitizen} 
+            onChange={e => setFormData({...formData, isSeniorCitizen: e.target.checked})} 
+          />
+          <span className="text-xs font-bold text-brand-text">Senior Citizen (60+)</span>
         </label>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" className="rounded text-blue-600" checked={formData.isPWD} onChange={e => setFormData({...formData, isPWD: e.target.checked})} />
-          <span className="text-sm font-medium text-slate-700">PWD</span>
+        <label className="flex items-center gap-2 cursor-pointer interactive-click">
+          <input 
+            type="checkbox" 
+            className="w-4 h-4 accent-brand-primary rounded" 
+            checked={formData.isPWD} 
+            onChange={e => setFormData({...formData, isPWD: e.target.checked})} 
+          />
+          <span className="text-xs font-bold text-brand-text">PWD (Special Needs)</span>
         </label>
       </div>
-      <Button type="submit" disabled={loading} className="w-full h-12">
-        {loading ? 'Registering...' : 'Complete Registration'}
-      </Button>
+      <div className="flex gap-3 pt-2">
+        <Button 
+          type="button" 
+          variant="outline" 
+          onClick={onSuccess} 
+          className="flex-1 min-h-[44px] uppercase font-bold text-xs interactive-click"
+        >
+          Cancel
+        </Button>
+        <Button 
+          type="submit" 
+          disabled={loading} 
+          className="flex-1 min-h-[44px] bg-brand-primary text-brand-bg uppercase font-black text-xs tracking-wider interactive-click shadow-lg shadow-brand-primary/20"
+        >
+          {loading ? 'Registering...' : 'Complete Registration'}
+        </Button>
+      </div>
     </form>
   );
 };

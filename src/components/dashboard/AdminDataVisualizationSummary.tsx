@@ -97,7 +97,7 @@ export const AdminDataVisualizationSummary: React.FC = () => {
         {/* Module 1: Katarungang Pambarangay Breakdown */}
         {(activeTab === 'all' || activeTab === 'cases') && (
           <div className={cn(
-            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col",
+            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col min-w-0",
             activeTab === 'cases' ? "lg:col-span-3" : ""
           )}>
             <div className="flex items-center justify-between mb-4">
@@ -115,8 +115,8 @@ export const AdminDataVisualizationSummary: React.FC = () => {
               <span className="text-[10px] font-mono text-emerald-400 font-bold">52% Settled</span>
             </div>
 
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-56 w-full min-w-0">
+              <ResponsiveContainer width="100%" height={224} minWidth={0}>
                 <BarChart data={CASE_STATUS_DATA} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#30363D" />
                   <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 9, fill: '#8B949E' }} />
@@ -156,7 +156,7 @@ export const AdminDataVisualizationSummary: React.FC = () => {
         {/* Module 2: Health Service Utilization */}
         {(activeTab === 'all' || activeTab === 'health') && (
           <div className={cn(
-            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col",
+            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col min-w-0",
             activeTab === 'health' ? "lg:col-span-3" : ""
           )}>
             <div className="flex items-center justify-between mb-4">
@@ -174,8 +174,8 @@ export const AdminDataVisualizationSummary: React.FC = () => {
               <span className="text-[10px] font-mono text-pink-400 font-bold">+18% Outreach</span>
             </div>
 
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-56 w-full min-w-0">
+              <ResponsiveContainer width="100%" height={224} minWidth={0}>
                 <BarChart data={HEALTH_UTILIZATION_DATA} margin={{ left: 0, right: 10, top: 10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#30363D" />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 10, fill: '#8B949E' }} />
@@ -207,7 +207,7 @@ export const AdminDataVisualizationSummary: React.FC = () => {
         {/* Module 3: Treasury Fund Allocation */}
         {(activeTab === 'all' || activeTab === 'treasury') && (
           <div className={cn(
-            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col",
+            "p-5 rounded-2xl bg-brand-card/50 border border-brand-border flex flex-col min-w-0",
             activeTab === 'treasury' ? "lg:col-span-3" : ""
           )}>
             <div className="flex items-center justify-between mb-4">
@@ -225,8 +225,8 @@ export const AdminDataVisualizationSummary: React.FC = () => {
               <span className="text-[10px] font-mono text-emerald-400 font-bold">Audited</span>
             </div>
 
-            <div className="h-56 w-full flex items-center justify-center">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-56 w-full min-w-0 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={224} minWidth={0}>
                 <PieChart>
                   <Pie
                     data={TREASURY_ALLOCATION_DATA}

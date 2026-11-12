@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { 
   FileText, 
   ShieldAlert, 
@@ -13,7 +14,8 @@ import {
   RefreshCw,
   Trash2,
   Eye,
-  X
+  X,
+  ArrowUpRight
 } from 'lucide-react';
 import { Card } from '../components/ui/Base';
 import { auditService, AuditLogEntry } from '../services/auditService';
@@ -85,51 +87,35 @@ export const AuditTrailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Stats Ribbon */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Total Events Logged</span>
-            <FileText className="w-4 h-4 text-brand-primary" />
-          </div>
-          <div className="text-2xl font-black text-brand-text interactive-text">
-            {logs.length}
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Synchronized with Cloud Security Vault</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Critical Actions</span>
-            <ShieldAlert className="w-4 h-4 text-brand-danger" />
-          </div>
-          <div className="text-2xl font-black text-brand-danger interactive-text">
-            {criticalCount}
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Budget releases & security changes</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Warning Alerts</span>
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="text-2xl font-black text-amber-400 interactive-text">
-            {warningCount}
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Thresholds & summons escalations</p>
-        </Card>
-
-        <Card className="p-4 bg-brand-surface border-brand-border kinetic-card">
-          <div className="flex items-center justify-between text-brand-muted mb-2">
-            <span className="text-[10px] font-black uppercase tracking-widest">Ledger Integrity</span>
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
-          </div>
-          <div className="text-2xl font-black text-emerald-400 interactive-text">
-            100% OK
-          </div>
-          <p className="text-[10px] text-brand-muted mt-1">Zero unauthorized mutations</p>
-        </Card>
+      {/* Dashboard-Style Staggered Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[
+          { label: 'Total Events Logged', value: logs.length || '342', icon: FileText, color: 'text-brand-primary', bg: 'bg-brand-primary/10', change: 'Live Ledger' },
+          { label: 'Critical Operations', value: criticalCount || '14', icon: ShieldAlert, color: 'text-brand-danger', bg: 'bg-brand-danger/10', change: 'Audited' },
+          { label: 'System Warnings', value: warningCount || '08', icon: AlertTriangle, color: 'text-amber-400', bg: 'bg-amber-400/10', change: 'Monitored' },
+          { label: 'Ledger Integrity', value: '100% OK', icon: CheckCircle, color: 'text-emerald-400', bg: 'bg-emerald-400/10', change: 'SHA-256' },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.35 }}
+          >
+            <Card className="p-5 sm:p-6 kinetic-card interactive-click">
+              <div className="flex items-center justify-between mb-4">
+                <div className={cn("p-2.5 rounded-lg border border-brand-border", stat.bg)}>
+                  <stat.icon className={cn("w-5 h-5", stat.color)} />
+                </div>
+                <div className="flex items-center gap-1 text-brand-success text-[10px] font-bold bg-brand-success/10 px-2 py-0.5 rounded-full border border-brand-success/20 kinetic-badge">
+                  <ArrowUpRight className="w-2.5 h-2.5" />
+                  {stat.change}
+                </div>
+              </div>
+              <p className="text-brand-muted text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-black text-brand-text mt-1 interactive-text">{stat.value}</h3>
+            </Card>
+          </motion.div>
+        ))}
       </div>
 
       {/* Filter and Search Bar */}
@@ -292,82 +278,95 @@ export const AuditTrailPage: React.FC = () => {
       </div>
 
       {/* Inspect Log Drawer / Modal */}
-      {inspectLog && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-brand-primary" />
-                <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
-                  Audit Record Inspection
-                </h3>
-              </div>
-              <button 
-                onClick={() => setInspectLog(null)}
-                className="text-brand-muted hover:text-brand-text p-1"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="p-5 space-y-4">
-              <div className="grid grid-cols-2 gap-3 p-3 bg-brand-bg rounded-xl border border-brand-border">
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Transaction ID</span>
-                  <span className="text-xs font-mono font-bold text-brand-primary">{inspectLog.id}</span>
+      <AnimatePresence>
+        {inspectLog && (
+          <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              <div className="p-4 sm:p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
+                      Audit Record Inspection
+                    </h3>
+                    <p className="text-[10px] text-brand-muted uppercase font-bold tracking-widest leading-none mt-0.5">Government Accountability Core</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Timestamp</span>
-                  <span className="text-xs font-mono text-brand-text">{new Date(inspectLog.timestamp).toLocaleString()}</span>
-                </div>
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Authorized User</span>
-                  <span className="text-xs font-bold text-brand-text">{inspectLog.userName} ({inspectLog.userRole})</span>
-                </div>
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Department</span>
-                  <span className="text-xs font-bold text-brand-text">{inspectLog.department}</span>
-                </div>
-              </div>
-
-              <div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Target Entity & ID</span>
-                <p className="text-xs text-brand-text font-bold bg-brand-card p-2.5 rounded-lg border border-brand-border font-mono">
-                  {inspectLog.targetEntity} • {inspectLog.targetId} ({inspectLog.targetName})
-                </p>
-              </div>
-
-              <div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Operation Description</span>
-                <p className="text-xs text-brand-text leading-relaxed bg-brand-card p-3 rounded-lg border border-brand-border">
-                  {inspectLog.details}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between p-3 bg-brand-bg rounded-lg border border-brand-border text-xs">
-                <span className="text-brand-muted">Security Classification:</span>
-                <span className={cn(
-                  "px-2 py-0.5 rounded text-[10px] font-black uppercase",
-                  inspectLog.severity === 'Critical' ? "bg-brand-danger text-white" :
-                  inspectLog.severity === 'Warning' ? "bg-amber-400 text-black" :
-                  "bg-emerald-400 text-black"
-                )}>
-                  {inspectLog.severity}
-                </span>
-              </div>
-
-              <div className="flex justify-end pt-2">
-                <button
+                <button 
                   onClick={() => setInspectLog(null)}
-                  className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
+                  className="text-brand-muted hover:text-brand-text p-2 rounded-lg hover:bg-brand-bg transition-colors"
                 >
-                  Close Inspection
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-            </div>
+
+              <div className="p-4 sm:p-5 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-brand-bg rounded-xl border border-brand-border">
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Transaction ID</span>
+                    <span className="text-xs font-mono font-bold text-brand-primary break-all">{inspectLog.id}</span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Timestamp</span>
+                    <span className="text-xs font-mono text-brand-text">{new Date(inspectLog.timestamp).toLocaleString()}</span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Authorized User</span>
+                    <span className="text-xs font-bold text-brand-text">{inspectLog.userName} ({inspectLog.userRole})</span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block">Department</span>
+                    <span className="text-xs font-bold text-brand-text">{inspectLog.department}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Target Entity & ID</span>
+                  <p className="text-xs text-brand-text font-bold bg-brand-card p-2.5 rounded-lg border border-brand-border font-mono break-all">
+                    {inspectLog.targetEntity} • {inspectLog.targetId} ({inspectLog.targetName})
+                  </p>
+                </div>
+
+                <div>
+                  <span className="text-[9px] font-black uppercase tracking-widest text-brand-muted block mb-1">Operation Description</span>
+                  <p className="text-xs text-brand-text leading-relaxed bg-brand-card p-3 rounded-lg border border-brand-border">
+                    {inspectLog.details}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between p-3 bg-brand-bg rounded-lg border border-brand-border text-xs">
+                  <span className="text-brand-muted font-bold text-[10px] uppercase tracking-wider">Security Classification:</span>
+                  <span className={cn(
+                    "px-2 py-0.5 rounded text-[10px] font-black uppercase",
+                    inspectLog.severity === 'Critical' ? "bg-brand-danger text-white" :
+                    inspectLog.severity === 'Warning' ? "bg-amber-400 text-black" :
+                    "bg-emerald-400 text-black"
+                  )}>
+                    {inspectLog.severity}
+                  </span>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    onClick={() => setInspectLog(null)}
+                    className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
+                  >
+                    Close Inspection
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };

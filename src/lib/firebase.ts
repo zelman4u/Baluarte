@@ -5,9 +5,16 @@ import { getStorage } from 'firebase/storage';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 const app = initializeApp(firebaseConfig);
-// Force long polling to avoid transport errors in restricted environments
-export const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true
-}, firebaseConfig.firestoreDatabaseId);
+// Force long polling with 15-second timeout to prevent QUIC protocol idle timeouts and proxy buffering drops
+export const db = initializeFirestore(
+  app,
+  {
+    experimentalForceLongPolling: true,
+    experimentalLongPollingOptions: {
+      timeoutSeconds: 15,
+    },
+  },
+  firebaseConfig.firestoreDatabaseId
+);
 export const auth = getAuth(app);
 export const storage = getStorage(app);

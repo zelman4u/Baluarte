@@ -12,13 +12,15 @@ import {
   PhoneCall,
   Calendar,
   Shield,
-  FileText
+  FileText,
+  ArrowUpRight
 } from 'lucide-react';
 import { Card } from '../components/ui/Base';
 import { auditService } from '../services/auditService';
 import { notificationService } from '../services/notificationService';
 import { useAuth } from '../context/AuthContext';
 import { cn } from '../lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface PatrolLog {
   id: string;
@@ -339,132 +341,140 @@ export const SecurityPage: React.FC = () => {
         ))}
       </div>
 
-      {/* New Dispatch Modal */}
-      {showNewModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-brand-primary" />
-                <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
-                  Dispatch Field Patrol Unit
-                </h3>
-              </div>
-              <button 
-                onClick={() => setShowNewModal(false)}
-                className="text-brand-muted hover:text-brand-text p-1"
-              >
-                ✕
-              </button>
-            </div>
-
-            <form onSubmit={handleCreateLog} className="p-5 space-y-4">
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Patrol Callsign
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={newLog.callsign}
-                  onChange={(e) => setNewLog({ ...newLog, callsign: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Lead Tanod Officer
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Officer Carlos Mendoza"
-                  value={newLog.leadOfficer}
-                  onChange={(e) => setNewLog({ ...newLog, leadOfficer: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Designated Zone
-                  </label>
-                  <select
-                    value={newLog.zone}
-                    onChange={(e) => setNewLog({ ...newLog, zone: e.target.value })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                  >
-                    <option value="Zone 1 Riverside & Spillway dike">Zone 1 Riverside</option>
-                    <option value="Zone 2 Central Poblacion">Zone 2 Central Poblacion</option>
-                    <option value="Zone 3 Commercial Corridor & Market">Zone 3 Commercial Corridor</option>
-                    <option value="Zone 4 School District & Coastal Road">Zone 4 School District</option>
-                    <option value="Zone 5 Upper Baluarte Foothills">Zone 5 Upper Baluarte</option>
-                  </select>
+      {/* New Dispatch Modal with fluid motion */}
+      <AnimatePresence>
+        {showNewModal && (
+          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-brand-surface border border-brand-border rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+            >
+              <div className="p-4 sm:p-5 border-b border-brand-border bg-brand-card/50 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-brand-primary" />
+                  <h3 className="text-sm font-black uppercase tracking-wider text-brand-text">
+                    Dispatch Field Patrol Unit
+                  </h3>
                 </div>
-
-                <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                    Shift Assignment
-                  </label>
-                  <select
-                    value={newLog.shift}
-                    onChange={(e) => setNewLog({ ...newLog, shift: e.target.value as PatrolLog['shift'] })}
-                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                  >
-                    <option value="Morning (0600-1400)">Morning (0600-1400)</option>
-                    <option value="Afternoon (1400-2200)">Afternoon (1400-2200)</option>
-                    <option value="Night Watch (2200-0600)">Night Watch (2200-0600)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Patrol Mission / Field Observations
-                </label>
-                <textarea
-                  required
-                  rows={3}
-                  placeholder="Details of deployment, focus areas, curfew checkpoints..."
-                  value={newLog.observations}
-                  onChange={(e) => setNewLog({ ...newLog, observations: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
-                  Issued Equipment (comma separated)
-                </label>
-                <input
-                  type="text"
-                  value={newLog.equipment}
-                  onChange={(e) => setNewLog({ ...newLog, equipment: e.target.value })}
-                  className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
-                />
-              </div>
-
-              <div className="flex justify-end gap-2 pt-3 border-t border-brand-border">
-                <button
-                  type="button"
+                <button 
                   onClick={() => setShowNewModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-brand-muted hover:text-brand-text"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-muted hover:text-brand-text hover:bg-brand-bg transition-colors min-h-[36px] min-w-[36px] interactive-click"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
-                >
-                  Confirm Deployment
+                  ✕
                 </button>
               </div>
-            </form>
+
+              <form onSubmit={handleCreateLog} className="p-4 sm:p-5 space-y-4 overflow-y-auto">
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Patrol Callsign
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newLog.callsign}
+                    onChange={(e) => setNewLog({ ...newLog, callsign: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Lead Tanod Officer
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Officer Carlos Mendoza"
+                    value={newLog.leadOfficer}
+                    onChange={(e) => setNewLog({ ...newLog, leadOfficer: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Designated Zone
+                    </label>
+                    <select
+                      value={newLog.zone}
+                      onChange={(e) => setNewLog({ ...newLog, zone: e.target.value })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    >
+                      <option value="Zone 1 Riverside & Spillway dike">Zone 1 Riverside</option>
+                      <option value="Zone 2 Central Poblacion">Zone 2 Central Poblacion</option>
+                      <option value="Zone 3 Commercial Corridor & Market">Zone 3 Commercial Corridor</option>
+                      <option value="Zone 4 School District & Coastal Road">Zone 4 School District</option>
+                      <option value="Zone 5 Upper Baluarte Foothills">Zone 5 Upper Baluarte</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                      Shift Assignment
+                    </label>
+                    <select
+                      value={newLog.shift}
+                      onChange={(e) => setNewLog({ ...newLog, shift: e.target.value as PatrolLog['shift'] })}
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                    >
+                      <option value="Morning (0600-1400)">Morning (0600-1400)</option>
+                      <option value="Afternoon (1400-2200)">Afternoon (1400-2200)</option>
+                      <option value="Night Watch (2200-0600)">Night Watch (2200-0600)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Patrol Mission / Field Observations
+                  </label>
+                  <textarea
+                    required
+                    rows={3}
+                    placeholder="Details of deployment, focus areas, curfew checkpoints..."
+                    value={newLog.observations}
+                    onChange={(e) => setNewLog({ ...newLog, observations: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg p-3 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted block mb-1">
+                    Issued Equipment (comma separated)
+                  </label>
+                  <input
+                    type="text"
+                    value={newLog.equipment}
+                    onChange={(e) => setNewLog({ ...newLog, equipment: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-primary min-h-[44px]"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2 pt-3 border-t border-brand-border">
+                  <button
+                    type="button"
+                    onClick={() => setShowNewModal(false)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-brand-muted hover:text-brand-text min-h-[44px] interactive-click"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="min-h-[44px] px-5 py-2 rounded-xl bg-brand-primary text-brand-bg font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-primary/20 interactive-click"
+                  >
+                    Confirm Deployment
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };

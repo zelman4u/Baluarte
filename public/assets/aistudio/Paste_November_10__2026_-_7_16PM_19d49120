@@ -1,0 +1,829 @@
+initial theme: light
+index.iife.js:123   Uncaught (in promise) TypeError: Failed to fetch
+    at ds (index.iife.js:123:39008)
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+m=Jn51xb:2759 JetskiLog: currentStep changed to 0
+(anonymous) @ m=Jn51xb:2759
+content.js:18 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'useCache')
+    at me (content.js:18:86270)
+globals-front.js:6027 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+content.js:18 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'useCache')
+    at me (content.js:18:86270)
+globals-front.js:6027 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+adblock-picreplacement.js:813 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+adblock-picreplacement.js:813 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+12Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app:24678/?token=mjjrYRGpyE-1' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+m=Jn51xb:2759 JetskiLog: currentStep changed to 0
+(anonymous) @ m=Jn51xb:2759
+m=Jn51xb:2759 JetskiLog: currentStep changed to 1
+(anonymous) @ m=Jn51xb:2759
+5m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 [DEFAULT]: WARN : Using DEFAULT root logger
+printToConsole @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+22m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 [Telemetry.TS.AgentsExperimentationService]: WARN : Requested gate not found in ALL_GATES:  personalized_humanizer_agent_poc_gate
+printToConsole @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 [Telemetry.TS.AgentsExperimentationService]: WARN : Requested experiment not found in ALL_EXPERIMENTS:  personalized_humanizer_v1
+printToConsole @ VM691 Grammarly.js:2
+index.iife.js:133 Object
+18m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=EzIGj3kU3pJ9eJLkDmdWTLMarAGdbVd8A-C-nuBtn5w2Mh6Su5zKfg&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=aCkZ92V9kaku60QRNAs1Rw&AID=7&CI=1&TYPE=xmlhttp&zx=3bbgxsv74hxh&t=1:1  Failed to load resource: the server responded with a status of 400 ()
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=YbE_A8Dtt3iiZuQELGfm9JAkMBLd-5qeDmkyGQWBG5R3o3XaejbUAw&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=X_T2cw2uJ2W7WZnLpgRVxg&AID=7&CI=1&TYPE=xmlhttp&zx=sio95i84tia8&t=1:1  Failed to load resource: the server responded with a status of 400 ()
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=WRTxeQw1IDeUwxUuYmEg7E_VqgBcJrhEHgml58OSaHi67DT7bphRcg&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=v9QucENY9QkMe1Yp8DtRLw&AID=9&CI=1&TYPE=xmlhttp&zx=yz9u0og1edaq&t=1:1  Failed to load resource: the server responded with a status of 400 ()
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=1ZFQUKe4GPbvRV2p6Fb8K769tMfHoY4kKovdEzNlHopzoXwYGN3jAw&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=CMFwPvuWaXHckk6j748qbw&AID=9&CI=1&TYPE=xmlhttp&zx=jfy8erde19rs&t=1:1  Failed to load resource: the server responded with a status of 400 ()
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&gsessionid=3ulnnTeHuTDZoNN9PORMSOX0JIuX1cPzPnZdyq4FMcQbEzeK4t5ZGA&SID=baL-nhJXYsMWwR6Vi-yPqg&RID=60386&TYPE=terminate&zx=3cqbl4hr39xs:1  Failed to load resource: the server responded with a status of 400 ()
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&gsessionid=gbyIAeOOcY2Dn8JD5IDIySGApP8UmQF7Gs14o-eMsYFwiCZMdlaq2g&SID=vgfU_ucdveSxfjN2itQ4Ww&RID=69744&TYPE=terminate&zx=jmkpjq2zzk6g:1  Failed to load resource: the server responded with a status of 400 ()
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+IWU5O3yRaE9v/vs/loader.js:8 Duplicate definition of module 'vs/language/css/cssMode'
+defineModule @ IWU5O3yRaE9v/vs/loader.js:8
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/?token=Vzu3uPxf_5Mb' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://localhost:3000/?token=Vzu3uPxf_5Mb' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+3m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+m=Jn51xb:2759 JetskiLog: currentStep changed to 1
+(anonymous) @ m=Jn51xb:2759
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+firebase-applet-config.json?import:1 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+Base.tsx:30 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+utils.ts:1 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+reports.ts:1 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+AdminDataVisualizationSummary.tsx:57 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+landingPageService.ts:1 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+GeminiCivicAssistantModal.tsx:143 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+OrgChart.tsx:48 Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+m=Jn51xb:2759 JetskiLog: currentStep changed to 1
+(anonymous) @ m=Jn51xb:2759
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+1978The resource <URL> was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Origin trial controlled feature not enabled: 'writer'.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Origin trial controlled feature not enabled: 'writer'.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Origin trial controlled feature not enabled: 'rewriter'.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Origin trial controlled feature not enabled: 'rewriter'.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Unrecognized feature: 'proofreader'.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 Unrecognized feature: 'proofreader'.
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error: Extension context invalidated.
+    at new ur (Grammarly.js:2:330944)
+    at l.createPortConnection (Grammarly.js:2:331741)
+    at createContentScriptPort (Agents-MessageBusClient.common.chunk.js:1:720)
+    at o (Agents-MessageBusClient.common.chunk.js:1:3765)
+    at v._getNewPort (Agents-MessageBusClient.common.chunk.js:1:3069)
+    at Agents-MessageBusClient.common.chunk.js:1:2341
+    at e._subscribe (Grammarly.js:2:1958839)
+    at e._trySubscribe (Grammarly.js:2:1947123)
+    at Grammarly.js:2:1947046
+    at o (Grammarly.js:2:1994222)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at h.dispose (Grammarly.js:2:429564)
+    at Object.next (Grammarly.js:2:1175932)
+    at e.next (Grammarly.js:2:1953274)
+    at t._next (Grammarly.js:2:1952878)
+    at t.next (Grammarly.js:2:1952496)
+    at Grammarly.js:2:1982819
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Grammarly.js:2:275263
+    at u (Grammarly.js:2:1956056)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+    at [Symbol.dispose] (Agents-getDocumentIntegrationsObservable.common.chunk.js:2:25607)
+    at DisposableStack.dispose (<anonymous>)
+    at Agents-getDocumentIntegrationsObservable.common.chunk.js:2:27776
+    at u (Grammarly.js:2:1956056)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+    at u (Grammarly.js:2:1956062)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at Se.dispose (smartAgentRecommendationService.common.chunk.js:1:97162)
+    at Grammarly.js:2:908567
+    at Array.forEach (<anonymous>)
+    at Se.dispose (Grammarly.js:2:908554)
+    at ln.dispose (Grammarly.js:2:941439)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at h.dispose (Grammarly.js:2:429564)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at ln.dispose (Grammarly.js:2:941517)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at h.dispose (Grammarly.js:2:429564)
+    at Object.next (Grammarly.js:2:1175932)
+    at e.next (Grammarly.js:2:1953274)
+    at t._next (Grammarly.js:2:1952878)
+    at t.next (Grammarly.js:2:1952496)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at t.dispose (Grammarly.js:2:1209583)
+    at Grammarly.js:2:1208186
+    at Array.forEach (<anonymous>)
+    at j._disposeIntegrations (Grammarly.js:2:1207805)
+    at j.dispose (Grammarly.js:2:1205407)
+    at wt.dispose (Grammarly.js:2:250782)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Grammarly.js:2:275263
+    at u (Grammarly.js:2:1956056)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+    at [Symbol.dispose] (Agents-getDocumentIntegrationsObservable.common.chunk.js:2:25607)
+    at DisposableStack.dispose (<anonymous>)
+    at Agents-getDocumentIntegrationsObservable.common.chunk.js:2:27776
+    at u (Grammarly.js:2:1956056)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+    at u (Grammarly.js:2:1956062)
+    at e.unsubscribe (Grammarly.js:2:1954941)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at Se.dispose (smartAgentRecommendationService.common.chunk.js:1:97162)
+    at Grammarly.js:2:908567
+    at Array.forEach (<anonymous>)
+    at Se.dispose (Grammarly.js:2:908554)
+    at ln.dispose (Grammarly.js:2:941439)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at t.dispose (Grammarly.js:2:1209583)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Object.dispose (Grammarly.js:2:275263)
+    at ln.dispose (Grammarly.js:2:941517)
+    at Grammarly.js:2:763617
+    at Array.forEach (<anonymous>)
+    at y.dispose (Grammarly.js:2:763590)
+    at t.dispose (Grammarly.js:2:1209583)
+    at Grammarly.js:2:1208186
+    at Array.forEach (<anonymous>)
+    at j._disposeIntegrations (Grammarly.js:2:1207805)
+    at j.dispose (Grammarly.js:2:1205407)
+write @ VM691 Grammarly.js:2
+VM691 Grammarly.js:2 grm ERROR [ChromeMV3SessionStorageApiImpl] ░░ error removing session storage listener Error: Extension context invalidated.
+    at Grammarly.js:2:275263
+    at Object.dispose (Grammarly.js:2:297862)
+    at Grammarly.js:2:309853
+    at Array.forEach (<anonymous>)
+    at ui.dispose (Grammarly.js:2:309825)
+    at Vi.unload (Grammarly.js:2:317304)
+    at Grammarly.js:2:315835
+    at n (Grammarly.js:2:1448614)
+    at Grammarly.js:2:1448521
+    at Grammarly.js:2:1396249
+write @ VM691 Grammarly.js:2
+5[Violation] Permissions policy violation: unload is not allowed in this document.
+chrome-extension://kbfnbcaeplbcioakkpcpgfkobkghlhen/src/js/Grammarly-check.js:1 Uncaught Error: Extension context invalidated.
+    at Grammarly-check.js:1:399261
+    at new Promise (<anonymous>)
+    at e.create (Grammarly-check.js:1:109394)
+    at Object.getAll (Grammarly-check.js:1:399231)
+    at Object.t [as getAll] (Grammarly-check.js:1:80288)
+    at Grammarly-check.js:1:80784
+    at Grammarly-check.js:1:216359
+    at a._next (Grammarly-check.js:1:209947)
+    at t.next (Grammarly-check.js:1:200476)
+    at c (Grammarly-check.js:1:211185)
+VM691 Grammarly.js:2 grm ERROR [lib.tracking.telemetry] ░░ cs.unhandled Error: Extension context invalidated.
+    at S.csUnhandled (Grammarly.js:2:1523172)
+    at Object.next (Grammarly.js:2:318304)
+    at e.next (Grammarly.js:2:1953274)
+    at t._next (Grammarly.js:2:1952878)
+    at t.next (Grammarly.js:2:1952496)
+    at Grammarly.js:2:1982819
+    at a._next (Grammarly.js:2:1964561)
+    at t.next (Grammarly.js:2:1952496)
+    at Grammarly.js:2:1980320
+    at a._next (Grammarly.js:2:1964561)
+write @ VM691 Grammarly.js:2
+chrome-extension://kbfnbcaeplbcioakkpcpgfkobkghlhen/src/js/Grammarly-check.js:1 Uncaught Error: Extension context invalidated.
+    at Grammarly-check.js:1:399261
+    at new Promise (<anonymous>)
+    at e.create (Grammarly-check.js:1:109394)
+    at Object.getAll (Grammarly-check.js:1:399231)
+    at Object.t [as getAll] (Grammarly-check.js:1:80288)
+    at Grammarly-check.js:1:80784
+    at Grammarly-check.js:1:216359
+    at a._next (Grammarly-check.js:1:209947)
+    at t.next (Grammarly-check.js:1:200476)
+    at c (Grammarly-check.js:1:211185)
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=PNYU_irnvvJ3EOxyskvNBlrwlWvOiQD0-YNy0M76AJ0WcZtuP2nVYA&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=mvPD5FtBjVRMNdClFuR9lQ&AID=5&CI=1&TYPE=xmlhttp&zx=424qqdz7f0c1&t=1:1  Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR.QUIC_TOO_MANY_RTOS
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&gsessionid=PNYU_irnvvJ3EOxyskvNBlrwlWvOiQD0-YNy0M76AJ0WcZtuP2nVYA&SID=mvPD5FtBjVRMNdClFuR9lQ&RID=8085&TYPE=terminate&zx=d025vhk44zhd:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=28097&CVER=22&X-HTTP-Session-Id=gsessionid&zx=4vixpf4c9iao&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=50f76ep9u2h6:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=87048&CVER=22&X-HTTP-Session-Id=gsessionid&zx=ldrcwk881qpt&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=n0fecqajexb5:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=92210&CVER=22&X-HTTP-Session-Id=gsessionid&zx=a6iq38lccf5n&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=2f9y8ynhvfs5:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=40183&CVER=22&X-HTTP-Session-Id=gsessionid&zx=o8kh6ciiy8dm&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=5seppvo29np1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=39139&CVER=22&X-HTTP-Session-Id=gsessionid&zx=x8wkfnte9u9y&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=5l411pmjtj99:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=43783&CVER=22&X-HTTP-Session-Id=gsessionid&zx=xhu5th95duv4&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=80kmehiywie1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=50504&CVER=22&X-HTTP-Session-Id=gsessionid&zx=mp2vxhhn8vg1&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=8rpb0s625gv5:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=8351&CVER=22&X-HTTP-Session-Id=gsessionid&zx=lahju75eq8ra&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=w442nq79rgnz:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=12600&CVER=22&X-HTTP-Session-Id=gsessionid&zx=91thld3nbzvm&t=1:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+www.google.com/images/cleardot.gif?zx=un0ren4mfwpr:1  Failed to load resource: net::ERR_INTERNET_DISCONNECTED
+VM3178:1 The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127
+eval @ VM3178:1
+ The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127
+eval @ (unknown)
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 No available adapters.
+4bad7828-1dbd-4252-bf5d-79509eb63ac2?showAssistant=true&showPreview=true:1 No available adapters.
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+Grammarly.js:2 [DEFAULT]: WARN : Using DEFAULT root logger
+printToConsole @ Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+Grammarly.js:2 grm ERROR [lib.tracking.telemetry] ░░ cs.unhandled Error: Connection attempt superseded by a newer one
+    at S.csUnhandled (Grammarly.js:2:1532982)
+    at Object.next (Grammarly.js:2:318658)
+    at e.next (Grammarly.js:2:1962649)
+    at t._next (Grammarly.js:2:1962253)
+    at t.next (Grammarly.js:2:1961871)
+    at Grammarly.js:2:1992194
+    at a._next (Grammarly.js:2:1973936)
+    at t.next (Grammarly.js:2:1961871)
+    at Grammarly.js:2:1989695
+    at a._next (Grammarly.js:2:1973936)
+write @ Grammarly.js:2
+83065.libs.chunk.js:1 Uncaught (in promise) Error: Connection attempt superseded by a newer one
+    at Q.connect (83065.libs.chunk.js:1:2695)
+    at Agents-MessageBusClient.common.chunk.js:1:2494
+    at e._subscribe (Grammarly.js:2:1968214)
+    at e._trySubscribe (Grammarly.js:2:1956498)
+    at Grammarly.js:2:1956421
+    at o (Grammarly.js:2:2003597)
+    at e.subscribe (Grammarly.js:2:1956337)
+    at Grammarly.js:2:1992993
+    at t.<anonymous> (Grammarly.js:2:2005553)
+    at Grammarly.js:2:1956391
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+editor.main.js:601 Creating a worker from 'https://aistudio.google.com/monaco/IWU5O3yRaE9v/worker.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://accounts.google.com/gsi/client https://apis.google.com/js/api.js https://billing-ads-qa-devel.corp.google.com/payments/v4/js/integrator.js https://payments.google.com/payments/v4/js/integrator.js https://payments.sandbox.google.com/payments/v4/js/integrator.js https://www.googletagmanager.com/gtm.js https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/destination https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en.0yKf50XJzlQ.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://payments.google.com/payments/u/0/v4/js/integrator.js https://payments.youtube.com/payments/v4/js/integrator.js https://payments.youtube.com/payments/u/0/v4/js/integrator.js https://payments.cloud.google/payments/v4/js/integrator.js". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.
+ Creating a worker from 'https://aistudio.google.com/monaco/IWU5O3yRaE9v/worker.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://accounts.google.com/gsi/client https://apis.google.com/js/api.js https://billing-ads-qa-devel.corp.google.com/payments/v4/js/integrator.js https://payments.google.com/payments/v4/js/integrator.js https://payments.sandbox.google.com/payments/v4/js/integrator.js https://www.googletagmanager.com/gtm.js https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/destination https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en.0yKf50XJzlQ.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://payments.google.com/payments/u/0/v4/js/integrator.js https://payments.youtube.com/payments/v4/js/integrator.js https://payments.youtube.com/payments/u/0/v4/js/integrator.js https://payments.cloud.google/payments/v4/js/integrator.js". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.
+editor.main.js:122 Uncaught (in promise) Canceled: Canceled
+editor.main.js:601 Creating a worker from 'https://aistudio.google.com/monaco/IWU5O3yRaE9v/worker.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://accounts.google.com/gsi/client https://apis.google.com/js/api.js https://billing-ads-qa-devel.corp.google.com/payments/v4/js/integrator.js https://payments.google.com/payments/v4/js/integrator.js https://payments.sandbox.google.com/payments/v4/js/integrator.js https://www.googletagmanager.com/gtm.js https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/destination https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en.0yKf50XJzlQ.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://payments.google.com/payments/u/0/v4/js/integrator.js https://payments.youtube.com/payments/v4/js/integrator.js https://payments.youtube.com/payments/u/0/v4/js/integrator.js https://payments.cloud.google/payments/v4/js/integrator.js". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.
+ Creating a worker from 'https://aistudio.google.com/monaco/IWU5O3yRaE9v/worker.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://accounts.google.com/gsi/client https://apis.google.com/js/api.js https://billing-ads-qa-devel.corp.google.com/payments/v4/js/integrator.js https://payments.google.com/payments/v4/js/integrator.js https://payments.sandbox.google.com/payments/v4/js/integrator.js https://www.googletagmanager.com/gtm.js https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/destination https://www.gstatic.com/_/mss/boq-makersuite/_/js/k=boq-makersuite.MakerSuite.en.0yKf50XJzlQ.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://payments.google.com/payments/u/0/v4/js/integrator.js https://payments.youtube.com/payments/v4/js/integrator.js https://payments.youtube.com/payments/u/0/v4/js/integrator.js https://payments.cloud.google/payments/v4/js/integrator.js". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+2m=_b:1536 No ID or name found in config.
+updateJsLog @ m=_b:1536
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=lO4RXWgFsUJCJW6yuvQYZFIeITPHiX-2o6ezUHNDRdtwY9S1GYM2IA&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=RHd6FBvxs8bbz91LFu9mFw&AID=55&CI=1&TYPE=xmlhttp&zx=1ca72kqivgn4&t=1:1  Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR.QUIC_NETWORK_IDLE_TIMEOUT
+firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=lO4RXWgFsUJCJW6yuvQYZFIeITPHiX-2o6ezUHNDRdtwY9S1GYM2IA&VER=8&database=projects%2Fbaluarte-ce2bf%2Fdatabases%2Fai-studio-4bad7828-1dbd-4252-bf5d-79509eb63ac2&RID=rpc&SID=RHd6FBvxs8bbz91LFu9mFw&AID=56&CI=1&TYPE=xmlhttp&zx=2p43vg411bzv&t=1:1  Failed to load resource: the server responded with a status of 400 ()
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+ WebSocket connection to 'wss://ais-dev-fwe6o2fzffwmoqpqzvikwc-126912267342.asia-southeast1.run.app/' failed: 
+createWebSocket @ _aistudio-iframe.js:313
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+ [AUTH_CONTEXT] Profile snapshot received for x8g4RBKutZannfTtNNn6e9MfRVt1
+10 The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+warn @ _aistudio-iframe.js:433
+chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/globals-front.js:6027 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-picreplacement.js:813 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+ [AUTH] Attempting login for: youth@baluarte.com
+ [AUTH] Login success. UID: i6G1gfx7S6M5RHvIdD8m5d4kbQO2
+ [AUTH] Entering secure sync phase...
+ [AUTH] Existing identity verified.
+ [AUTH_CONTEXT] Profile snapshot received for i6G1gfx7S6M5RHvIdD8m5d4kbQO2
+24 The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+warn @ _aistudio-iframe.js:433
+globals-front.js:6027 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+adblock-picreplacement.js:813 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+Grammarly.js:2 grm ERROR [AgentsReconnectingMessageBusRouterClient] ░░ Failed to reconnect to message bus server Error
+write @ Grammarly.js:2
+m=Jn51xb:2759 JetskiLog: currentStep changed to 1
+(anonymous) @ m=Jn51xb:2759
+2041 log entries are not shown.
+2041 log entries are not shown.
